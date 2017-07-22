@@ -1,0 +1,305 @@
+/* CSS reset */
+
+
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* PAGE DEFAULTS */
+
+html {
+    box-sizing: border-box;
+    background-color: #8180B2;
+    font-family: 'Lato', sans-serif;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+.centered {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* HEADER */
+
+header {
+    background-color: #1B1A59;
+    color: #8180B2;
+    padding: 2rem;
+    position: relative;
+}
+
+#welcome-message {
+    position: absolute;
+    top: 25%;
+    right: 20%;
+}
+
+#nav {
+    position: absolute;
+    right: 1rem;
+}
+
+.nav-item {
+    display: inline-block;
+    border: 1px solid red;
+    margin: 0 1rem 0 1rem;
+}
+
+
+/* LOGIN SCREEN */
+
+#login-screen {
+    padding: 1rem;
+    border: 1px solid red;
+}
+
+#login-box {
+    height: 10rem;
+    text-align: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0A093B;
+    color: #8180B2;
+    border: 1px solid red;
+}
+
+#login-box p,
+h1,
+h2,
+h3,
+a {
+    margin: 0.5rem;
+}
+
+.vertically-centered {
+    margin-top: 2rem;
+}
+
+
+/* DASHBOARD */
+
+#dashboard {
+    border: 1px solid red;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    background-color: #0A093B;
+    margin-bottom: 1rem;
+}
+
+.column {
+    border: 1px solid red;
+    display: inline-block;
+    width: 16%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.category {
+    background-color: #1B1A59;
+    padding: 1rem;
+    border: 2px solid #8180B2;
+    color: #8180B2;
+}
+
+.job-lead {
+    background-color: #8180B2;
+    padding: 1rem;
+    border: 2px solid #1B1A59;
+    position: relative;
+    color: #1B1A59;
+}
+
+
+/* VIEW/EDIT SCREEN */
+
+#edit-screen {
+    height: auto;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0A093B;
+    color: #8180B2;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.buttons {
+    position: absolute;
+    right: 0;
+    margin: 0.5rem;
+}
+
+.view-button {
+    display: inline-block;
+}
+
+#view-edit-box h1,
+h2,
+h3,
+p,
+a {
+    margin: 0.25rem;
+}
+
+footer {
+    height: 5rem;
+    background-color: #8180B2;
+    text-align: center;
+    padding: 1rem;
+}
+
+
+/* MEDIA QUERIES */
+
+
+/* To do: media queries; set up empty DB with test user on mLab and connect to GitHub repo; do client.js and server.js */
