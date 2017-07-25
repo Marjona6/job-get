@@ -160,10 +160,19 @@ h3 {
     font-size: 1.5rem;
 }
 
+p {
+    font-size: 1rem;
+}
+
 .centered {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+input[type=text] {
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 
@@ -189,7 +198,6 @@ header {
 
 .nav-item {
     display: inline-block;
-    border: 1px solid red;
     margin: 0 1rem 0 1rem;
 }
 
@@ -198,7 +206,6 @@ header {
 
 #login-screen {
     padding: 1rem;
-    border: 1px solid red;
 }
 
 #login-box {
@@ -209,7 +216,8 @@ header {
     margin-right: auto;
     background-color: #0A093B;
     color: #8180B2;
-    border: 1px solid red;
+    border: 1px solid #0A093B;
+    border-radius: 5px;
 }
 
 #login-box p,
@@ -228,7 +236,8 @@ a {
 /* DASHBOARD */
 
 #dashboard {
-    border: 1px solid red;
+    border: 1px solid #0a093B;
+    border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -237,7 +246,6 @@ a {
 }
 
 .column {
-    border: 1px solid red;
     display: inline-block;
     width: 16%;
     text-align: center;
@@ -271,6 +279,8 @@ a {
     color: #8180B2;
     padding: 0.5rem;
     position: relative;
+    border: 1px solid #0a093B;
+    border-radius: 5px;
 }
 
 .buttons {
@@ -299,7 +309,202 @@ footer {
 }
 
 
+/*BUTTONS */
+
+.styledButton {
+    padding: 5px;
+    font-size: 1rem;
+    background-color: goldenrod;
+    color: #0A093B;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid goldenrod;
+    cursor: pointer;
+}
+
+
 /* MEDIA QUERIES */
+
+@media only screen and (max-width: 1024px) {
+    h1 {
+        font-size: 4rem;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    h3 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+    /* HEADER */
+    #welcome-message {
+        position: absolute;
+        top: 25%;
+        right: 20%;
+    }
+    #nav {
+        position: absolute;
+        right: 1rem;
+    }
+    .nav-item {
+        display: none;
+    }
+    /* LOGIN SCREEN */
+    #login-box {
+        height: 12.5rem;
+    }
+    .vertically-centered {
+        margin-top: 1.5rem;
+    }
+    /* DASHBOARD */
+    #dashboard {
+        width: 95%;
+    }
+    .column {
+        width: 33%;
+    }
+    /* BUTTONS */
+    .styledButton {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 4rem;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    h3 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+    /* HEADER */
+    #welcome-message {
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+    /* VIEW/EDIT SCREEN */
+    #view-edit-box {
+        margin-top: 3rem;
+    }
+}
+
+@media only screen and (max-width: 752px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    p {
+        font-size: 1.75rem;
+    }
+    .column {
+        width: 49%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    p {
+        font-size: 1.75rem;
+    }
+    /* HEADER */
+    #welcome-message {
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+    /* LOGIN SCREEN */
+    #login-box {
+        width: 70%;
+    }
+    /* DASHBOARD */
+    .column {
+        width: 49%;
+    }
+    /* BUTTONS */
+    .styledButton {
+        padding: 4px;
+    }
+}
+
+@media only screen and (max-width: 545px) {
+    /* LOGIN SCREEN */
+    #login-box {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1.25rem;
+    }
+    /* HEADER */
+    #welcome-message {
+        display: none;
+    }
+    /* LOGIN SCREEN */
+    #login-box {
+        width: 90%;
+    }
+    /* DASHBOARD */
+    .column {
+        width: 100%;
+    }
+    /* BUTTONS */
+    .styledButton {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    /* LOGIN SCREEN */
+    #login-box {
+        width: 95%;
+    }
+    /* DASHBOARD */
+    .column {
+        width: 100%;
+    }
+    /* VIEW/EDIT SCREEN */
+    #edit-screen {
+        width: 90%;
+    }
+    /* FOOTER */
+    footer {
+        height: 3rem;
+        font-size: 0.75rem;
+    }
+}
 
 
 /* To do: media queries; set up empty DB with test user on mLab and connect to GitHub repo; do client.js and server.js */
