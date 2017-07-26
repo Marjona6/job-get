@@ -18,38 +18,29 @@
     <header>
         <h1>Job Tracker App</h1>
         <h2>Find your dream job!</h2>
-<!--
-<div id="welcome-message">
-    <p>Welcome, Meryem!</p>
-</div>
--->
         <div id="nav">
-            <div class="nav-item">
-                <p>Create New Job Lead</p>
+            <div class="nav-item" id="js-create-new">
+                <p><a href="#">New Lead</a></p>
             </div>
             <div class="nav-item">
-                <p>Tutorial</p>
+                <p><a href="https://github.com/Marjona6/job-tracker-capstone-app/blob/master/README.md" target="_blank">FAQ</a></p>
             </div>
-            <div class="nav-item">
-                <p>FAQ</p>
-            </div>
-            <div class="nav-item">
-                <p>Log Out</p>
+            <div class="nav-item" id="js-log-out">
+                <p><a href="#">Log Out</a></p>
             </div>
         </div>
     </header>
     <main>
         <section id="login-screen">
             <div class="box" id="login-box">
-                <form class="vertically-centered">
+                <form>
                     <h3>Sign in and start tracking</h3>
-                    <p>Email:
+                    <p>Email:</p>
                         <input type="text" name="email">
-                    </p>
-                    <p>Password:
+                    <p>Password:</p>
                         <input type="text" name="password">
-                    </p>
-                    <input type="submit" class="styledButton" value="Sign in">
+                    <p></p>
+                    <input type="submit" id="js-login-button" class="styledButton" value="Sign in">
                 </form>
             </div>
 
@@ -101,9 +92,6 @@
         <section id="edit-screen">
             <div class="buttons">
                 <div class="view-button">
-                    <input type="submit" class="styledButton" value="Save Changes">
-                </div>
-                <div class="view-button">
                     <input type="submit" class="styledButton" value="Edit">
                 </div>
                 <div class="view-button">
@@ -111,27 +99,42 @@
                 </div>
             </div>
             <div id="view-edit-box">
-                <h3><span id="position-name">Position</span> at <span id="company-name">Apple</span></h3>
-                <p>Company overview:</p>
-                <p>Company size:</p>
-                <p>Position location:</p>
-                <p>Salary/benefits offered:</p>
-                <p>Job description:</p>
-                <p>Date of application:</p>
-                <p>Contact name:</p>
-                <p>Contact email:</p>
-                <p>Application materials:</p>
-                <p>Interview date:</p>
-                <p>Interview follow-up:</p>
-                <p>Source of lead:</p>
-                <p>Notes:</p>
-                <p>Overall desirability rating:</p>
+                <h3><span id="position-name">
+                    <input type="text" placeholder="Position"></span> at <span id="company-name"><input type="text" placeholder="Company Name"></span></h3>
+                <p>Company overview: <span><input type="textarea" placeholder="What kind of company is this? What is the company culture like?"></span></p>
+                <p>Company size: <span><input type="text" placeholder="About how many?"></span> employees</p>
+                <p>Position location: <span><input type="text" placeholder="Ganymede Station"></span></p>
+                <p>Salary/benefits offered: <span><input type="text" placeholder="$1,000,000 + a helicopter"></span></p>
+                <p>Job description: <span><input type="textarea" placeholder="What are the duties and requirements?"></span></p>
+                <p>Date of application: <span><input type="date"></span></p>
+                <p>Contact name: <span><input type="text" placeholder="James Bond"></span></p>
+                <p>Contact email: <span><input type="email" placeholder="example@example.com"></span></p>
+                <p>Application materials: <span><input type="text" placeholder="CV, resume, cover letter..."></span></p>
+                <p>Interview date: <span><input type="date"></span></p>
+                <p>Interview follow-up: <span><input type="text" placeholder="Did you send a thank-you note?"></span></p>
+                <p>Source of lead: <span><input type="text" placeholder="Friend? Google?"></span></p>
+                <p>Notes: <span><input type="textarea" placeholder="Note to self!"></span></p>
+                <p>Overall desirability rating:
+                    <select name="rating">
+                        <option value="1">Dream job!</option>
+                        <option value="2">Good fit</option>
+                        <option value="3">Take it or leave it</option>
+                        <option value="4">Only if I'm desperate</option>
+                    </select>
+                </p>
+            </div>
+            <div class="buttons">
+                <div class="view-button">
+                    <input type="submit" class="styledButton" value="Save Changes" id="js-save-button">
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <p>2017 Meryem Yanar</p>
+        <p>&#xa9; 2017 Meryem Yanar</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="client.js" type="text/javascript"></script>
 </body>
 
 </html>
