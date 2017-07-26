@@ -2,6 +2,7 @@
 
 // Function and object definitions
 
+
 // Triggers
 $(document).ready(function () {
     // when page loads
@@ -12,9 +13,37 @@ $(document).ready(function () {
     $('#login-screen').show();
 
     // when user signs in
+    // step 1: login trigger
     $('#js-login-button').click(function (event) {
         event.preventDefault();
         console.log('clicked the login button');
+        // step 2: taking input from the user
+        var inputEmail = $('input[name="email"]').val();
+        var inputPassword = $('input[name="password"]').val();
+          var usernamePwObject = {
+            username: inputEmail,
+            password: inputPassword
+        };
+        // step 3: using user input, make the local login API call
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            dataType: 'json',
+            data: JSON.stringify(usernamePwObject),
+            contentType: 'application/json'
+        })
+        // step 8 (continuing from server.js): display results
+        .done(function(result) {
+            console.log('made the POST request');
+            console.log(result);
+        })
+        .fail(function(jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+        console.log(inputEmail);
+        console.log('password is ' + inputPassword);
         $('#login-screen').hide();
         $('#nav').show();
         $('#dashboard').show();
