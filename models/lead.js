@@ -3,7 +3,6 @@
 var mongoose = require('mongoose');
 
 var leadSchema = new mongoose.Schema({
-	leadId: Schema.Types.ObjectId,
 	position: {
 		type: String,
 		required: false
@@ -12,7 +11,7 @@ var leadSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
-	companyOverview: {type: String},
+	companyOverview: {type: String, required: false},
 	companySize: {type: String,
 		required: false},
 	positionLocation: {type: String,
@@ -37,10 +36,10 @@ var leadSchema = new mongoose.Schema({
 		required: false},
 	notes: {type: String,
 		required: false},
-	desirability: {type: Number,
+	rating: {type: Number,
 		required: false}
 });
 
-var lead = mongoose.model('lead', leadSchema);
+var Lead = mongoose.model('Lead', leadSchema);
 
-module.exports = lead;
+module.exports = Lead;

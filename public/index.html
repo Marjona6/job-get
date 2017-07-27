@@ -97,23 +97,24 @@
                 </div>
             </div>
             <div id="view-edit-box">
-                <h3><span id="position-name">
-                    <input type="text" placeholder="Position"></span> at <span id="company-name"><input type="text" placeholder="Company Name"></span></h3>
-                <p>Company overview: <span><input type="textarea" placeholder="What kind of company is this? What is the company culture like?"></span></p>
-                <p>Company size: <span><input type="text" placeholder="About how many?"></span> employees</p>
-                <p>Position location: <span><input type="text" placeholder="Ganymede Station"></span></p>
-                <p>Salary/benefits offered: <span><input type="text" placeholder="$1,000,000 + a helicopter"></span></p>
-                <p>Job description: <span><input type="textarea" placeholder="What are the duties and requirements?"></span></p>
-                <p>Date of application: <span><input type="date"></span></p>
-                <p>Contact name: <span><input type="text" placeholder="James Bond"></span></p>
-                <p>Contact email: <span><input type="email" placeholder="example@example.com"></span></p>
-                <p>Application materials: <span><input type="text" placeholder="CV, resume, cover letter..."></span></p>
-                <p>Interview date: <span><input type="date"></span></p>
-                <p>Interview follow-up: <span><input type="text" placeholder="Did you send a thank-you note?"></span></p>
-                <p>Source of lead: <span><input type="text" placeholder="Friend? Google?"></span></p>
-                <p>Notes: <span><input type="textarea" placeholder="Note to self!"></span></p>
+                <h3><span>
+                    <input type="text" name="position" placeholder="Position"></span> at <span><input type="text" name="company" placeholder="Company Name"></span></h3>
+                <p>Company overview: <span><input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?"></span></p>
+                <p>Company size: <span><input type="text" name="company-size" placeholder="About how many?"></span> employees</p>
+                <p>Position location: <span><input type="text" name="position-location" placeholder="Ganymede Station"></span></p>
+                <p>Salary/benefits offered: <span><input type="text" name="salary-benefits" placeholder="$1,000,000 + a helicopter"></span></p>
+                <p>Job description: <span><input type="textarea" name="job-description" placeholder="What are the duties and requirements?"></span></p>
+                <p>Date of application: <span><input type="date" name="application-date"></span></p>
+                <p>Contact name: <span><input type="text" name="contact-name" placeholder="James Bond"></span></p>
+                <p>Contact email: <span><input type="email" name="contact-email" placeholder="example@example.com"></span></p>
+                <p>Application materials: <span><input type="text" name="application-materials" placeholder="CV, resume, cover letter..."></span></p>
+                <p>Interview date: <span><input type="date" name="interview-date"></span></p>
+                <p>Interview follow-up: <span><input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?"></span></p>
+                <p>Source of lead: <span><input type="text" name="lead-source" placeholder="Friend? Google?"></span></p>
+                <p>Notes: <span><input type="textarea" name="notes" placeholder="Note to self!"></span></p>
                 <p>Overall desirability rating:
-                    <select name="rating">
+                    <select name="rating" id="rating">
+                        <option value="0">Select</option>
                         <option value="1">Dream job!</option>
                         <option value="2">Good fit</option>
                         <option value="3">Take it or leave it</option>
