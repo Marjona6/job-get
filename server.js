@@ -5,9 +5,11 @@ var Lead = require('./models/lead');
 var bodyParser = require('body-parser');
 var config = require('./config');
 var mongoose = require('mongoose');
+var cors = require('cors');
 var express = require('express');
 var app = express();
 app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static('public'));
 
 mongoose.Promise = global.Promise;
@@ -35,10 +37,28 @@ if (require.main === module) {
     });
 };
 
+// getting the lead objects to populate the dashboard
+app.get('/leads', function(req, res) {
+	console.log('getting the leads');
+	//console.log(req);
+	Lead
+		.find()
+		.then(function(leads) {
+			res.json({
+				leads: leads.map(function(lead) {
+					return lead;
+				})
+			});
+		})
+		.catch(function(err) {
+			console.error(err);
+			res.status(500).json({message: 'Internal server error'});
+		});
+});
 
 // step 4 (continuing from client.js): local API endpoint in server.js
 app.post('/login', function(req, res) {
-	console.log(req);
+	//console.log(req);
 	//console.log(req.body.password);
 	// send data from login to database
 	// for now, send it without validation
@@ -54,19 +74,20 @@ app.post('/login', function(req, res) {
 			});
 		}
 		// step 7: send the result back to client.js
-		console.log(user);
+		//console.log(user);
 		res.status(201).json(user);
 
 	});
 });
 
 // step b4 (continuing from client.js): local API endpoint in server.js
-app.post('/create-new', function(req, res) {
+app.post('/leads', function(req, res) {
 	console.log(req);
 	// step b5: send the local data to the database
 	Lead.create({
 		position: req.body.position,
 		company: req.body.company,
+		funnelStage: req.body.funnelStage,
         companyOverview: req.body.companyOverview,
         companySize: req.body.companySize,
         positionLocation: req.body.positionLocation,

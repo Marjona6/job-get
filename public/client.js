@@ -2,7 +2,6 @@
 
 // Function and object definitions
 
-
 // Triggers
 $(document).ready(function () {
     // when page loads
@@ -47,6 +46,48 @@ $(document).ready(function () {
         $('#login-screen').hide();
         $('#nav').show();
         $('#dashboard').show();
+        getAndDisplayLeads();
+
+        // populate the dashboard with contents of the user's database
+        // requires making an API call to the DB
+        function getAndDisplayLeads() {
+            console.log('retrieving job lead items');
+            $.getJSON("/leads", function(res) {
+                    console.log('logging the data now');
+                    console.log(res);
+                    var htmlOutput = '';
+                    for (var i=0; i<res.leads.length; i++) {
+                       // console.log(res.leads[i].company + ' is the company name!');
+                        if (res.leads[i].funnelStage == 1) {
+                            htmlOutput = '<p class="job-lead"><a href="#">' + res.leads[i].company + '</a></p>';
+                            $('#new-leads').append(htmlOutput);
+                        // stage 2: qualified leads
+                        } else if (res.leads[i].funnelStage == 2) {
+                            htmlOutput = '<p class="job-lead">' + res.leads[i].company + '</p>';
+                            $('#qualified-leads').append(htmlOutput);
+                        // stage 3: contact/apply
+                        } else if (res.leads[i].funnelStage == 3) {
+                            htmlOutput = '<p class="job-lead">' + res.leads[i].company + '</p>';
+                            $('#contact-apply').append(htmlOutput);
+                        // stage 4: interview
+                        } else if (res.leads[i].funnelStage == 4) {
+                            htmlOutput = '<p class="job-lead">' + res.leads[i].company + '</p>';
+                            $('#interview').append(htmlOutput);
+                        // stage 5: offer
+                        } else if (res.leads[i].funnelStage == 5) {
+                            htmlOutput = '<p class="job-lead">' + res.leads[i].company + '</p>';
+                            $('#offer').append(htmlOutput);
+                        // stage 6: negotiate
+                        } else if (res.leads[i].funnelStage == 6) {
+                            htmlOutput = '<p class="job-lead">' + res.leads[i].company + '</p>';
+                            $('#negotiate').append(htmlOutput);
+                        // anything other than 1-6 should throw an error
+                        } else {
+                            console.warn('error in funnel stages for API data!');
+                        }
+                    };
+                });
+        }
 
         // when user clicks "create new job lead" in nav
         $('#js-create-new').click(function (event) {
@@ -64,6 +105,7 @@ $(document).ready(function () {
                 // step b2: taking input from the user
                 var position = $('input[name="position"]').val();
                 var company = $('input[name="company"]').val();
+                var funnelStage = $('select[name="funnel-stage"]').find('option:selected').val();
                 var companyOverview = $('input[name="company-overview"]').val();
                 var companySize = $('input[name="company-size"]').val();
                 var positionLocation = $('input[name="position-location"]').val();
@@ -78,25 +120,10 @@ $(document).ready(function () {
                 var leadSource = $('input[name="lead-source"]').val();
                 var notes = $('input[name="notes"]').val();
                 var rating = $('select[name="rating"]').find('option:selected').val();
-                console.log(position);
-                console.log(company);
-                console.log(companyOverview);
-                console.log(companySize);
-                console.log(positionLocation);
-                console.log(salaryBenefits);
-                console.log(jobDescription);
-                console.log(applicationDate);
-                console.log(contactName);
-                console.log(contactEmail);
-                console.log(applicationMaterials);
-                console.log(interviewDate);
-                console.log(interviewFollowUp);
-                console.log(leadSource);
-                console.log(notes);
-                console.log(rating);
                 var leadObject = {
                     position: position,
                     company: company,
+                    funnelStage: funnelStage,
                     companyOverview: companyOverview,
                     companySize: companySize,
                     positionLocation: positionLocation,
@@ -112,10 +139,11 @@ $(document).ready(function () {
                     notes: notes,
                     rating: rating
                 };
+                console.log(leadObject);
                 // step b3: make local API call using user input
                 $.ajax({
                     type: "POST",
-                    url: "/create-new",
+                    url: "/leads",
                     dataType: 'json',
                     data: JSON.stringify(leadObject),
                     contentType: 'application/json'
@@ -124,17 +152,53 @@ $(document).ready(function () {
                 .done(function(result) {
                     console.log('made the lead POST request');
                     console.log(result);
+                    // need to output the new job lead object
+                    // ... using just the position title
+                    // ... in a new rectangle on the dashboard
+                    console.log(result.company);
+                    console.log(result.funnelStage + ' is the funnel stage');
+                    var htmlOutput = '';
+                    // stage 1: new leads
+                    if (result.funnelStage == 1) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#new-leads').append(htmlOutput);
+                    // stage 2: qualified leads
+                    } else if (result.funnelStage == 2) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#qualified-leads').append(htmlOutput);
+                    // stage 3: contact/apply
+                    } else if (result.funnelStage == 3) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#contact-apply').append(htmlOutput);
+                    // stage 4: interview
+                    } else if (result.funnelStage == 4) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#interview').append(htmlOutput);
+                    // stage 5: offer
+                    } else if (result.funnelStage == 5) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#offer').append(htmlOutput);
+                    // stage 6: negotiate
+                    } else if (result.funnelStage == 6) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#negotiate').append(htmlOutput);
+                    // anything other than 1-6 should throw an error
+                    // user should go back and try again
+                    } else {
+                        console.warn('error in funnel stages!');
+                    }
                 })
                 .fail(function(jqXHR, error, errorThrown) {
                     console.log(jqXHR);
                     console.log(error);
                     console.log(errorThrown);
                 });
-           
-            console.log('ok');
-                $('#edit-screen').hide();
-                $('#dashboard').show();
-                 });
+            // reset the form so user can input a new lead
+            $('#edit-form').trigger('reset');
+            console.log('now leaving edit screen');
+            $('#edit-screen').hide();
+            $('#dashboard').show();
+                });
             });
 
         // when user clicks log out

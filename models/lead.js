@@ -11,6 +11,10 @@ var leadSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
+	funnelStage: {
+		type: Number,
+		required: false
+	},
 	companyOverview: {type: String, required: false},
 	companySize: {type: String,
 		required: false},

@@ -31,7 +31,7 @@
     <main>
         <section id="login-screen">
             <div class="box" id="login-box">
-                <form>
+                <form id="login-form">
                     <h3>Sign in and start tracking</h3>
                     <p>Email:</p>
                         <input type="text" name="email">
@@ -46,44 +46,44 @@
         <section id="dashboard">
             <div id="new-leads" class="column">
                 <p class="category">New Leads</p>
+                <!-- <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
+                <p class="job-lead">Apple</p>-->
             </div>
             <div id="qualified-leads" class="column">
                 <p class="category">Qualified Leads</p>
-                <p class="job-lead">Apple</p>
+                <!--<p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Something Something Co., Inc.</p>
                 <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
+                <p class="job-lead">Apple</p> -->
             </div>
             <div id="contact-apply" class="column">
                 <p class="category">Contact/Apply</p>
+                <!-- <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
+                <p class="job-lead">Apple</p> -->
             </div>
             <div id="interview" class="column">
                 <p class="category">Interview</p>
+                <!-- <p class="job-lead">Apple</p>
                 <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
+                <p class="job-lead">Apple</p> -->
             </div>
             <div id="offer" class="column">
                 <p class="category">Offer</p>
-                <p class="job-lead">Apple</p>
-                <p class="job-lead">Apple</p>
+                <!-- <p class="job-lead">Apple</p>
+                <p class="job-lead">Apple</p> -->
             </div>
             <div id="negotiate" class="column">
                 <p class="category">Negotiate</p>
-                <p class="job-lead">Apple</p>
+                <!-- <p class="job-lead">Apple</p> -->
             </div>
 
         </section>
@@ -97,8 +97,18 @@
                 </div>
             </div>
             <div id="view-edit-box">
-                <h3><span>
-                    <input type="text" name="position" placeholder="Position"></span> at <span><input type="text" name="company" placeholder="Company Name"></span></h3>
+                <form id="edit-form">
+                    <h3><span id="js-position-header"><input type="text" name="position" placeholder="Position"></span> at <span><input type="text" name="company" placeholder="Company Name"></span></h3>
+                <p>Funnel stage: </p>
+                    <select name="funnel-stage">
+                        <option value="0">Select</option>
+                        <option value="1">New Leads</option>
+                        <option value="2">Qualified Leads</option>
+                        <option value="3">Contact/Apply</option>
+                        <option value="4">Interview</option>
+                        <option value="5">Offer</option>
+                        <option value="6">Negotiate</option>
+                    </select>
                 <p>Company overview: <span><input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?"></span></p>
                 <p>Company size: <span><input type="text" name="company-size" placeholder="About how many?"></span> employees</p>
                 <p>Position location: <span><input type="text" name="position-location" placeholder="Ganymede Station"></span></p>
@@ -113,7 +123,7 @@
                 <p>Source of lead: <span><input type="text" name="lead-source" placeholder="Friend? Google?"></span></p>
                 <p>Notes: <span><input type="textarea" name="notes" placeholder="Note to self!"></span></p>
                 <p>Overall desirability rating:
-                    <select name="rating" id="rating">
+                    <select name="rating">
                         <option value="0">Select</option>
                         <option value="1">Dream job!</option>
                         <option value="2">Good fit</option>
@@ -121,6 +131,7 @@
                         <option value="4">Only if I'm desperate</option>
                     </select>
                 </p>
+                </form>
             </div>
             <div class="buttons">
                 <div class="view-button">
