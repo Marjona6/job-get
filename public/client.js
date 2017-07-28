@@ -96,6 +96,16 @@ $(document).ready(function () {
             $('#dashboard').hide();
             $('#edit-screen').show();
 
+            // when user clicks "cancel" (back) button on edit screen
+            // returns user to dashboard and resets form
+            $('#js-back-button').click(function(event) {
+                event.preventDefault();
+                console.log('user has canceled; going back to dashboard');
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
+            })
+
             // when user clicks "save changes" in edit screen
             // should also send the data as a POST request on server side
             // step b1: new lead trigger

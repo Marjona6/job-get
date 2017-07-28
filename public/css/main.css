@@ -350,7 +350,7 @@ footer {
     h3 {
         font-size: 1.25rem;
     }
-    p, .styledButton {
+    p, a, .styledButton {
         font-size: 0.9rem;
     }
     /* HEADER */
@@ -389,7 +389,7 @@ footer {
     h3 {
         font-size: 1rem;
     }
-    p, .styledButton {
+    p, a, .styledButton {
         font-size: 0.8rem;
     }
 
@@ -409,7 +409,7 @@ footer {
     h3 {
         font-size: 0.9rem;
     }
-    p, .styledButton {
+    p, a, .styledButton {
         font-size: 0.75rem;
     }
 
@@ -440,7 +440,7 @@ footer {
     h3 {
         font-size: 0.8rem;
     }
-    p, .styledButton {
+    p, a, .styledButton {
         font-size: 0.7rem;
     }
 
