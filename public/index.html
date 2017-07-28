@@ -34,9 +34,9 @@
                 <form id="login-form">
                     <h3>Sign in and start tracking</h3>
                     <p>Email:</p>
-                        <input type="text" name="email">
+                    <input type="text" name="email">
                     <p>Password:</p>
-                        <input type="text" name="password">
+                    <input type="text" name="password">
                     <p></p>
                     <input type="submit" id="js-login-button" class="styledButton" value="Sign in">
                 </form>
@@ -66,56 +66,43 @@
         </section>
         <section id="edit-screen">
             <div class="buttons">
-                <div class="edit-button">
+                <div class="edit-button" id="js-edit-button">
                     <input type="submit" class="styledButton" value="Edit">
                 </div>
-                <div class="edit-button">
+                <div class="edit-button" id="js-delete-button">
                     <input type="submit" class="styledButton" value="Delete">
                 </div>
             </div>
             <div id="view-edit-box">
                 <form id="edit-form">
-                    <h3><span id="js-position-header"><input type="text" name="position" placeholder="Position"></span> at <span><input type="text" name="company" placeholder="Company Name"></span></h3>
-                <p>Funnel stage: </p>
-                    <select name="funnel-stage">
-                        <option value="0">Select</option>
-                        <option value="1">New Leads</option>
-                        <option value="2">Qualified Leads</option>
-                        <option value="3">Contact/Apply</option>
-                        <option value="4">Interview</option>
-                        <option value="5">Offer</option>
-                        <option value="6">Negotiate</option>
-                    </select>
-                <p>Company overview: <span><input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?"></span></p>
-                <p>Company size: <span><input type="text" name="company-size" placeholder="About how many?"></span> employees</p>
-                <p>Position location: <span><input type="text" name="position-location" placeholder="Ganymede Station"></span></p>
-                <p>Salary/benefits offered: <span><input type="text" name="salary-benefits" placeholder="$1,000,000 + a helicopter"></span></p>
-                <p>Job description: <span><input type="textarea" name="job-description" placeholder="What are the duties and requirements?"></span></p>
-                <p>Date of application: <span><input type="date" name="application-date"></span></p>
-                <p>Contact name: <span><input type="text" name="contact-name" placeholder="James Bond"></span></p>
-                <p>Contact email: <span><input type="email" name="contact-email" placeholder="example@example.com"></span></p>
-                <p>Application materials: <span><input type="text" name="application-materials" placeholder="CV, resume, cover letter..."></span></p>
-                <p>Interview date: <span><input type="date" name="interview-date"></span></p>
-                <p>Interview follow-up: <span><input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?"></span></p>
-                <p>Source of lead: <span><input type="text" name="lead-source" placeholder="Friend? Google?"></span></p>
-                <p>Notes: <span><input type="textarea" name="notes" placeholder="Note to self!"></span></p>
-                <p>Overall desirability rating:
-                    <select name="rating">
-                        <option value="0">Select</option>
-                        <option value="1">Dream job!</option>
-                        <option value="2">Good fit</option>
-                        <option value="3">Take it or leave it</option>
-                        <option value="4">Only if I'm desperate</option>
-                    </select>
-                </p>
+                    <h3><span id="js-position-header"></span> at <span id="js-company-header"></span></h3>
+                    <p>Funnel stage: </p>
+                    <div id="js-funnel-stage">
+                    </div>
+                    <p>Company overview: <span id="js-company-overview"></span></p>
+                    <p>Company size: <span id="js-company-size"></span></p>
+                    <p>Position location: <span id="js-position-location"></span></p>
+                    <p>Salary/benefits offered: <span id="js-salary-benefits"></span></p>
+                    <p>Job description: <span id="js-job-description"></span></p>
+                    <p>Date of application: <span id="js-application-date"></span></p>
+                    <p>Contact name: <span id="js-contact-name"></span></p>
+                    <p>Contact email: <span id="js-contact-email"></span></p>
+                    <p>Application materials: <span id="js-application-materials"></span></p>
+                    <p>Interview date: <span id="js-interview-date"></span></p>
+                    <p>Interview follow-up: <span id="js-interview-follow-up"></span></p>
+                    <p>Source of lead: <span id="js-lead-source"></span></p>
+                    <p>Notes: <span id="js-notes"></span></p>
+                    <p>Overall desirability rating: </p>
+                    <div id="js-rating">
+                    </div>
                 </form>
             </div>
             <div class="buttons">
-                <div class="create-button">
-                    <input type="submit" class="styledButton" value="Cancel" id="js-back-button">
+                <div id="js-back-button">
+                    <input type="submit" class="styledButton" value="Back">
                 </div>
-                <div class="create-button">
-                    <input type="submit" class="styledButton" value="Save Changes" id="js-save-button">
+                <div id="js-save-button">
+                    <input type="submit" class="styledButton" value="Save Changes">
                 </div>
             </div>
         </section>

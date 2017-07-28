@@ -303,7 +303,9 @@ a {
     margin: 0.5rem;
 }
 
-.edit-button, .create-button {
+.edit-button,
+#js-save-button,
+#js-back-button {
     display: inline-block;
 }
 
@@ -350,18 +352,20 @@ footer {
     h3 {
         font-size: 1.25rem;
     }
-    p, a, .styledButton {
+    p,
+    a,
+    .styledButton {
         font-size: 0.9rem;
     }
     /* HEADER */
-
     #nav {
         position: absolute;
         right: 1rem;
     }
     .nav-item {
-/*        display: none;
-*/    }
+        /*        display: none;
+*/
+    }
     /* LOGIN SCREEN */
     .vertically-centered {
         margin-top: 1.5rem;
@@ -389,10 +393,11 @@ footer {
     h3 {
         font-size: 1rem;
     }
-    p, a, .styledButton {
+    p,
+    a,
+    .styledButton {
         font-size: 0.8rem;
     }
-
     /* VIEW/EDIT SCREEN */
     #view-edit-box {
         margin-top: 3rem;
@@ -409,10 +414,11 @@ footer {
     h3 {
         font-size: 0.9rem;
     }
-    p, a, .styledButton {
+    p,
+    a,
+    .styledButton {
         font-size: 0.75rem;
     }
-
     /* LOGIN SCREEN */
     #login-box {
         width: 70%;
@@ -440,10 +446,11 @@ footer {
     h3 {
         font-size: 0.8rem;
     }
-    p, a, .styledButton {
+    p,
+    a,
+    .styledButton {
         font-size: 0.7rem;
     }
-
     /* LOGIN SCREEN */
     #login-box {
         width: 90%;

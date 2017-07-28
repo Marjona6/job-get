@@ -37,57 +37,74 @@ if (require.main === module) {
     });
 };
 
-// getting the lead objects to populate the dashboard
-app.get('/leads', function(req, res) {
-	console.log('getting the leads');
-	//console.log(req);
-	Lead
-		.find()
-		.then(function(leads) {
-			res.json({
-				leads: leads.map(function(lead) {
-					return lead;
-				})
-			});
-		})
-		.catch(function(err) {
-			console.error(err);
-			res.status(500).json({message: 'Internal server error'});
-		});
+// getting all the lead objects to populate the dashboard
+app.get('/leads', function (req, res) {
+    console.log('getting the leads');
+    //console.log(req);
+    Lead
+        .find()
+        .then(function (leads) {
+            res.json({
+                leads: leads.map(function (lead) {
+                    return lead;
+                })
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
+// getting one lead object
+app.get('/leads/:id', function (req, res) {
+    console.log('getting lead by ID');
+    Lead
+        .findById(req.params.id).exec().then(function (lead) {
+            return res.json(lead);
+        })
+        .catch(function (leads) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
 });
 
 // step 4 (continuing from client.js): local API endpoint in server.js
-app.post('/login', function(req, res) {
-	//console.log(req);
-	//console.log(req.body.password);
-	// send data from login to database
-	// for now, send it without validation
-	// step 5: send the local data to the database
-	User.create({
-		username: req.body.username,
-		password: req.body.password
-	}, function (err, user) {
-		// step 6: return the result of DB call
-		if(err) {
-			return res.status(500).json({
-				message: 'Internal Server Error'
-			});
-		}
-		// step 7: send the result back to client.js
-		//console.log(user);
-		res.status(201).json(user);
+app.post('/login', function (req, res) {
+    //console.log(req);
+    //console.log(req.body.password);
+    // send data from login to database
+    // for now, send it without validation
+    // step 5: send the local data to the database
+    User.create({
+        username: req.body.username,
+        password: req.body.password
+    }, function (err, user) {
+        // step 6: return the result of DB call
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        // step 7: send the result back to client.js
+        //console.log(user);
+        res.status(201).json(user);
 
-	});
+    });
 });
 
 // step b4 (continuing from client.js): local API endpoint in server.js
-app.post('/leads', function(req, res) {
-	console.log(req);
-	// step b5: send the local data to the database
-	Lead.create({
-		position: req.body.position,
-		company: req.body.company,
-		funnelStage: req.body.funnelStage,
+app.post('/leads', function (req, res) {
+    console.log(req);
+    // step b5: send the local data to the database
+    Lead.create({
+        position: req.body.position,
+        company: req.body.company,
+        funnelStage: req.body.funnelStage,
         companyOverview: req.body.companyOverview,
         companySize: req.body.companySize,
         positionLocation: req.body.positionLocation,
@@ -102,18 +119,18 @@ app.post('/leads', function(req, res) {
         leadSource: req.body.leadSource,
         notes: req.body.notes,
         rating: req.body.rating
-	}, function (err, lead) {
-		// step b6: return the result of DB call
-		if(err) {
-			return res.status(500).json({
-				message: 'Internal Server Error'
-			});
-		}
-		// step b7: send the result back to client.js
-		console.log(lead);
-		res.status(201).json(lead);
+    }, function (err, lead) {
+        // step b6: return the result of DB call
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        // step b7: send the result back to client.js
+        console.log(lead);
+        res.status(201).json(lead);
 
-	});
+    });
 });
 
 exports.app = app;
