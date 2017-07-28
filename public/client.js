@@ -48,6 +48,23 @@ $(document).ready(function () {
         $('#dashboard').show();
         getAndDisplayLeads();
 
+        // when user clicks `a` anchor tag in a .job-lead box
+        // should take user to that job lead's view screen
+        $(document).on('click', ".job-lead a", function() {
+            console.log('hey now you clicked a job lead!!');
+            // now target the id of the object
+            console.log(this);
+            // var str = this;
+            // function stripAllHtmlTag(str){
+            //     var tmp = document.createElement("DIV");
+            //     tmp.innerHTML = str;
+            //     str = tmp.textContent || tmp.innerText || "";
+            //     console.log(str);
+    
+            // }
+            // stripAllHtmlTag(str);
+        });
+
         // populate the dashboard with contents of the user's database
         // requires making an API call to the DB
         function getAndDisplayLeads() {
@@ -94,17 +111,24 @@ $(document).ready(function () {
             event.preventDefault();
             console.log('clicked to create new job lead');
             $('#dashboard').hide();
+            // hide the edit and delete buttons;
+            // these are unnecessary when creating a brand new lead
+            $('.edit-button').hide();
             $('#edit-screen').show();
 
             // when user clicks "cancel" (back) button on edit screen
             // returns user to dashboard and resets form
             $('#js-back-button').click(function(event) {
                 event.preventDefault();
-                console.log('user has canceled; going back to dashboard');
-                $('#edit-form').trigger('reset');
-                $('#edit-screen').hide();
-                $('#dashboard').show();
-            })
+                if (confirm('Are you sure you want to cancel? Your changes will not be saved.') == true) {
+                    console.log('user has canceled; going back to dashboard');
+                    $('#edit-form').trigger('reset');
+                    $('#edit-screen').hide();
+                    $('#dashboard').show();
+                } else {
+                    console.log('user decided not to cancel after all');
+                };
+            });
 
             // when user clicks "save changes" in edit screen
             // should also send the data as a POST request on server side

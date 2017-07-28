@@ -303,7 +303,7 @@ a {
     margin: 0.5rem;
 }
 
-.view-button {
+.edit-button, .create-button {
     display: inline-block;
 }
 
