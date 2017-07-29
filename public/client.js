@@ -8,8 +8,7 @@ function populateEditScreen(dataPassedIn) {
     // populating the edit screen with fillable fields
     // variables here first
     var funnelStageHtmlOutput = '';
-    funnelStageHtmlOutput += '<select name="funnel-stage">';
-    funnelStageHtmlOutput += '<option value="0" disabled="disabled">Select</option>';
+    funnelStageHtmlOutput += '<select required name="funnel-stage">';
     funnelStageHtmlOutput += '<option value="1">New Leads</option>';
     funnelStageHtmlOutput += '<option value="2">Qualified Leads</option>';
     funnelStageHtmlOutput += '<option value="3">Contact/Apply</option>';
@@ -19,7 +18,7 @@ function populateEditScreen(dataPassedIn) {
     funnelStageHtmlOutput += '</select>';
     var ratingHtmlOutput = '';
     ratingHtmlOutput += '<select name="rating">';
-    ratingHtmlOutput += '<option value="0" disabled="disabled">Select</option>';
+    ratingHtmlOutput += '<option value="0">Select</option>';
     ratingHtmlOutput += '<option value="1">Dream job!</option>';
     ratingHtmlOutput += '<option value="2">Good fit</option>';
     ratingHtmlOutput += '<option value="3">Take it or leave it</option>';
@@ -63,14 +62,14 @@ function populateEditScreen(dataPassedIn) {
     $('#js-rating').html(ratingHtmlOutput);
 }
 
-// populating the edit screen with data
+// populating the edit screen with empty data
 // variables here first
-var testData = {
-    position: 'Junior Full-Stack Developer',
-    company: 'X-Team',
-    funnelStage: 'New Leads',
-    companyOverview: 'Fully remote team working on cutting-edge technology',
-    companySize: '100',
+var emptyData = {
+    position: '',
+    company: '',
+    funnelStage: '',
+    companyOverview: '',
+    companySize: '',
     positionLocation: '',
     salaryBenefits: '',
     jobDescription: '',
@@ -82,7 +81,7 @@ var testData = {
     interviewFollowUp: '',
     leadSource: '',
     notes: '',
-    rating: 2
+    rating: ''
 };
 
 function populateViewScreen(data) {
@@ -122,27 +121,27 @@ function getAndDisplayLeads() {
         for (var i = 0; i < res.leads.length; i++) {
             // console.log(res.leads[i].company + ' is the company name!');
             if (res.leads[i].funnelStage == 1) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#new-leads').append(htmlOutput);
                 // stage 2: qualified leads
             } else if (res.leads[i].funnelStage == 2) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#qualified-leads').append(htmlOutput);
                 // stage 3: contact/apply
             } else if (res.leads[i].funnelStage == 3) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#contact-apply').append(htmlOutput);
                 // stage 4: interview
             } else if (res.leads[i].funnelStage == 4) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#interview').append(htmlOutput);
                 // stage 5: offer
             } else if (res.leads[i].funnelStage == 5) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#offer').append(htmlOutput);
                 // stage 6: negotiate
             } else if (res.leads[i].funnelStage == 6) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '">' + res.leads[i].company + '</p>';
+                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
                 $('#negotiate').append(htmlOutput);
                 // anything other than 1-6 should throw an error
             } else {
@@ -282,7 +281,7 @@ $(document).ready(function () {
         // calling the function to populate the edit screen with fillable fields
         // passing in testData, which is an object shaped like our schema but each item is empty string
         // should result in all fields empty of value and only having placeholders
-        populateEditScreen(testData);
+        populateEditScreen(emptyData);
     });
 
     // when user clicks "save changes" in edit screen
