@@ -1,7 +1,7 @@
 "use strict";
 
 // Function and object definitions
-function populateEditScreen() {
+function populateEditScreen(dataPassedIn) {
     // populating the edit screen with fillable fields
     // variables here first
     var funnelStageHtmlOutput = '';
@@ -23,22 +23,22 @@ function populateEditScreen() {
     ratingHtmlOutput += '<option value="4">Only if I\'m desperate</option>';
     ratingHtmlOutput += '</select>';
 
-    $('#js-position-header').html('<input type="text" name="position" placeholder="Position">');
-    $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name">');
+    $('#js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
+    $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
     $('#js-funnel-stage').html(funnelStageHtmlOutput);
-    $('#js-company-overview').html('<input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?">');
-    $('#js-company-size').html('<input type="text" name="company-size" placeholder="About how many?">  employees');
-    $('#js-position-location').html('<input type="text" name="position-location" placeholder="Ganymede Station">');
-    $('#js-salary-benefits').html('<input type="text" name="salary-benefits" placeholder="$1,000,000 + a helicopter">');
-    $('#js-job-description').html('<input type="textarea" name="job-description" placeholder="What are the duties and requirements?">');
-    $('#js-application-date').html('<input type="date" name="application-date">');
-    $('#js-contact-name').html('<input type="text" name="contact-name" placeholder="James Bond">');
-    $('#js-contact-email').html('<input type="email" name="contact-email" placeholder="example@example.com">');
-    $('#js-application-materials').html('<input type="text" name="application-materials" placeholder="CV, resume, cover letter...">');
-    $('#js-interview-date').html('<input type="date" name="interview-date">');
-    $('#js-interview-follow-up').html('<input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?">');
-    $('#js-lead-source').html('<input type="text" name="lead-source" placeholder="Friend? Google?">');
-    $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!">');
+    $('#js-company-overview').html('<input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?" value="' + dataPassedIn.companyOverview + '">');
+    $('#js-company-size').html('<input type="text" name="company-size" placeholder="About how many?" value="' + dataPassedIn.companySize + '">  employees');
+    $('#js-position-location').html('<input type="text" name="position-location" placeholder="Ganymede Station" value="' + dataPassedIn.positionLocation + '">');
+    $('#js-salary-benefits').html('<input type="text" name="salary-benefits" placeholder="$1,000,000 + a helicopter" value="' + dataPassedIn.salaryBenefits + '">');
+    $('#js-job-description').html('<input type="textarea" name="job-description" placeholder="What are the duties and requirements?" value="' + dataPassedIn.jobDescription + '">');
+    $('#js-application-date').html('<input type="date" name="application-date" value="' + dataPassedIn.applicationDate + '">');
+    $('#js-contact-name').html('<input type="text" name="contact-name" placeholder="James Bond" value="' + dataPassedIn.contactName + '">');
+    $('#js-contact-email').html('<input type="email" name="contact-email" placeholder="example@example.com" value="' + dataPassedIn.contactEmail + '">');
+    $('#js-application-materials').html('<input type="text" name="application-materials" placeholder="CV, resume, cover letter..." value="' + dataPassedIn.applicationMaterials + '">');
+    $('#js-interview-date').html('<input type="date" name="interview-date" value="' + dataPassedIn.interviewDate + '">');
+    $('#js-interview-follow-up').html('<input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?" value="' + dataPassedIn.interviewFollowUp + '">');
+    $('#js-lead-source').html('<input type="text" name="lead-source" placeholder="Friend? Google?" value="' + dataPassedIn.leadSource + '">');
+    $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!" value="' + dataPassedIn.notes + '">');
     $('#js-rating').html(ratingHtmlOutput);
 }
 
@@ -50,12 +50,12 @@ var testData = {
     funnelStage: 'New Leads',
     companyOverview: 'Fully remote team working on cutting-edge technology',
     companySize: '100',
-    positionLocation: ' ',
-    salaryBenefits: ' ',
-    jobDescription: ' ',
-    applicationDate: ' ',
-    contactName: ' ',
-    contactEmail: ' ',
+    positionLocation: '',
+    salaryBenefits: '',
+    jobDescription: '',
+    applicationDate: '',
+    contactName: '',
+    contactEmail: '',
     applicationMaterials: '',
     interviewDate: '',
     interviewFollowUp: '',
@@ -73,18 +73,21 @@ function populateViewScreen(data) {
     $('#js-funnel-stage').text(data.funnelStage);
     $('#js-company-overview').text(data.companyOverview);
     $('#js-company-size').text(data.companySize + ' employees');
-    $('#js-position-location').text();
-    $('#js-salary-benefits').text();
-    $('#js-job-description').text();
-    $('#js-application-date').text();
-    $('#js-contact-name').text();
-    $('#js-contact-email').text();
-    $('#js-application-materials').text();
-    $('#js-interview-date').text();
-    $('#js-interview-follow-up').text();
-    $('#js-lead-source').text();
-    $('#js-notes').text();
+    $('#js-position-location').text(data.positionLocation);
+    $('#js-salary-benefits').text(data.salaryBenefits);
+    $('#js-job-description').text(data.jobDescription);
+    $('#js-application-date').text(data.applicationDate);
+    $('#js-contact-name').text(data.contactName);
+    $('#js-contact-email').text(data.contactEmail);
+    $('#js-application-materials').text(data.applicationMaterials);
+    $('#js-interview-date').text(data.interviewDate);
+    $('#js-interview-follow-up').text(data.interviewFollowUp);
+    $('#js-lead-source').text(data.leadSource);
+    $('#js-notes').text(data.notes);
     $('#js-rating').text(data.rating);
+
+    // add the id to the edit button for targeting
+    $('.js-edit-button').attr('id', data._id);
 }
 
 // populate the dashboard with contents of the user's database
@@ -128,6 +131,23 @@ function getAndDisplayLeads() {
     });
 }
 
+function getJobLeadForViewScreen(searchId) {
+    var result;
+    $.getJSON("/leads/" + searchId, function (res) {
+                console.log('made the GET request for the clicked job lead');
+                console.log(res);
+                populateViewScreen(res);
+        });
+    }
+
+function getJobLeadForEditScreen(searchId) {
+    var result;
+    $.getJSON("/leads/" + searchId, function (res) {
+                console.log('made the GET request for the clicked job lead');
+                console.log(res);
+                populateEditScreen(res);
+        });
+}
 
 // Triggers
 $(document).ready(function () {
@@ -194,62 +214,18 @@ $(document).ready(function () {
         };
     });
 
-    function getJobLead(searchId) {
-        $.ajax({
-                type: "GET",
-                url: "/leads/" + searchId,
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function () {
-                    console.log('what up I\'m in yer .ajax call');
-                }
-            })
-            // step 8 (continuing from server.js): display results
-            .done(function (result) {
-                console.log('made the GET request for the clicked job lead');
-                console.log(result);
-                // need a function here to populate the view screen with job lead data from GET request
-                populateViewScreen(result);
-            })
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });
-    }
-
-    // when user clicks `a` anchor tag in a .job-lead box
-    // should take user to that job lead's view screen
-    $(document).on('click', ".job-lead", function () {
-        console.log(event.target);
-        console.log('you clicked a job lead!');
-        // now target the id, which is the _id of the job lead object
-        console.log(event.target.id);
-        var currentId = event.target.id;
-        console.log(currentId);
-        getJobLead(currentId);
-
-        console.log('showing the view screen now for a selected job lead');
-        $('#dashboard').hide();
-        // after this is hidden here, trigger for js-edit-button does not show it again :(
-        console.log('about to hide js-save-button');
-        $('#js-save-button').hide();
-        $('#edit-screen').show();
-        $('.edit-button').show();
-        // call the function to populate the view screen with text
-        // will need to replace this call to function populateViewScreen(testData) with the GET call that contains it with real data
-        populateViewScreen(testData);
-    });
-
     // when user clicks "edit" button
     // should change text to fillable fields
     // existing data should prepopulate or...???
-    document.getElementById('js-edit-button').addEventListener('click', function () {
+    $(document).on('click', ".js-edit-button", function () {
+   // document.querySelectorAll('.js-edit-button').addEventListener('click', function () {
         event.preventDefault();
         console.log('about to edit a job lead');
-        $('#js-edit-button').hide();
+        var idFromEditButton = $('.js-edit-button').attr('id');
+        console.log(idFromEditButton);
+        getJobLeadForEditScreen(idFromEditButton);
+        $('.js-edit-button').hide();
         $('#js-save-button').show();
-        populateEditScreen();
     });
 
     // when user clicks "delete" button
@@ -278,12 +254,14 @@ $(document).ready(function () {
         $('#dashboard').hide();
         // hide the edit and delete buttons;
         // these are unnecessary when creating a brand new lead
-        $('#js-edit-button').hide();
+        $('.js-edit-button').hide();
         $('#js-delete-button').hide();
         $('#edit-screen').show();
         $('#js-save-button').show();
         // calling the function to populate the edit screen with fillable fields
-        populateEditScreen();
+        // passing in testData, which is an object shaped like our schema but each item is empty string
+        // should result in all fields empty of value and only having placeholders
+        populateEditScreen(testData);
     });
 
     // when user clicks "save changes" in edit screen
@@ -390,6 +368,19 @@ $(document).ready(function () {
         $('#edit-screen').hide();
         $('#dashboard').show();
     });
+});
+
+// when user clicks  a .job-lead box
+// should take user to that job lead's view screen
+$(document).on('click', ".job-lead", function () {
+    getJobLeadForViewScreen(event.target.id);
+    console.log('populating view screen with getJobLead function');
+    populateViewScreen(getJobLeadForViewScreen);
+    $('#dashboard').hide();
+    $('#js-save-button').hide();
+    $('#edit-screen').show();
+    $('.js-edit-button').show();
+    $('#js-delete-button').show();
 });
 
 // when user clicks log out
