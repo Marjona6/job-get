@@ -1,12 +1,15 @@
 "use strict";
 
 // Function and object definitions
+
+// var funnelStageText = [1]
+
 function populateEditScreen(dataPassedIn) {
     // populating the edit screen with fillable fields
     // variables here first
     var funnelStageHtmlOutput = '';
     funnelStageHtmlOutput += '<select name="funnel-stage">';
-    funnelStageHtmlOutput += '<option value="0">Select</option>';
+    funnelStageHtmlOutput += '<option value="0" disabled="disabled">Select</option>';
     funnelStageHtmlOutput += '<option value="1">New Leads</option>';
     funnelStageHtmlOutput += '<option value="2">Qualified Leads</option>';
     funnelStageHtmlOutput += '<option value="3">Contact/Apply</option>';
@@ -16,7 +19,7 @@ function populateEditScreen(dataPassedIn) {
     funnelStageHtmlOutput += '</select>';
     var ratingHtmlOutput = '';
     ratingHtmlOutput += '<select name="rating">';
-    ratingHtmlOutput += '<option value="0">Select</option>';
+    ratingHtmlOutput += '<option value="0" disabled="disabled">Select</option>';
     ratingHtmlOutput += '<option value="1">Dream job!</option>';
     ratingHtmlOutput += '<option value="2">Good fit</option>';
     ratingHtmlOutput += '<option value="3">Take it or leave it</option>';
@@ -25,6 +28,15 @@ function populateEditScreen(dataPassedIn) {
 
     $('#js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
     $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
+    for (var i=1; i<=6; i++) {
+        if (dataPassedIn.funnelStage == i) {
+            console.log('i found an i of ' + i);
+            // first search for the index where i occurs
+            var indx = funnelStageHtmlOutput.search(i);
+            // then pass that index (+2 to account for closing double quotes and a space following)
+            funnelStageHtmlOutput = funnelStageHtmlOutput.slice(0, indx+2) + ' selected="selected"' + funnelStageHtmlOutput.slice(indx+2);
+        }
+    };
     $('#js-funnel-stage').html(funnelStageHtmlOutput);
     $('#js-company-overview').html('<input type="textarea" name="company-overview" placeholder="What kind of company is this? What is the company culture like?" value="' + dataPassedIn.companyOverview + '">');
     $('#js-company-size').html('<input type="text" name="company-size" placeholder="About how many?" value="' + dataPassedIn.companySize + '">  employees');
@@ -39,6 +51,15 @@ function populateEditScreen(dataPassedIn) {
     $('#js-interview-follow-up').html('<input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?" value="' + dataPassedIn.interviewFollowUp + '">');
     $('#js-lead-source').html('<input type="text" name="lead-source" placeholder="Friend? Google?" value="' + dataPassedIn.leadSource + '">');
     $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!" value="' + dataPassedIn.notes + '">');
+    for (var i=1; i<=4; i++) {
+        if (dataPassedIn.rating == i) {
+            console.log('i found an i of ' + i);
+            // first search for the index where i occurs
+            var indx = ratingHtmlOutput.search(i);
+            // then pass that index (+2 to account for closing double quotes and a space following)
+            ratingHtmlOutput = ratingHtmlOutput.slice(0, indx+2) + ' selected="selected"' + ratingHtmlOutput.slice(indx+2);
+        }
+    };
     $('#js-rating').html(ratingHtmlOutput);
 }
 
