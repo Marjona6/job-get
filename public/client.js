@@ -27,13 +27,13 @@ function populateEditScreen(dataPassedIn) {
 
     $('#js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
     $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
-    for (var i=1; i<=6; i++) {
+    for (var i = 1; i <= 6; i++) {
         if (dataPassedIn.funnelStage == i) {
             console.log('i found an i of ' + i);
             // first search for the index where i occurs
             var indx = funnelStageHtmlOutput.search(i);
             // then pass that index (+2 to account for closing double quotes and a space following)
-            funnelStageHtmlOutput = funnelStageHtmlOutput.slice(0, indx+2) + ' selected="selected"' + funnelStageHtmlOutput.slice(indx+2);
+            funnelStageHtmlOutput = funnelStageHtmlOutput.slice(0, indx + 2) + ' selected="selected"' + funnelStageHtmlOutput.slice(indx + 2);
         }
     };
     $('#js-funnel-stage').html(funnelStageHtmlOutput);
@@ -50,13 +50,13 @@ function populateEditScreen(dataPassedIn) {
     $('#js-interview-follow-up').html('<input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?" value="' + dataPassedIn.interviewFollowUp + '">');
     $('#js-lead-source').html('<input type="text" name="lead-source" placeholder="Friend? Google?" value="' + dataPassedIn.leadSource + '">');
     $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!" value="' + dataPassedIn.notes + '">');
-    for (var i=1; i<=4; i++) {
+    for (var i = 1; i <= 4; i++) {
         if (dataPassedIn.rating == i) {
             console.log('i found an i of ' + i);
             // first search for the index where i occurs
             var indx = ratingHtmlOutput.search(i);
             // then pass that index (+2 to account for closing double quotes and a space following)
-            ratingHtmlOutput = ratingHtmlOutput.slice(0, indx+2) + ' selected="selected"' + ratingHtmlOutput.slice(indx+2);
+            ratingHtmlOutput = ratingHtmlOutput.slice(0, indx + 2) + ' selected="selected"' + ratingHtmlOutput.slice(indx + 2);
         }
     };
     $('#js-rating').html(ratingHtmlOutput);
@@ -106,14 +106,19 @@ function populateViewScreen(data) {
     $('#js-notes').text(data.notes);
     $('#js-rating').text(data.rating);
 
-    // add the id to the edit button for targeting
+    // add the id to the edit, save, delete buttons for targeting
     $('.js-edit-button').attr('id', data._id);
+    $('.js-save-button').attr('id', data._id);
+    $('.js-delete-button').attr('id', data._id);
 }
 
 // populate the dashboard with contents of the user's database
 // requires making an API call to the DB
 function getAndDisplayLeads() {
     console.log('retrieving job lead items');
+    // can I add some code here that will clear out any existing
+    // ... leads already showing up?
+    // will be useful for DELETE function's success thingie
     $.getJSON("/leads", function (res) {
         console.log('logging the data now');
         console.log(res);
@@ -121,27 +126,27 @@ function getAndDisplayLeads() {
         for (var i = 0; i < res.leads.length; i++) {
             // console.log(res.leads[i].company + ' is the company name!');
             if (res.leads[i].funnelStage == 1) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#new-leads').append(htmlOutput);
                 // stage 2: qualified leads
             } else if (res.leads[i].funnelStage == 2) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#qualified-leads').append(htmlOutput);
                 // stage 3: contact/apply
             } else if (res.leads[i].funnelStage == 3) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#contact-apply').append(htmlOutput);
                 // stage 4: interview
             } else if (res.leads[i].funnelStage == 4) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#interview').append(htmlOutput);
                 // stage 5: offer
             } else if (res.leads[i].funnelStage == 5) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#offer').append(htmlOutput);
                 // stage 6: negotiate
             } else if (res.leads[i].funnelStage == 6) {
-                htmlOutput = '<p class="job-lead"><a href="#"><span id="' + res.leads[i]._id + '">' + res.leads[i].company + '</span></a></p>';
+                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#negotiate').append(htmlOutput);
                 // anything other than 1-6 should throw an error
             } else {
@@ -154,19 +159,19 @@ function getAndDisplayLeads() {
 function getJobLeadForViewScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-                console.log('made the GET request for the clicked job lead');
-                console.log(res);
-                populateViewScreen(res);
-        });
-    }
+        console.log('made the GET request for the clicked job lead--for view screen');
+        console.log(res);
+        populateViewScreen(res);
+    });
+}
 
 function getJobLeadForEditScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-                console.log('made the GET request for the clicked job lead');
-                console.log(res);
-                populateEditScreen(res);
-        });
+        console.log('made the GET request for the clicked job lead--for edit screen');
+        console.log(res);
+        populateEditScreen(res);
+    });
 }
 
 // Triggers
@@ -238,14 +243,13 @@ $(document).ready(function () {
     // should change text to fillable fields
     // existing data should prepopulate or...???
     $(document).on('click', ".js-edit-button", function () {
-   // document.querySelectorAll('.js-edit-button').addEventListener('click', function () {
         event.preventDefault();
         console.log('about to edit a job lead');
         var idFromEditButton = $('.js-edit-button').attr('id');
         console.log(idFromEditButton);
         getJobLeadForEditScreen(idFromEditButton);
         $('.js-edit-button').hide();
-        $('#js-save-button').show();
+        $('.js-save-button').show();
     });
 
     // when user clicks "delete" button
@@ -254,11 +258,26 @@ $(document).ready(function () {
     // and delete that job lead
     // should then reset the form, hide the edit screen, show the dashboard
     // the DOM should show that the job lead is now gone
-    document.getElementById('js-delete-button').addEventListener('click', function () {
+    $(document).on('click', ".js-delete-button", function () {
+        //document.getElementById('js-delete-button').addEventListener('click', function () {
         event.preventDefault();
         console.log('about to delete a job lead');
         if (confirm('Are you sure you want to delete this job lead? Deleting is PERMANENT. You will not be able to recover this data.') == true) {
             console.log('user has deleted; going back to dashboard');
+            // define a variable here and set it to the value of the id of the js-delete-button
+            console.log('about to edit a job lead');
+            var idFromDeleteButton = $('.js-delete-button').attr('id');
+            console.log(idFromDeleteButton);
+            // getJobLeadForEditScreen(idFromDeleteButton);
+            // make the AJAX call to delete the lead by id
+            $.ajax({
+                method: "DELETE",
+                url: "/leads/" + idFromDeleteButton,
+                success: getAndDisplayLeads // this is adding to,
+                // rather than replacing, the pre-deletion dashboard leads.
+                // can I create a function that will first clear out
+                // everything and then call getanddisplayleads?
+            });
             $('#edit-form').trigger('reset');
             $('#edit-screen').hide();
             $('#dashboard').show();
@@ -275,9 +294,9 @@ $(document).ready(function () {
         // hide the edit and delete buttons;
         // these are unnecessary when creating a brand new lead
         $('.js-edit-button').hide();
-        $('#js-delete-button').hide();
+        $('.js-delete-button').hide();
         $('#edit-screen').show();
-        $('#js-save-button').show();
+        $('.js-save-button').show();
         // calling the function to populate the edit screen with fillable fields
         // passing in testData, which is an object shaped like our schema but each item is empty string
         // should result in all fields empty of value and only having placeholders
@@ -287,7 +306,9 @@ $(document).ready(function () {
     // when user clicks "save changes" in edit screen
     // should also send the data as a POST request on server side
     // step b1: new lead trigger
-    document.getElementById('js-save-button').addEventListener('click', function () {
+    $(document).on('click', ".js-save-button", function () {
+        // document.getElementById('js-save-button').addEventListener('click', function () {
+        // need to get the id here too so we can send a PUT request when editing
         //$('#js-save-button').click(function (event) {
         event.preventDefault();
         console.log('clicked to save changes');
@@ -393,14 +414,15 @@ $(document).ready(function () {
 // when user clicks  a .job-lead box
 // should take user to that job lead's view screen
 $(document).on('click', ".job-lead", function () {
+    console.log(event);
     getJobLeadForViewScreen(event.target.id);
     console.log('populating view screen with getJobLead function');
     populateViewScreen(getJobLeadForViewScreen);
     $('#dashboard').hide();
-    $('#js-save-button').hide();
+    $('.js-save-button').hide();
     $('#edit-screen').show();
     $('.js-edit-button').show();
-    $('#js-delete-button').show();
+    $('.js-delete-button').show();
 });
 
 // when user clicks log out
@@ -410,12 +432,7 @@ document.getElementById('js-log-out').addEventListener('click', function () {
 });
 
 // to do:
-// From dashboard, users should be able to click the name of a company to see the view
-// ... screen for that company, with data populated by a GET call to the DB.
-// From that view screen for a particular job lead, users should be able to click the
-// ... 'edit' button to turn the view screen into an editable one like the
-// ... 'create new lead' screen, only with existing data for that job lead already
-// ... filled in from the database.
+// fix problem with dates in view/edit screen (date formats)
 // API calls should work:
 // --DELETE on js-delete-button trigger
 // --PUT on js-save-button trigger from edit screen (how to differentiate this from a POST request

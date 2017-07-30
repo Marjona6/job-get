@@ -37,7 +37,7 @@ if (require.main === module) {
     });
 };
 
-// getting all the lead objects to populate the dashboard
+// GET: getting all the lead objects to populate the dashboard
 app.get('/leads', function (req, res) {
     console.log('getting the leads');
     //console.log(req);
@@ -58,7 +58,7 @@ app.get('/leads', function (req, res) {
         });
 });
 
-// getting one lead object
+// GET: getting one lead object
 app.get('/leads/:id', function (req, res) {
     console.log('getting lead by ID');
     Lead
@@ -73,6 +73,10 @@ app.get('/leads/:id', function (req, res) {
         });
 });
 
+// GET: getting a user
+// next step is verifying and validating the user credentials
+
+// POST: creating a new user
 // step 4 (continuing from client.js): local API endpoint in server.js
 app.post('/login', function (req, res) {
     //console.log(req);
@@ -97,6 +101,7 @@ app.post('/login', function (req, res) {
     });
 });
 
+// POST: creating a new lead
 // step b4 (continuing from client.js): local API endpoint in server.js
 app.post('/leads', function (req, res) {
     console.log(req);
@@ -130,6 +135,21 @@ app.post('/leads', function (req, res) {
         console.log(lead);
         res.status(201).json(lead);
 
+    });
+});
+
+// PUT: updating a lead
+
+// DELETE: deleting a lead
+app.delete('/leads/:id', function(req, res) {
+    console.log('deleting a lead by id');
+    console.log(req);
+    Lead.findByIdAndRemove(req.params.id).exec().then(function(lead) {
+        return res.status(204).end();
+    }).catch(function(err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
     });
 });
 

@@ -305,8 +305,8 @@ a {
 }
 
 .js-edit-button,
-#js-delete-button,
-#js-save-button,
+.js-delete-button,
+.js-save-button,
 #js-back-button {
     display: inline-block;
 }
