@@ -123,6 +123,13 @@ function getAndDisplayLeads() {
         console.log('logging the data now');
         console.log(res);
         var htmlOutput = '';
+        // what I need to do to clear this out is to .html a blank htmlOutput for each section first
+        $('#new-leads').html('<p class="category">New Leads</p>');
+        $('#qualified-leads').html('<p class="category">Qualified Leads</p>');
+        $('#contact-apply').html('<p class="category">Contact/Apply</p>');
+        $('#interview').html('<p class="category">Interview</p>');
+        $('#offer').html('<p class="category">Offer</p>');
+        $('#negotiate').html('<p class="category">Negotiate</p>');
         for (var i = 0; i < res.leads.length; i++) {
             // console.log(res.leads[i].company + ' is the company name!');
             if (res.leads[i].funnelStage == 1) {
@@ -273,10 +280,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "DELETE",
                 url: "/leads/" + idFromDeleteButton,
-                success: getAndDisplayLeads // this is adding to,
-                // rather than replacing, the pre-deletion dashboard leads.
-                // can I create a function that will first clear out
-                // everything and then call getanddisplayleads?
+                success: getAndDisplayLeads
             });
             $('#edit-form').trigger('reset');
             $('#edit-screen').hide();
