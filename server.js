@@ -139,17 +139,19 @@ app.post('/leads', function (req, res) {
 });
 
 // PUT: updating a lead
-app.put('leads/:id', function(req, res) {
+app.put('/leads/:id', function(req, res) {
     console.log('updating a lead by id');
     console.log(req);
+    console.log(req.body.id + ' is req.body.id just so you know');
+    console.log(req.params.id + ' is req.params.id FYI');
     // ensure that the id in the request path and the one in request body match
-    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        var message = 'Request path id (' + req.params.id + ') and request body id ' + ('(' + req.body.id + ') must match');
-        console.error(message);
-        res.status(400).json({
-            message: message
-        });
-    }
+    // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    //     var message = 'Request path id (' + req.params.id + ') and request body id ' + ('(' + req.body.id + ') must match');
+    //     console.error(message);
+    //     res.status(400).json({
+    //         message: message
+    //     });
+   // }
     var toUpdate = {};
     var updateableFields = ['position', 'company', 'funnelStage', 'companyOverview', 'companySize', 'positionLocation', 'salaryBenefits', 'jobDescription', 'applicationDate', 'contactName', 'contactEmail', 'applicationMaterials', 'interviewDate', 'interviewFollowUp', 'leadSource', 'notes', 'rating'];
     updateableFields.forEach(function(field) {

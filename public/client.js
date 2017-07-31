@@ -2,8 +2,6 @@
 
 // Function and object definitions
 
-// var funnelStageText = [1]
-
 function populateEditScreen(dataPassedIn) {
     // populating the edit screen with fillable fields
     // variables here first
@@ -181,6 +179,12 @@ function getJobLeadForEditScreen(searchId) {
     });
 }
 
+// the below variable is used to flag whether or not the edit button has been clicked;
+// if it has, clicking save makes a PUT request;
+// if it has not, clicking save makes a POST request for a new lead
+// (need to make sure this works properly when going back for a second lead)
+var editToggle = false;
+
 // Triggers
 $(document).ready(function () {
     // when page loads
@@ -251,7 +255,10 @@ $(document).ready(function () {
     // existing data should prepopulate or...???
     $(document).on('click', ".js-edit-button", function () {
         event.preventDefault();
+        console.log(editToggle);
         console.log('about to edit a job lead');
+        editToggle = true;
+        console.log(editToggle);
         var idFromEditButton = $('.js-edit-button').attr('id');
         console.log(idFromEditButton);
         getJobLeadForEditScreen(idFromEditButton);
@@ -354,6 +361,22 @@ $(document).ready(function () {
             rating: rating
         };
         console.log(leadObject);
+        // if the bool has NOT been toggled, make a POST request for a new object
+        if (editToggle == true) {
+            console.log('making a PUT request');
+            // get the id for the lead from the save button id
+            var idFromSaveButton = $('.js-save-button').attr('id');
+            console.log(idFromSaveButton);
+            $.ajax({
+                method: "PUT",
+                url: "/leads/" + idFromSaveButton,
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(leadObject),
+                success: function(data) {getAndDisplayLeads}
+            });
+        } else {
+        // if it HAS been toggled, make a PUT request to the same object by ID
         // step b3: make local API call using user input
         $.ajax({
                 type: "POST",
@@ -407,6 +430,7 @@ $(document).ready(function () {
                 console.log(error);
                 console.log(errorThrown);
             });
+            };
         // reset the form so user can input a new lead
         $('#edit-form').trigger('reset');
         console.log('now leaving edit screen');
