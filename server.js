@@ -139,6 +139,34 @@ app.post('/leads', function (req, res) {
 });
 
 // PUT: updating a lead
+app.put('leads/:id', function(req, res) {
+    console.log('updating a lead by id');
+    console.log(req);
+    // ensure that the id in the request path and the one in request body match
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+        var message = 'Request path id (' + req.params.id + ') and request body id ' + ('(' + req.body.id + ') must match');
+        console.error(message);
+        res.status(400).json({
+            message: message
+        });
+    }
+    var toUpdate = {};
+    var updateableFields = ['position', 'company', 'funnelStage', 'companyOverview', 'companySize', 'positionLocation', 'salaryBenefits', 'jobDescription', 'applicationDate', 'contactName', 'contactEmail', 'applicationMaterials', 'interviewDate', 'interviewFollowUp', 'leadSource', 'notes', 'rating'];
+    updateableFields.forEach(function(field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    Lead.findByIdAndUpdate(req.params.id, {
+        $set: toUpdate
+    }).exec().then(function(lead) {
+        return res.status(204).end();
+    }).catch(function(err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
 
 // DELETE: deleting a lead
 app.delete('/leads/:id', function(req, res) {
@@ -150,6 +178,13 @@ app.delete('/leads/:id', function(req, res) {
         return res.status(500).json({
             message: 'Internal Server Error'
         });
+    });
+});
+
+// catch-all endpoint if client makes request to non-existent endpoint
+app.use('*', function (req, res) {
+    res.status(404).json({
+        message: 'Not Found'
     });
 });
 
