@@ -39,7 +39,7 @@ if (require.main === module) {
 
 // GET: getting all the lead objects to populate the dashboard
 app.get('/leads', function (req, res) {
-    console.log('getting the leads');
+    //console.log('getting the leads');
     //console.log(req);
     Lead
         .find()
@@ -60,7 +60,7 @@ app.get('/leads', function (req, res) {
 
 // GET: getting one lead object
 app.get('/leads/:id', function (req, res) {
-    console.log('getting lead by ID');
+    //console.log('getting lead by ID');
     Lead
         .findById(req.params.id).exec().then(function (lead) {
             return res.json(lead);
@@ -104,7 +104,7 @@ app.post('/login', function (req, res) {
 // POST: creating a new lead
 // step b4 (continuing from client.js): local API endpoint in server.js
 app.post('/leads', function (req, res) {
-    console.log(req);
+    //console.log(req);
     // step b5: send the local data to the database
     Lead.create({
         position: req.body.position,
@@ -132,7 +132,7 @@ app.post('/leads', function (req, res) {
             });
         }
         // step b7: send the result back to client.js
-        console.log(lead);
+        //console.log(lead);
         res.status(201).json(lead);
 
     });
@@ -140,10 +140,10 @@ app.post('/leads', function (req, res) {
 
 // PUT: updating a lead
 app.put('/leads/:id', function(req, res) {
-    console.log('updating a lead by id');
-    console.log(req);
-    console.log(req.body.id + ' is req.body.id just so you know');
-    console.log(req.params.id + ' is req.params.id FYI');
+    // console.log('updating a lead by id');
+    // console.log(req);
+    // console.log(req.body.id + ' is req.body.id just so you know');
+    // console.log(req.params.id + ' is req.params.id FYI');
     // ensure that the id in the request path and the one in request body match
     // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     //     var message = 'Request path id (' + req.params.id + ') and request body id ' + ('(' + req.body.id + ') must match');
@@ -172,8 +172,8 @@ app.put('/leads/:id', function(req, res) {
 
 // DELETE: deleting a lead
 app.delete('/leads/:id', function(req, res) {
-    console.log('deleting a lead by id');
-    console.log(req);
+    //console.log('deleting a lead by id');
+    //console.log(req);
     Lead.findByIdAndRemove(req.params.id).exec().then(function(lead) {
         return res.status(204).end();
     }).catch(function(err) {

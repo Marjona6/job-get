@@ -27,7 +27,6 @@ function populateEditScreen(dataPassedIn) {
     $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
     for (var i = 1; i <= 6; i++) {
         if (dataPassedIn.funnelStage == i) {
-            console.log('i found an i of ' + i);
             // first search for the index where i occurs
             var indx = funnelStageHtmlOutput.search(i);
             // then pass that index (+2 to account for closing double quotes and a space following)
@@ -40,7 +39,13 @@ function populateEditScreen(dataPassedIn) {
     $('#js-position-location').html('<input type="text" name="position-location" placeholder="Ganymede Station" value="' + dataPassedIn.positionLocation + '">');
     $('#js-salary-benefits').html('<input type="text" name="salary-benefits" placeholder="$1,000,000 + a helicopter" value="' + dataPassedIn.salaryBenefits + '">');
     $('#js-job-description').html('<input type="textarea" name="job-description" placeholder="What are the duties and requirements?" value="' + dataPassedIn.jobDescription + '">');
-    $('#js-application-date').html('<input type="date" name="application-date" value="' + dataPassedIn.applicationDate + '">');
+    if (dataPassedIn.applicationDate != null) {
+        var dateForEditScreen = ((dataPassedIn.applicationDate).split('T'))[0];
+        console.log('date for edit screen is ' + dateForEditScreen);
+        $('#js-application-date').html('<input type="date" name="application-date" value="' + dateForEditScreen + '">');
+    } else {
+        $('#js-application-date').html('<input type="date" name="application-date" value="" placeholder="2017-09-15">');
+    }
     $('#js-contact-name').html('<input type="text" name="contact-name" placeholder="James Bond" value="' + dataPassedIn.contactName + '">');
     $('#js-contact-email').html('<input type="email" name="contact-email" placeholder="example@example.com" value="' + dataPassedIn.contactEmail + '">');
     $('#js-application-materials').html('<input type="text" name="application-materials" placeholder="CV, resume, cover letter..." value="' + dataPassedIn.applicationMaterials + '">');
@@ -50,7 +55,6 @@ function populateEditScreen(dataPassedIn) {
     $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!" value="' + dataPassedIn.notes + '">');
     for (var i = 1; i <= 4; i++) {
         if (dataPassedIn.rating == i) {
-            console.log('i found an i of ' + i);
             // first search for the index where i occurs
             var indx = ratingHtmlOutput.search(i);
             // then pass that index (+2 to account for closing double quotes and a space following)
@@ -82,6 +86,65 @@ var emptyData = {
     rating: ''
 };
 
+function formatDate(str) {
+    if (str != null && str != undefined) {
+        var parts = ((str).split('T'))[0].split('-');
+        var month = '';
+        console.log(parts);
+        // the code below evaluates every value of parts[1] to '01'--why?
+        if (parts[1] == '01') {
+            month = "January";
+        } else if (parts[1] == '02') {
+            month = "February";
+        } else if (parts[1] == '03') {
+            month = "March";
+        } else if (parts[1] == '04') {
+            month = "April";
+        } else if (parts[1] == '05') {
+            month = "May";
+        } else if (parts[1] == '06') {
+            month = "June";
+        } else if (parts[1] == '07') {
+            month = "July";
+        } else if (parts[1] == '08') {
+            month = "August";
+        } else if (parts[1] == '09') {
+            month = "September";
+        } else if (parts[1] == '10') {
+            month = "October";
+        } else if (parts[1] == '11') {
+            month = "November";
+        } else if (parts[1] == '12') {
+            month = "December";
+        } else {
+            month = '';
+        };
+        console.log(month);
+        var day = '';
+        if ((parts[2])[0] == 0) {
+            day = (parts[2])[1];
+        } else {
+            day = parts[2];
+        }
+        var textDate = month + ' ' + day + ', ' + parts[0];
+        return textDate;
+    };
+}
+
+// function populateDropDown(id) {
+//     // need to do two different things--for application date and interview date
+//     $.getJSON("/leads/" + id, function (res) {
+//         var str = res.body.applicationDate;
+//         console.log(str);
+//     });
+//     var newStr = str.split(' ');
+//     console.log(newStr);
+//     var monthVal = '';
+//     var dayVal = '';
+//     var yearVal = '';
+
+// }
+
 function populateViewScreen(data) {
 
     // now replace the previous html added to the DOM with text
@@ -94,7 +157,21 @@ function populateViewScreen(data) {
     $('#js-position-location').text(data.positionLocation);
     $('#js-salary-benefits').text(data.salaryBenefits);
     $('#js-job-description').text(data.jobDescription);
-    $('#js-application-date').text(data.applicationDate);
+    console.log(data.applicationDate);
+    if (data.applicationDate != undefined && data.applicationDate != null) {
+        var textAppDate = formatDate(data.applicationDate);
+        console.log(data.applicationDate);
+        console.log('textAppDate is ' + textAppDate);
+        //var applicationDateString = new Date(data.applicationDate);
+        //console.log(applicationDateString);
+        //var newDate = turnStringIntoDate(applicationDateString);
+        //console.log(newDate + ' is newDate');
+        //if (applicationDateString) {
+        //    $('#js-application-date').text(applicationDateString.toISOString().split('T')[0]);
+        //}
+        $('#js-application-date').text(textAppDate);
+        //console.log(data.applicationDate);
+    };
     $('#js-contact-name').text(data.contactName);
     $('#js-contact-email').text(data.contactEmail);
     $('#js-application-materials').text(data.applicationMaterials);
@@ -113,13 +190,11 @@ function populateViewScreen(data) {
 // populate the dashboard with contents of the user's database
 // requires making an API call to the DB
 function getAndDisplayLeads() {
-    console.log('retrieving job lead items');
+    //console.log('retrieving job lead items');
     // can I add some code here that will clear out any existing
     // ... leads already showing up?
     // will be useful for DELETE function's success thingie
     $.getJSON("/leads", function (res) {
-        console.log('logging the data now');
-        console.log(res);
         var htmlOutput = '';
         // what I need to do to clear this out is to .html a blank htmlOutput for each section first
         $('#new-leads').html('<p class="category">New Leads</p>');
@@ -129,7 +204,6 @@ function getAndDisplayLeads() {
         $('#offer').html('<p class="category">Offer</p>');
         $('#negotiate').html('<p class="category">Negotiate</p>');
         for (var i = 0; i < res.leads.length; i++) {
-            // console.log(res.leads[i].company + ' is the company name!');
             if (res.leads[i].funnelStage == 1) {
                 htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
                 $('#new-leads').append(htmlOutput);
@@ -164,8 +238,7 @@ function getAndDisplayLeads() {
 function getJobLeadForViewScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-        console.log('made the GET request for the clicked job lead--for view screen');
-        console.log(res);
+        // console.log('made the GET request for the clicked job lead--for view screen');
         populateViewScreen(res);
     });
 }
@@ -173,8 +246,7 @@ function getJobLeadForViewScreen(searchId) {
 function getJobLeadForEditScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-        console.log('made the GET request for the clicked job lead--for edit screen');
-        console.log(res);
+        // console.log('made the GET request for the clicked job lead--for edit screen');
         populateEditScreen(res);
     });
 }
@@ -194,12 +266,12 @@ $(document).ready(function () {
     $('#nav').hide();
     $('#login-screen').show();
 
+// STILL NEED TO DO ALL THIS STUFF FOR LOGIN PROCESS: AUTHENTICATION ETC.
     // when user signs in
     // step 1: login trigger
     //$('#js-login-button').click(function (event) {
-    document.getElementById('js-login-button').addEventListener('click', function () {
+    document.getElementById('js-login-button').addEventListener('click', function (event) {
         event.preventDefault();
-        console.log('clicked the login button');
         // step 2: taking input from the user
         var inputEmail = $('input[name="email"]').val();
         var inputPassword = $('input[name="password"]').val();
@@ -217,16 +289,16 @@ $(document).ready(function () {
             })
             // step 8 (continuing from server.js): display results
             .done(function (result) {
-                console.log('made the user POST request');
-                console.log(result);
+                //console.log('made the user POST request');
+                //console.log(result);
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
             });
-        console.log(inputEmail);
-        console.log('password is ' + inputPassword);
+        // console.log(inputEmail);
+        // console.log('password is ' + inputPassword);
         $('#login-screen').hide();
         $('#nav').show();
         $('#dashboard').show();
@@ -235,32 +307,33 @@ $(document).ready(function () {
 
     // when user clicks "back" button on view/edit screen
     // returns user to dashboard and resets form
-    document.getElementById('js-back-button').addEventListener('click', function () {
+    document.getElementById('js-back-button').addEventListener('click', function (event) {
         event.preventDefault();
-        // the confirm should only happen if the person has clicked the edit button
-        // should not happen if the person is only viewing
-        // how to do this?
-        if (confirm('Are you sure you want to go back? Your changes will not be saved.') == true) {
-            console.log('user has canceled; going back to dashboard');
+        if (editToggle == true) {
+            if (confirm('Are you sure you want to go back? Your changes will not be saved.') == true) 
+            {
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
+                editToggle = false;
+            };
+        } else {
             $('#edit-form').trigger('reset');
             $('#edit-screen').hide();
             $('#dashboard').show();
-        } else {
-            console.log('user decided not to go back after all');
         };
     });
 
     // when user clicks "edit" button
     // should change text to fillable fields
     // existing data should prepopulate or...???
-    $(document).on('click', ".js-edit-button", function () {
+    $(document).on('click', ".js-edit-button", function (event) {
         event.preventDefault();
-        console.log(editToggle);
-        console.log('about to edit a job lead');
+        //console.log('about to edit a job lead');
         editToggle = true;
-        console.log(editToggle);
         var idFromEditButton = $('.js-edit-button').attr('id');
-        console.log(idFromEditButton);
+        //populateDropDown(idFromEditButton);
+        //console.log(idFromEditButton);
         getJobLeadForEditScreen(idFromEditButton);
         $('.js-edit-button').hide();
         $('.js-save-button').show();
@@ -272,16 +345,16 @@ $(document).ready(function () {
     // and delete that job lead
     // should then reset the form, hide the edit screen, show the dashboard
     // the DOM should show that the job lead is now gone
-    $(document).on('click', ".js-delete-button", function () {
+    $(document).on('click', ".js-delete-button", function (event) {
         //document.getElementById('js-delete-button').addEventListener('click', function () {
         event.preventDefault();
-        console.log('about to delete a job lead');
+        //console.log('about to delete a job lead');
         if (confirm('Are you sure you want to delete this job lead? Deleting is PERMANENT. You will not be able to recover this data.') == true) {
-            console.log('user has deleted; going back to dashboard');
+           // console.log('user has deleted; going back to dashboard');
             // define a variable here and set it to the value of the id of the js-delete-button
-            console.log('about to edit a job lead');
+           // console.log('about to edit a job lead');
             var idFromDeleteButton = $('.js-delete-button').attr('id');
-            console.log(idFromDeleteButton);
+           // console.log(idFromDeleteButton);
             // getJobLeadForEditScreen(idFromDeleteButton);
             // make the AJAX call to delete the lead by id
             $.ajax({
@@ -292,15 +365,13 @@ $(document).ready(function () {
             $('#edit-form').trigger('reset');
             $('#edit-screen').hide();
             $('#dashboard').show();
-        } else {
-            console.log('user decided not to delete after all');
         };
     });
 
     // when user clicks "create new job lead" in nav
-    document.getElementById('js-create-new').addEventListener('click', function () {
+    document.getElementById('js-create-new').addEventListener('click', function (event) {
         event.preventDefault();
-        console.log('clicked to create new job lead');
+        //console.log('clicked to create new job lead');
         $('#dashboard').hide();
         // hide the edit and delete buttons;
         // these are unnecessary when creating a brand new lead
@@ -317,12 +388,12 @@ $(document).ready(function () {
     // when user clicks "save changes" in edit screen
     // should also send the data as a POST request on server side
     // step b1: new lead trigger
-    $(document).on('click', ".js-save-button", function () {
+    $(document).on('click', ".js-save-button", function (event) {
         // document.getElementById('js-save-button').addEventListener('click', function () {
         // need to get the id here too so we can send a PUT request when editing
         //$('#js-save-button').click(function (event) {
         event.preventDefault();
-        console.log('clicked to save changes');
+        //console.log('clicked to save changes');
         // step b2: taking input from the user
         var position = $('input[name="position"]').val();
         var company = $('input[name="company"]').val();
@@ -360,20 +431,27 @@ $(document).ready(function () {
             notes: notes,
             rating: rating
         };
-        console.log(leadObject);
         // if the bool has NOT been toggled, make a POST request for a new object
         if (editToggle == true) {
-            console.log('making a PUT request');
             // get the id for the lead from the save button id
             var idFromSaveButton = $('.js-save-button').attr('id');
-            console.log(idFromSaveButton);
             $.ajax({
+                // PUT is currently not working; throwing Internal Server Error
                 method: "PUT",
                 url: "/leads/" + idFromSaveButton,
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify(leadObject),
                 success: function(data) {getAndDisplayLeads}
+            })
+            .done(function (result) {
+                console.log('made the user PUT request');
+                console.log(result);
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
             });
         } else {
         // if it HAS been toggled, make a PUT request to the same object by ID
@@ -387,13 +465,11 @@ $(document).ready(function () {
             })
             // step b8: display results
             .done(function (result) {
-                console.log('made the lead POST request');
-                console.log(result);
+                //console.log('made the lead POST request');
+                //console.log(result);
                 // need to output the new job lead object
                 // ... using just the position title
                 // ... in a new rectangle on the dashboard
-                console.log(result.company);
-                console.log(result.funnelStage + ' is the funnel stage');
                 var htmlOutput = '';
                 // stage 1: new leads
                 if (result.funnelStage == 1) {
@@ -422,7 +498,7 @@ $(document).ready(function () {
                     // anything other than 1-6 should throw an error
                     // user should go back and try again
                 } else {
-                    console.warn('error in funnel stages!');
+                    console.warn('Error in funnel stages!');
                 }
             })
             .fail(function (jqXHR, error, errorThrown) {
@@ -433,7 +509,6 @@ $(document).ready(function () {
             };
         // reset the form so user can input a new lead
         $('#edit-form').trigger('reset');
-        console.log('now leaving edit screen');
         $('#edit-screen').hide();
         $('#dashboard').show();
     });
@@ -441,10 +516,8 @@ $(document).ready(function () {
 
 // when user clicks  a .job-lead box
 // should take user to that job lead's view screen
-$(document).on('click', ".job-lead", function () {
-    console.log(event);
+$(document).on('click', ".job-lead", function (event) {
     getJobLeadForViewScreen(event.target.id);
-    console.log('populating view screen with getJobLead function');
     populateViewScreen(getJobLeadForViewScreen);
     $('#dashboard').hide();
     $('.js-save-button').hide();
@@ -461,11 +534,7 @@ document.getElementById('js-log-out').addEventListener('click', function () {
 
 // to do:
 // fix problem with dates in view/edit screen (date formats)
-// API calls should work:
-// --DELETE on js-delete-button trigger
-// --PUT on js-save-button trigger from edit screen (how to differentiate this from a POST request
-// ... when creating a brand-new job lead object?)
-// --GET for a particular job lead when user clicks its company name on dashboard
+
 // Users should be able to choose whether to sign in or sign up at login screen
 // Should send a POST request to users (to create a new user) when a user signs up
 // Should validate email and PW formats when a user tries to sign in or sign up
