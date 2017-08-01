@@ -135,20 +135,6 @@ function formatDate(str) {
     };
 }
 
-// function populateDropDown(id) {
-//     // need to do two different things--for application date and interview date
-//     $.getJSON("/leads/" + id, function (res) {
-//         var str = res.body.applicationDate;
-//         console.log(str);
-//     });
-//     var newStr = str.split(' ');
-//     console.log(newStr);
-//     var monthVal = '';
-//     var dayVal = '';
-//     var yearVal = '';
-
-// }
-
 function populateViewScreen(data) {
 
     // now replace the previous html added to the DOM with text
@@ -216,12 +202,7 @@ function populateViewScreen(data) {
 }
 
 // populate the dashboard with contents of the user's database
-// requires making an API call to the DB
 function getAndDisplayLeads() {
-    //console.log('retrieving job lead items');
-    // can I add some code here that will clear out any existing
-    // ... leads already showing up?
-    // will be useful for DELETE function's success thingie
     $.getJSON("/leads", function (res) {
         var htmlOutput = '';
         // what I need to do to clear this out is to .html a blank htmlOutput for each section first
@@ -282,9 +263,9 @@ function getJobLeadForEditScreen(searchId) {
 // the below variable is used to flag whether or not the edit button has been clicked;
 // if it has, clicking save makes a PUT request;
 // if it has not, clicking save makes a POST request for a new lead
-// (need to make sure this works properly when going back for a second lead)
 var editToggle = false;
 
+// ****************************************************************************************
 // Triggers
 $(document).ready(function () {
     // when page loads
@@ -298,7 +279,7 @@ $(document).ready(function () {
     // when user signs in
     // step 1: login trigger
     //$('#js-login-button').click(function (event) {
-    document.getElementById('js-login-button').addEventListener('click', function (event) {
+    document.getElementById('js-signup-button').addEventListener('click', function (event) {
         event.preventDefault();
         // step 2: taking input from the user
         var inputEmail = $('input[name="email"]').val();
@@ -317,6 +298,12 @@ $(document).ready(function () {
             })
             // step 8 (continuing from server.js): display results
             .done(function (result) {
+                // console.log(inputEmail);
+                // console.log('password is ' + inputPassword);
+                $('#login-screen').hide();
+                $('#nav').show();
+                $('#dashboard').show();
+                getAndDisplayLeads();
                 //console.log('made the user POST request');
                 //console.log(result);
             })
@@ -325,8 +312,25 @@ $(document).ready(function () {
                 console.log(error);
                 console.log(errorThrown);
             });
-        // console.log(inputEmail);
-        // console.log('password is ' + inputPassword);
+    });
+
+    document.getElementById('js-signin-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        // step 2: taking input from the user
+        var inputEmail = $('input[name="email"]').val();
+        var inputPassword = $('input[name="password"]').val();
+        var usernamePwObject = {
+            username: inputEmail,
+            password: inputPassword
+        };
+        // step 3: using user input, make the local login API call
+        // first we have to make a GET request and check the user input against the
+        // ... existing objects in the users database
+        $.getJSON("/login", function (res) {
+            console.log('made the GET request for all users');
+        });
+        console.log(inputEmail);
+        console.log('password is ' + inputPassword);
         $('#login-screen').hide();
         $('#nav').show();
         $('#dashboard').show();
@@ -352,16 +356,11 @@ $(document).ready(function () {
         };
     });
 
-    // when user clicks "edit" button
-    // should change text to fillable fields
-    // existing data should prepopulate or...???
+    // when user clicks "edit" button, displays prepopulated fillable fields
     $(document).on('click', ".js-edit-button", function (event) {
         event.preventDefault();
-        //console.log('about to edit a job lead');
         editToggle = true;
         var idFromEditButton = $('.js-edit-button').attr('id');
-        //populateDropDown(idFromEditButton);
-        //console.log(idFromEditButton);
         getJobLeadForEditScreen(idFromEditButton);
         $('.js-edit-button').hide();
         $('.js-save-button').show();
@@ -374,16 +373,9 @@ $(document).ready(function () {
     // should then reset the form, hide the edit screen, show the dashboard
     // the DOM should show that the job lead is now gone
     $(document).on('click', ".js-delete-button", function (event) {
-        //document.getElementById('js-delete-button').addEventListener('click', function () {
         event.preventDefault();
-        //console.log('about to delete a job lead');
         if (confirm('Are you sure you want to delete this job lead? Deleting is PERMANENT. You will not be able to recover this data.') == true) {
-           // console.log('user has deleted; going back to dashboard');
-            // define a variable here and set it to the value of the id of the js-delete-button
-           // console.log('about to edit a job lead');
             var idFromDeleteButton = $('.js-delete-button').attr('id');
-           // console.log(idFromDeleteButton);
-            // getJobLeadForEditScreen(idFromDeleteButton);
             // make the AJAX call to delete the lead by id
             $.ajax({
                 method: "DELETE",
@@ -417,11 +409,7 @@ $(document).ready(function () {
     // should also send the data as a POST request on server side
     // step b1: new lead trigger
     $(document).on('click', ".js-save-button", function (event) {
-        // document.getElementById('js-save-button').addEventListener('click', function () {
-        // need to get the id here too so we can send a PUT request when editing
-        //$('#js-save-button').click(function (event) {
         event.preventDefault();
-        //console.log('clicked to save changes');
         // step b2: taking input from the user
         var position = $('input[name="position"]').val();
         var company = $('input[name="company"]').val();
@@ -464,7 +452,6 @@ $(document).ready(function () {
             // get the id for the lead from the save button id
             var idFromSaveButton = $('.js-save-button').attr('id');
             $.ajax({
-                // PUT is currently not working; throwing Internal Server Error
                 method: "PUT",
                 url: "/leads/" + idFromSaveButton,
                 dataType: 'json',
@@ -493,11 +480,6 @@ $(document).ready(function () {
             })
             // step b8: display results
             .done(function (result) {
-                //console.log('made the lead POST request');
-                //console.log(result);
-                // need to output the new job lead object
-                // ... using just the position title
-                // ... in a new rectangle on the dashboard
                 var htmlOutput = '';
                 // stage 1: new leads
                 if (result.funnelStage == 1) {
@@ -562,8 +544,6 @@ document.getElementById('js-log-out').addEventListener('click', function () {
 });
 
 // to do:
-// fix problem with dates in view/edit screen (date formats)
-
 // Users should be able to choose whether to sign in or sign up at login screen
 // Should send a POST request to users (to create a new user) when a user signs up
 // Should validate email and PW formats when a user tries to sign in or sign up

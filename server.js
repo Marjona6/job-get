@@ -39,8 +39,6 @@ if (require.main === module) {
 
 // GET: getting all the lead objects to populate the dashboard
 app.get('/leads', function (req, res) {
-    //console.log('getting the leads');
-    //console.log(req);
     Lead
         .find()
         .then(function (leads) {
@@ -60,7 +58,6 @@ app.get('/leads', function (req, res) {
 
 // GET: getting one lead object
 app.get('/leads/:id', function (req, res) {
-    //console.log('getting lead by ID');
     Lead
         .findById(req.params.id).exec().then(function (lead) {
             return res.json(lead);
@@ -75,6 +72,24 @@ app.get('/leads/:id', function (req, res) {
 
 // GET: getting a user
 // next step is verifying and validating the user credentials
+app.get('/login', function (req, res) {
+    User
+        .find()
+        .then(function (user) {
+            //res.json({
+                // console.log(res.body); // returns undefined
+                // leads: users.map(function (user) {
+                //    // return user;
+                // })
+           // });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
 
 // POST: creating a new user
 // step 4 (continuing from client.js): local API endpoint in server.js
