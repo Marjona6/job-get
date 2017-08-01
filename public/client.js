@@ -155,7 +155,23 @@ function populateViewScreen(data) {
     // how to deal with empty variables? currently these still display the fillable fields (html)
     $('#js-position-header').text(data.position);
     $('#js-company-header').text(data.company);
-    $('#js-funnel-stage').text(data.funnelStage);
+    var funnelStageText = '';
+    if (data.funnelStage == 1) {
+        funnelStageText = 'New Leads';
+    } else if (data.funnelStage == 2) {
+        funnelStageText = 'Qualified Leads';
+    } else if (data.funnelStage == 3) {
+        funnelStageText = 'Contact/Apply';
+    } else if (data.funnelStage == 4) {
+        funnelStageText = 'Interview';
+    } else if (data.funnelStage == 5) {
+        funnelStageText = 'Offer';
+    } else if (data.funnelStage == 6) {
+        funnelStageText = 'Negotiate';
+    } else {
+        funnelStageText = '';
+    }
+    $('#js-funnel-stage').text(funnelStageText);
     $('#js-company-overview').text(data.companyOverview);
     $('#js-company-size').text(data.companySize + ' employees');
     $('#js-position-location').text(data.positionLocation);
@@ -164,6 +180,8 @@ function populateViewScreen(data) {
     if (data.applicationDate != undefined && data.applicationDate != null) {
         var textAppDate = formatDate(data.applicationDate);
         $('#js-application-date').text(textAppDate);
+    } else {
+        $('#js-application-date').text('');
     };
     $('#js-contact-name').text(data.contactName);
     $('#js-contact-email').text(data.contactEmail);
@@ -171,11 +189,25 @@ function populateViewScreen(data) {
     if (data.interviewDate != undefined && data.interviewDate != null) {
             var textIntDate = formatDate(data.interviewDate);
             $('#js-interview-date').text(textIntDate);
-        };
+    } else {
+        $('#js-interview-date').text('');
+    };
     $('#js-interview-follow-up').text(data.interviewFollowUp);
     $('#js-lead-source').text(data.leadSource);
     $('#js-notes').text(data.notes);
-    $('#js-rating').text(data.rating);
+    var ratingText = '';
+    if (data.rating == 1) {
+        ratingText = 'Dream job!';
+    } else if (data.rating == 2) {
+        ratingText = 'Good fit';
+    } else if (data.rating == 3) {
+        ratingText = 'Take it or leave it';
+    } else if (data.rating == 4) {
+        ratingText = 'Only if I\'m desperate';
+    } else {
+        funnelStageText = '';
+    }
+    $('#js-rating').text(ratingText);
 
     // add the id to the edit, save, delete buttons for targeting
     $('.js-edit-button').attr('id', data._id);
@@ -368,7 +400,6 @@ $(document).ready(function () {
     // when user clicks "create new job lead" in nav
     document.getElementById('js-create-new').addEventListener('click', function (event) {
         event.preventDefault();
-        editToggle = true;
         $('#dashboard').hide();
         // hide the edit and delete buttons;
         // these are unnecessary when creating a brand new lead
@@ -428,7 +459,7 @@ $(document).ready(function () {
             notes: notes,
             rating: rating
         };
-        // if the bool has NOT been toggled, make a POST request for a new object
+        // if the bool has been toggled, make a PUT request to the same object by ID
         if (editToggle == true) {
             // get the id for the lead from the save button id
             var idFromSaveButton = $('.js-save-button').attr('id');
@@ -444,7 +475,6 @@ $(document).ready(function () {
             .done(function (result) {
                 console.log('made the user PUT request');
                 console.log(result);
-                getAndDisplayLeads();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -452,7 +482,7 @@ $(document).ready(function () {
                 console.log(errorThrown);
             });
         } else {
-        // if it HAS been toggled, make a PUT request to the same object by ID
+        // if it has NOT been toggled, make a POST request
         // step b3: make local API call using user input
         $.ajax({
                 type: "POST",
