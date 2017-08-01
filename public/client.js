@@ -41,15 +41,19 @@ function populateEditScreen(dataPassedIn) {
     $('#js-job-description').html('<input type="textarea" name="job-description" placeholder="What are the duties and requirements?" value="' + dataPassedIn.jobDescription + '">');
     if (dataPassedIn.applicationDate != null) {
         var dateForEditScreen = ((dataPassedIn.applicationDate).split('T'))[0];
-        console.log('date for edit screen is ' + dateForEditScreen);
         $('#js-application-date').html('<input type="date" name="application-date" value="' + dateForEditScreen + '">');
     } else {
         $('#js-application-date').html('<input type="date" name="application-date" value="" placeholder="2017-09-15">');
-    }
+    };
     $('#js-contact-name').html('<input type="text" name="contact-name" placeholder="James Bond" value="' + dataPassedIn.contactName + '">');
     $('#js-contact-email').html('<input type="email" name="contact-email" placeholder="example@example.com" value="' + dataPassedIn.contactEmail + '">');
     $('#js-application-materials').html('<input type="text" name="application-materials" placeholder="CV, resume, cover letter..." value="' + dataPassedIn.applicationMaterials + '">');
-    $('#js-interview-date').html('<input type="date" name="interview-date" value="' + dataPassedIn.interviewDate + '">');
+    if (dataPassedIn.interviewDate != null) {
+            var dateForEditScreen = ((dataPassedIn.interviewDate).split('T'))[0];
+            $('#js-interview-date').html('<input type="date" name="interview-date" value="' + dateForEditScreen + '">');
+        } else {
+            $('#js-interview-date').html('<input type="date" name="interview-date" value="" placeholder="2017-09-15">');
+        };
     $('#js-interview-follow-up').html('<input type="text" name="interview-follow-up" placeholder="Did you send a thank-you note?" value="' + dataPassedIn.interviewFollowUp + '">');
     $('#js-lead-source').html('<input type="text" name="lead-source" placeholder="Friend? Google?" value="' + dataPassedIn.leadSource + '">');
     $('#js-notes').html('<input type="textarea" name="notes" placeholder="Note to self!" value="' + dataPassedIn.notes + '">');
@@ -157,25 +161,17 @@ function populateViewScreen(data) {
     $('#js-position-location').text(data.positionLocation);
     $('#js-salary-benefits').text(data.salaryBenefits);
     $('#js-job-description').text(data.jobDescription);
-    console.log(data.applicationDate);
     if (data.applicationDate != undefined && data.applicationDate != null) {
         var textAppDate = formatDate(data.applicationDate);
-        console.log(data.applicationDate);
-        console.log('textAppDate is ' + textAppDate);
-        //var applicationDateString = new Date(data.applicationDate);
-        //console.log(applicationDateString);
-        //var newDate = turnStringIntoDate(applicationDateString);
-        //console.log(newDate + ' is newDate');
-        //if (applicationDateString) {
-        //    $('#js-application-date').text(applicationDateString.toISOString().split('T')[0]);
-        //}
         $('#js-application-date').text(textAppDate);
-        //console.log(data.applicationDate);
     };
     $('#js-contact-name').text(data.contactName);
     $('#js-contact-email').text(data.contactEmail);
     $('#js-application-materials').text(data.applicationMaterials);
-    $('#js-interview-date').text(data.interviewDate);
+    if (data.interviewDate != undefined && data.interviewDate != null) {
+            var textIntDate = formatDate(data.interviewDate);
+            $('#js-interview-date').text(textIntDate);
+        };
     $('#js-interview-follow-up').text(data.interviewFollowUp);
     $('#js-lead-source').text(data.leadSource);
     $('#js-notes').text(data.notes);
@@ -366,12 +362,13 @@ $(document).ready(function () {
             $('#edit-screen').hide();
             $('#dashboard').show();
         };
+        editToggle = false;
     });
 
     // when user clicks "create new job lead" in nav
     document.getElementById('js-create-new').addEventListener('click', function (event) {
         event.preventDefault();
-        //console.log('clicked to create new job lead');
+        editToggle = true;
         $('#dashboard').hide();
         // hide the edit and delete buttons;
         // these are unnecessary when creating a brand new lead
@@ -447,6 +444,7 @@ $(document).ready(function () {
             .done(function (result) {
                 console.log('made the user PUT request');
                 console.log(result);
+                getAndDisplayLeads();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -500,6 +498,7 @@ $(document).ready(function () {
                 } else {
                     console.warn('Error in funnel stages!');
                 }
+                getAndDisplayLeads();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
