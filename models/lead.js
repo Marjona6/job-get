@@ -41,6 +41,8 @@ var leadSchema = new mongoose.Schema({
 	notes: {type: String,
 		required: false},
 	rating: {type: Number,
+		required: false},
+	username: {type: String,
 		required: false}
 });
 

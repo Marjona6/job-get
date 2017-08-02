@@ -30,19 +30,24 @@
     </header>
     <main>
         <section id="login-screen">
-            <div class="box" id="login-box">
+            <div id="login-box">
                 <form id="login-form">
                     <h3>Sign in / Sign up</h3>
                     <p>Email:</p>
-                    <input type="text" name="email">
+                    <input type="text" name="email" placeholder="competent_person@dreamjob.com">
                     <p>Password:</p>
-                    <input type="text" name="password">
+                    <input type="password" name="password">
                     <p></p>
                     <input type="submit" id="js-signin-button" class="styledButton" value="Sign in">
                     <input type="submit" id="js-signup-button" class="styledButton" value="Sign up">
                 </form>
             </div>
-
+        </section>
+        <section id="welcome">
+        </section>
+        <section id="thanks">
+            <p>Thanks for signing up! Click the button below to sign in.</p>
+            <input type="submit" id="js-redirect" class="styledButton" value="Back to Sign In">
         </section>
         <section id="dashboard">
             <div id="new-leads" class="column">

@@ -182,7 +182,7 @@ select {
     border-radius: 5px;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
     width: 50%;
 }
 
@@ -426,6 +426,9 @@ footer {
         width: 70%;
     }
     #login-box input[type=text] {
+        width: 90%;
+    }
+    #login-box input[type=password] {
         width: 90%;
     }
     /* DASHBOARD */

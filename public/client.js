@@ -1,10 +1,13 @@
 "use strict";
 
+// Triggers
+$(document).ready(function () {
+
+// -----------------------------------------------------------------
 // Function and object definitions
 
 function populateEditScreen(dataPassedIn) {
     // populating the edit screen with fillable fields
-    // variables here first
     var funnelStageHtmlOutput = '';
     funnelStageHtmlOutput += '<select required name="funnel-stage">';
     funnelStageHtmlOutput += '<option value="1">New Leads</option>';
@@ -87,7 +90,8 @@ var emptyData = {
     interviewFollowUp: '',
     leadSource: '',
     notes: '',
-    rating: ''
+    rating: '',
+    username: ''
 };
 
 function formatDate(str) {
@@ -203,6 +207,7 @@ function populateViewScreen(data) {
 
 // populate the dashboard with contents of the user's database
 function getAndDisplayLeads() {
+    console.log('Get and display leads username: ' + username);
     $.getJSON("/leads", function (res) {
         var htmlOutput = '';
         // what I need to do to clear this out is to .html a blank htmlOutput for each section first
@@ -212,34 +217,37 @@ function getAndDisplayLeads() {
         $('#interview').html('<p class="category">Interview</p>');
         $('#offer').html('<p class="category">Offer</p>');
         $('#negotiate').html('<p class="category">Negotiate</p>');
-        for (var i = 0; i < res.leads.length; i++) {
-            if (res.leads[i].funnelStage == 1) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#new-leads').append(htmlOutput);
-                // stage 2: qualified leads
-            } else if (res.leads[i].funnelStage == 2) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#qualified-leads').append(htmlOutput);
-                // stage 3: contact/apply
-            } else if (res.leads[i].funnelStage == 3) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#contact-apply').append(htmlOutput);
-                // stage 4: interview
-            } else if (res.leads[i].funnelStage == 4) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#interview').append(htmlOutput);
-                // stage 5: offer
-            } else if (res.leads[i].funnelStage == 5) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#offer').append(htmlOutput);
-                // stage 6: negotiate
-            } else if (res.leads[i].funnelStage == 6) {
-                htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
-                $('#negotiate').append(htmlOutput);
-                // anything other than 1-6 should throw an error
-            } else {
-                console.warn('error in funnel stages for API data!');
-            }
+            for (var i = 0; i < res.leads.length; i++) {
+                console.log(username + ' ' + res.leads[i].username);
+                if (res.leads[i].username == username) {
+                    if (res.leads[i].funnelStage == 1) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#new-leads').append(htmlOutput);
+                        // stage 2: qualified leads
+                    } else if (res.leads[i].funnelStage == 2) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#qualified-leads').append(htmlOutput);
+                        // stage 3: contact/apply
+                    } else if (res.leads[i].funnelStage == 3) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#contact-apply').append(htmlOutput);
+                        // stage 4: interview
+                    } else if (res.leads[i].funnelStage == 4) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#interview').append(htmlOutput);
+                        // stage 5: offer
+                    } else if (res.leads[i].funnelStage == 5) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#offer').append(htmlOutput);
+                        // stage 6: negotiate
+                    } else if (res.leads[i].funnelStage == 6) {
+                        htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
+                        $('#negotiate').append(htmlOutput);
+                        // anything other than 1-6 should throw an error
+                    } else {
+                        console.warn('error in funnel stages for API data!');
+                    };     
+            };
         };
     });
 }
@@ -264,31 +272,91 @@ function getJobLeadForEditScreen(searchId) {
 // if it has, clicking save makes a PUT request;
 // if it has not, clicking save makes a POST request for a new lead
 var editToggle = false;
+// ----------------------------------------------------------------
+// END FUNCTION AND VARIABLE DEFINITIONS
 
-// ****************************************************************************************
-// Triggers
-$(document).ready(function () {
     // when page loads
     // show and hide sections as needed
     $('#dashboard').hide();
     $('#edit-screen').hide();
     $('#nav').hide();
+    $('#thanks').hide();
     $('#login-screen').show();
+    var username = $('input[name="email"]').val();
+    console.log(username);
+    if (username != '') {
+        $('#welcome').html('<p>Welcome, ' + username + '</p>');
+        $('#welcome').show();
+    };
 
-// STILL NEED TO DO ALL THIS STUFF FOR LOGIN PROCESS: AUTHENTICATION ETC.
-    // when user signs in
+    // CREATING A NEW USER
     // step 1: login trigger
-    //$('#js-login-button').click(function (event) {
     document.getElementById('js-signup-button').addEventListener('click', function (event) {
         event.preventDefault();
         // step 2: taking input from the user
         var inputEmail = $('input[name="email"]').val();
         var inputPassword = $('input[name="password"]').val();
-        var usernamePwObject = {
-            username: inputEmail,
-            password: inputPassword
-        };
-        // step 3: using user input, make the local login API call
+        if ((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
+            alert('Invalid email');
+        }
+        else if ((!inputPassword) || (inputPassword.length < 1) || (inputPassword.indexOf(' ') > 0)) {
+            alert('Invalid password');
+        } else {
+            var usernamePwObject = {
+                username: inputEmail,
+                password: inputPassword
+            };
+            // step 3: using user input, make the local login API call
+            $.ajax({
+                    type: "POST",
+                    url: "/users/create",
+                    dataType: 'json',
+                    data: JSON.stringify(usernamePwObject),
+                    contentType: 'application/json'
+                })
+                // step 8 (continuing from server.js): display results
+                .done(function (result) {
+                    $('#login-screen').hide();
+                    $('#thanks').show();
+                    console.log('made the user POST request');
+                    console.log(result);
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+            };
+    });
+
+    document.getElementById('js-redirect').addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('successfully redirected back to login screen');
+        $('#thanks').hide();
+        $('#login-screen').show();
+    });
+
+    document.getElementById('js-signin-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        // step 2: taking input from the user
+        var inputEmail = $('input[name="email"]').val();
+        console.log(inputEmail);
+        var inputPassword = $('input[name="password"]').val();
+        console.log(inputPassword);
+        // check for spaces, empty, undefined
+        if ((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
+            alert('Invalid email');
+        }
+        else if ((!inputPassword) || (inputPassword.length < 1) || (inputPassword.indexOf(' ') > 0)) {
+            alert('Invalid password');
+        } else {
+            var usernamePwObject = {
+                username: inputEmail,
+                password: inputPassword
+            };
+            username = inputEmail;
+            console.log('username is currently ' + username);
+            // step 3: using user input, make the local login API call
         $.ajax({
                 type: "POST",
                 url: "/login",
@@ -298,244 +366,243 @@ $(document).ready(function () {
             })
             // step 8 (continuing from server.js): display results
             .done(function (result) {
-                // console.log(inputEmail);
-                // console.log('password is ' + inputPassword);
+                console.log(result);
+                // set global username variable from result object
+                username = result.username;
                 $('#login-screen').hide();
                 $('#nav').show();
                 $('#dashboard').show();
+                console.log(username);
+                if (username != '') {
+                    $('#welcome').html('<p>Welcome, ' + username + '</p>');
+                    $('#welcome').show();
+                };
                 getAndDisplayLeads();
-                //console.log('made the user POST request');
-                //console.log(result);
-            })
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });
-    });
-
-    document.getElementById('js-signin-button').addEventListener('click', function (event) {
-        event.preventDefault();
-        // step 2: taking input from the user
-        var inputEmail = $('input[name="email"]').val();
-        var inputPassword = $('input[name="password"]').val();
-        var usernamePwObject = {
-            username: inputEmail,
-            password: inputPassword
-        };
-        // step 3: using user input, make the local login API call
-        // first we have to make a GET request and check the user input against the
-        // ... existing objects in the users database
-        $.getJSON("/login", function (res) {
-            console.log('made the GET request for all users');
-        });
-        console.log(inputEmail);
-        console.log('password is ' + inputPassword);
-        $('#login-screen').hide();
-        $('#nav').show();
-        $('#dashboard').show();
-        getAndDisplayLeads();
-    });
-
-    // when user clicks "back" button on view/edit screen
-    // returns user to dashboard and resets form
-    document.getElementById('js-back-button').addEventListener('click', function (event) {
-        event.preventDefault();
-        if (editToggle == true) {
-            if (confirm('Are you sure you want to go back? Your changes will not be saved.') == true) 
-            {
-                $('#edit-form').trigger('reset');
-                $('#edit-screen').hide();
-                $('#dashboard').show();
-                editToggle = false;
-            };
-        } else {
-            $('#edit-form').trigger('reset');
-            $('#edit-screen').hide();
-            $('#dashboard').show();
-        };
-    });
-
-    // when user clicks "edit" button, displays prepopulated fillable fields
-    $(document).on('click', ".js-edit-button", function (event) {
-        event.preventDefault();
-        editToggle = true;
-        var idFromEditButton = $('.js-edit-button').attr('id');
-        getJobLeadForEditScreen(idFromEditButton);
-        $('.js-edit-button').hide();
-        $('.js-save-button').show();
-    });
-
-    // when user clicks "delete" button
-    // should confirm with user that they want to delete the job lead
-    // should send a DELETE request to the database
-    // and delete that job lead
-    // should then reset the form, hide the edit screen, show the dashboard
-    // the DOM should show that the job lead is now gone
-    $(document).on('click', ".js-delete-button", function (event) {
-        event.preventDefault();
-        if (confirm('Are you sure you want to delete this job lead? Deleting is PERMANENT. You will not be able to recover this data.') == true) {
-            var idFromDeleteButton = $('.js-delete-button').attr('id');
-            // make the AJAX call to delete the lead by id
-            $.ajax({
-                method: "DELETE",
-                url: "/leads/" + idFromDeleteButton,
-                success: getAndDisplayLeads
-            });
-            $('#edit-form').trigger('reset');
-            $('#edit-screen').hide();
-            $('#dashboard').show();
-        };
-        editToggle = false;
-    });
-
-    // when user clicks "create new job lead" in nav
-    document.getElementById('js-create-new').addEventListener('click', function (event) {
-        event.preventDefault();
-        $('#dashboard').hide();
-        // hide the edit and delete buttons;
-        // these are unnecessary when creating a brand new lead
-        $('.js-edit-button').hide();
-        $('.js-delete-button').hide();
-        $('#edit-screen').show();
-        $('.js-save-button').show();
-        // calling the function to populate the edit screen with fillable fields
-        // passing in testData, which is an object shaped like our schema but each item is empty string
-        // should result in all fields empty of value and only having placeholders
-        populateEditScreen(emptyData);
-    });
-
-    // when user clicks "save changes" in edit screen
-    // should also send the data as a POST request on server side
-    // step b1: new lead trigger
-    $(document).on('click', ".js-save-button", function (event) {
-        event.preventDefault();
-        // step b2: taking input from the user
-        var position = $('input[name="position"]').val();
-        var company = $('input[name="company"]').val();
-        var funnelStage = $('select[name="funnel-stage"]').find('option:selected').val();
-        var companyOverview = $('input[name="company-overview"]').val();
-        var companySize = $('input[name="company-size"]').val();
-        var positionLocation = $('input[name="position-location"]').val();
-        var salaryBenefits = $('input[name="salary-benefits"]').val();
-        var jobDescription = $('input[name="job-description"]').val();
-        var applicationDate = $('input[name="application-date"]').val();
-        var contactName = $('input[name="contact-name"]').val();
-        var contactEmail = $('input[name="contact-email"]').val();
-        var applicationMaterials = $('input[name="application-materials"]').val();
-        var interviewDate = $('input[name="interview-date"]').val();
-        var interviewFollowUp = $('input[name="interview-follow-up"]').val();
-        var leadSource = $('input[name="lead-source"]').val();
-        var notes = $('input[name="notes"]').val();
-        var rating = $('select[name="rating"]').find('option:selected').val();
-        var leadObject = {
-            position: position,
-            company: company,
-            funnelStage: funnelStage,
-            companyOverview: companyOverview,
-            companySize: companySize,
-            positionLocation: positionLocation,
-            salaryBenefits: salaryBenefits,
-            jobDescription: jobDescription,
-            applicationDate: applicationDate,
-            contactName: contactName,
-            contactEmail: contactEmail,
-            applicationMaterials: applicationMaterials,
-            interviewDate: interviewDate,
-            interviewFollowUp: interviewFollowUp,
-            leadSource: leadSource,
-            notes: notes,
-            rating: rating
-        };
-        // if the bool has been toggled, make a PUT request to the same object by ID
-        if (editToggle == true) {
-            // get the id for the lead from the save button id
-            var idFromSaveButton = $('.js-save-button').attr('id');
-            $.ajax({
-                method: "PUT",
-                url: "/leads/" + idFromSaveButton,
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(leadObject),
-                success: function(data) {getAndDisplayLeads}
-            })
-            .done(function (result) {
-                console.log('made the user PUT request');
+                console.log('trying to sign in a user');
                 console.log(result);
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
+                alert('User does not exist! Please sign up using the sign-up button.');
             });
-        } else {
-        // if it has NOT been toggled, make a POST request
-        // step b3: make local API call using user input
-        $.ajax({
-                type: "POST",
-                url: "/leads",
-                dataType: 'json',
-                data: JSON.stringify(leadObject),
-                contentType: 'application/json'
-            })
-            // step b8: display results
-            .done(function (result) {
-                var htmlOutput = '';
-                // stage 1: new leads
-                if (result.funnelStage == 1) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#new-leads').append(htmlOutput);
-                    // stage 2: qualified leads
-                } else if (result.funnelStage == 2) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#qualified-leads').append(htmlOutput);
-                    // stage 3: contact/apply
-                } else if (result.funnelStage == 3) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#contact-apply').append(htmlOutput);
-                    // stage 4: interview
-                } else if (result.funnelStage == 4) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#interview').append(htmlOutput);
-                    // stage 5: offer
-                } else if (result.funnelStage == 5) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#offer').append(htmlOutput);
-                    // stage 6: negotiate
-                } else if (result.funnelStage == 6) {
-                    htmlOutput += '<p class="job-lead">' + result.company + '</p>';
-                    $('#negotiate').append(htmlOutput);
-                    // anything other than 1-6 should throw an error
-                    // user should go back and try again
-                } else {
-                    console.warn('Error in funnel stages!');
-                }
-                getAndDisplayLeads();
-            })
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });
-            };
-        // reset the form so user can input a new lead
-        $('#edit-form').trigger('reset');
-        $('#edit-screen').hide();
-        $('#dashboard').show();
-    });
-});
+        };
 
-// when user clicks  a .job-lead box
-// should take user to that job lead's view screen
-$(document).on('click', ".job-lead", function (event) {
-    getJobLeadForViewScreen(event.target.id);
-    populateViewScreen(getJobLeadForViewScreen);
-    $('#dashboard').hide();
-    $('.js-save-button').hide();
-    $('#edit-screen').show();
-    $('.js-edit-button').show();
-    $('.js-delete-button').show();
-});
+        // all the other event listeners go inside the sign-in event listener
+        // so we can pass the username variable to every function that needs it
+
+        // when user clicks "back" button on view/edit screen
+        // returns user to dashboard and resets form
+        document.getElementById('js-back-button').addEventListener('click', function (event) {
+            event.preventDefault();
+            if (editToggle == true) {
+                if (confirm('Are you sure you want to go back? Your changes will not be saved.') == true) 
+                {
+                    $('#edit-form').trigger('reset');
+                    $('#edit-screen').hide();
+                    $('#dashboard').show();
+                    editToggle = false;
+                };
+            } else {
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
+            };
+        });
+
+        // when user clicks "edit" button, displays prepopulated fillable fields
+        $(document).on('click', ".js-edit-button", function (event) {
+            event.preventDefault();
+            editToggle = true;
+            var idFromEditButton = $('.js-edit-button').attr('id');
+            getJobLeadForEditScreen(idFromEditButton);
+            $('.js-edit-button').hide();
+            $('.js-save-button').show();
+        });
+
+        // when user clicks "delete" button
+        // should confirm with user that they want to delete the job lead
+        // should send a DELETE request to the database
+        // and delete that job lead
+        // should then reset the form, hide the edit screen, show the dashboard
+        // the DOM should show that the job lead is now gone
+        $(document).on('click', ".js-delete-button", function (event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to delete this job lead? Deleting is PERMANENT. You will not be able to recover this data.') == true) {
+                var idFromDeleteButton = $('.js-delete-button').attr('id');
+                // make the AJAX call to delete the lead by id
+                $.ajax({
+                    method: "DELETE",
+                    url: "/leads/" + idFromDeleteButton,
+                    success: getAndDisplayLeads
+                });
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
+                editToggle = false;
+            };
+        });
+
+        // when user clicks "create new job lead" in nav
+        document.getElementById('js-create-new').addEventListener('click', function (event) {
+            event.preventDefault();
+            $('#dashboard').hide();
+            // hide the edit and delete buttons;
+            // these are unnecessary when creating a brand new lead
+            $('.js-edit-button').hide();
+            $('.js-delete-button').hide();
+            $('#edit-screen').show();
+            $('.js-save-button').show();
+            // calling the function to populate the edit screen with fillable fields
+            // passing in testData, which is an object shaped like our schema but each item is empty string
+            // should result in all fields empty of value and only having placeholders
+            populateEditScreen(emptyData);
+        });
+
+        // when user clicks "save changes" in edit screen
+        // should also send the data as a POST request on server side
+        // step b1: new lead trigger
+        $(document).on('click', ".js-save-button", function (event) {
+            event.preventDefault();
+            // step b2: taking input from the user
+            var position = $('input[name="position"]').val();
+            var company = $('input[name="company"]').val();
+            var funnelStage = $('select[name="funnel-stage"]').find('option:selected').val();
+            var companyOverview = $('input[name="company-overview"]').val();
+            var companySize = $('input[name="company-size"]').val();
+            var positionLocation = $('input[name="position-location"]').val();
+            var salaryBenefits = $('input[name="salary-benefits"]').val();
+            var jobDescription = $('input[name="job-description"]').val();
+            var applicationDate = $('input[name="application-date"]').val();
+            var contactName = $('input[name="contact-name"]').val();
+            var contactEmail = $('input[name="contact-email"]').val();
+            var applicationMaterials = $('input[name="application-materials"]').val();
+            var interviewDate = $('input[name="interview-date"]').val();
+            var interviewFollowUp = $('input[name="interview-follow-up"]').val();
+            var leadSource = $('input[name="lead-source"]').val();
+            var notes = $('input[name="notes"]').val();
+            var rating = $('select[name="rating"]').find('option:selected').val();
+            var leadObject = {
+                position: position,
+                company: company,
+                funnelStage: funnelStage,
+                companyOverview: companyOverview,
+                companySize: companySize,
+                positionLocation: positionLocation,
+                salaryBenefits: salaryBenefits,
+                jobDescription: jobDescription,
+                applicationDate: applicationDate,
+                contactName: contactName,
+                contactEmail: contactEmail,
+                applicationMaterials: applicationMaterials,
+                interviewDate: interviewDate,
+                interviewFollowUp: interviewFollowUp,
+                leadSource: leadSource,
+                notes: notes,
+                rating: rating,
+                username: username
+            };
+            // if the bool has been toggled, make a PUT request to the same object by ID
+            if (editToggle == true) {
+                // get the id for the lead from the save button id
+                var idFromSaveButton = $('.js-save-button').attr('id');
+                $.ajax({
+                    method: "PUT",
+                    url: "/leads/" + idFromSaveButton,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(leadObject),
+                    success: function(data) {getAndDisplayLeads}
+                })
+                .done(function (result) {
+                    console.log('made the user PUT request');
+                    console.log(result);
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+            } else {
+            // if it has NOT been toggled, make a POST request
+            // step b3: make local API call using user input
+            $.ajax({
+                    type: "POST",
+                    url: "/leads",
+                    dataType: 'json',
+                    data: JSON.stringify(leadObject),
+                    contentType: 'application/json'
+                })
+                // step b8: display results
+                .done(function (result) {
+                    var htmlOutput = '';
+                    // stage 1: new leads
+                    if (result.funnelStage == 1) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#new-leads').append(htmlOutput);
+                        // stage 2: qualified leads
+                    } else if (result.funnelStage == 2) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#qualified-leads').append(htmlOutput);
+                        // stage 3: contact/apply
+                    } else if (result.funnelStage == 3) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#contact-apply').append(htmlOutput);
+                        // stage 4: interview
+                    } else if (result.funnelStage == 4) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#interview').append(htmlOutput);
+                        // stage 5: offer
+                    } else if (result.funnelStage == 5) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#offer').append(htmlOutput);
+                        // stage 6: negotiate
+                    } else if (result.funnelStage == 6) {
+                        htmlOutput += '<p class="job-lead">' + result.company + '</p>';
+                        $('#negotiate').append(htmlOutput);
+                        // anything other than 1-6 should throw an error
+                        // user should go back and try again
+                    } else {
+                        console.warn('Error in funnel stages!');
+                    }
+                    getAndDisplayLeads();
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+                };
+            // reset the form so user can input a new lead
+            $('#edit-form').trigger('reset');
+            $('#edit-screen').hide();
+            $('#dashboard').show();
+        });
+    });
+
+    // when user clicks  a .job-lead box
+    // should take user to that job lead's view screen
+    $(document).on('click', ".job-lead", function (event) {
+        if (event.target.nodeName == "SPAN") {
+            console.log('span');
+            getJobLeadForViewScreen(event.target.parentNode.parentNode.id);
+        } else if (event.target.nodeName == "A") {
+            console.log('a');
+            getJobLeadForViewScreen(event.target.parentNode.id);
+        } else if (event.target.nodeName == "P") {
+            console.log('p');
+            getJobLeadForViewScreen(event.target.id);
+        }
+        populateViewScreen(getJobLeadForViewScreen);
+        $('#dashboard').hide();
+        $('.js-save-button').hide();
+        $('#edit-screen').show();
+        $('.js-edit-button').show();
+        $('.js-delete-button').show();
+    });
+
+    });
 
 // when user clicks log out
 // should also log them out from DB on server side

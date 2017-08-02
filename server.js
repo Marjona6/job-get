@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var mongoose = require('mongoose');
 var cors = require('cors');
+var bcrypt = require('bcrypt');
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;
 var express = require('express');
 var app = express();
 app.use(bodyParser.json());
@@ -37,6 +40,12 @@ if (require.main === module) {
     });
 };
 
+// logging
+// app.use('*', function(req, res) {
+//     return res.status(404).json({message: 'Not found'});
+// });
+
+// ----------- LEAD ENDPOINTS ------------------------
 // GET: getting all the lead objects to populate the dashboard
 app.get('/leads', function (req, res) {
     Lead
@@ -70,49 +79,96 @@ app.get('/leads/:id', function (req, res) {
         });
 });
 
-// GET: getting a user
+// POST: signing in a user
 // next step is verifying and validating the user credentials
-app.get('/login', function (req, res) {
+app.post('/login', function (req, res) {
+    var user = req.body.username;
+    var pwd = req.body.password;
+    console.log(user);
+    console.log(pwd);
     User
-        .find()
-        .then(function (user) {
-            //res.json({
-                // console.log(res.body); // returns undefined
-                // leads: users.map(function (user) {
-                //    // return user;
-                // })
-           // });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
+        .findOne({
+            username: req.body.username
+        }, function(err, items) {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+            if (!items) {
+                // bad username
+                return res.status(401).json({
+                    message: "Not found!"
+                });
+            } else {
+                items.validatePassword(req.body.password, function(err, isValid) {
+                    if (err) {
+                        console.log('there was an error validating the password');
+                    }
+                    if (!isValid) {
+                        return res.status(401).json({
+                            message: "Not found"
+                        });
+                    } else {
+                        console.log("User logged in: " + req.body.username);
+                        return res.json(items);
+                    }
+                    // return sth here?
+                });
+            };
         });
+        // .then(function (user) {
+        //     //res.json({
+        //         // console.log(res.body); // returns undefined
+        //         // leads: users.map(function (user) {
+        //         //    // return user;
+        //         // })
+        //    // });
+        // })
+        // .catch(function (err) {
+        //     console.error(err);
+        //     res.status(500).json({
+        //         message: 'Internal server error'
+        //     });
+        // });
 });
 
 // POST: creating a new user
 // step 4 (continuing from client.js): local API endpoint in server.js
-app.post('/login', function (req, res) {
-    //console.log(req);
-    //console.log(req.body.password);
-    // send data from login to database
-    // for now, send it without validation
-    // step 5: send the local data to the database
-    User.create({
-        username: req.body.username,
-        password: req.body.password
-    }, function (err, user) {
-        // step 6: return the result of DB call
+app.post('/users/create', function (req, res) {
+    var username = req.body.username;
+    username = username.trim();
+    var password = req.body.password;
+    password = password.trim();
+    bcrypt.genSalt(10, function(err, salt) {
         if (err) {
             return res.status(500).json({
-                message: 'Internal Server Error'
+                message: 'Internal server error'
             });
         }
-        // step 7: send the result back to client.js
-        //console.log(user);
-        res.status(201).json(user);
 
+        bcrypt.hash(password, salt, function(err, hash) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal server error'
+                });
+            }
+        
+        User.create({
+            username: username,
+            password: hash,
+        }, function(err, item) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            if(item) {
+                console.log("User: " + username + " created.");
+                return res.json(item);
+            }
+        });
+        });
     });
 });
 
@@ -138,7 +194,8 @@ app.post('/leads', function (req, res) {
         interviewFollowUp: req.body.interviewFollowUp,
         leadSource: req.body.leadSource,
         notes: req.body.notes,
-        rating: req.body.rating
+        rating: req.body.rating,
+        username: req.body.username // this should not be here
     }, function (err, lead) {
         // step b6: return the result of DB call
         if (err) {
@@ -148,6 +205,7 @@ app.post('/leads', function (req, res) {
         }
         // step b7: send the result back to client.js
         //console.log(lead);
+        console.log(lead);
         res.status(201).json(lead);
 
     });
