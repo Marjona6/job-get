@@ -17,28 +17,44 @@ app.use(express.static('public'));
 
 mongoose.Promise = global.Promise;
 
-var runServer = function (callback) {
-    mongoose.connect(config.DATABASE_URL, function (err) {
-        if (err && callback) {
-            return callback(err);
-        }
+var server = undefined;
 
-        app.listen(config.PORT, function () {
-            console.log('Listening on localhost:' + config.PORT);
-            if (callback) {
-                callback();
+function runServer() {
+    return new Promise(function(resolve, reject) {
+        mongoose.connect(config.DATABASE_URL, function(err) {
+            if(err) {
+                return reject(err);
             }
+            server = app.listen(config.PORT, function() {
+                console.log('Listening on localhost:' + config.PORT);
+                resolve();
+            }).on('error', function(err) {
+                mongoose.disconnect();
+                reject(err);
+            });
         });
     });
-};
+}
 
 if (require.main === module) {
-    runServer(function (err) {
-        if (err) {
-            console.error(err);
-        }
+    runServer().catch(function(err) {
+        return console.error(err);
     });
 };
+
+function closeServer() {
+    return mongoose.disconnect().then(function() {
+        return new Promise(function(resolve, reject) {
+            console.log('Closing server');
+            server.close(function(err) {
+                if(err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+        });
+    });
+}
 
 // logging
 // app.use('*', function(req, res) {
@@ -84,8 +100,6 @@ app.get('/leads/:id', function (req, res) {
 app.post('/login', function (req, res) {
     var user = req.body.username;
     var pwd = req.body.password;
-    console.log(user);
-    console.log(pwd);
     User
         .findOne({
             username: req.body.username
@@ -103,34 +117,21 @@ app.post('/login', function (req, res) {
             } else {
                 items.validatePassword(req.body.password, function(err, isValid) {
                     if (err) {
-                        console.log('there was an error validating the password');
+                        console.log('There was an error validating the password.');
                     }
                     if (!isValid) {
                         return res.status(401).json({
                             message: "Not found"
                         });
                     } else {
-                        console.log("User logged in: " + req.body.username);
+                        var logInTime = new Date();
+                        console.log("User logged in: " + req.body.username + ' at ' + logInTime);
                         return res.json(items);
                     }
                     // return sth here?
                 });
             };
         });
-        // .then(function (user) {
-        //     //res.json({
-        //         // console.log(res.body); // returns undefined
-        //         // leads: users.map(function (user) {
-        //         //    // return user;
-        //         // })
-        //    // });
-        // })
-        // .catch(function (err) {
-        //     console.error(err);
-        //     res.status(500).json({
-        //         message: 'Internal server error'
-        //     });
-        // });
 });
 
 // POST: creating a new user
@@ -164,7 +165,7 @@ app.post('/users/create', function (req, res) {
                 });
             }
             if(item) {
-                console.log("User: " + username + " created.");
+                console.log("User `" + username + "` created.");
                 return res.json(item);
             }
         });
@@ -175,7 +176,6 @@ app.post('/users/create', function (req, res) {
 // POST: creating a new lead
 // step b4 (continuing from client.js): local API endpoint in server.js
 app.post('/leads', function (req, res) {
-    //console.log(req);
     // step b5: send the local data to the database
     Lead.create({
         position: req.body.position,
@@ -204,8 +204,6 @@ app.post('/leads', function (req, res) {
             });
         }
         // step b7: send the result back to client.js
-        //console.log(lead);
-        console.log(lead);
         res.status(201).json(lead);
 
     });
@@ -213,18 +211,6 @@ app.post('/leads', function (req, res) {
 
 // PUT: updating a lead
 app.put('/leads/:id', function(req, res) {
-    // console.log('updating a lead by id');
-    // console.log(req);
-    // console.log(req.body.id + ' is req.body.id just so you know');
-    // console.log(req.params.id + ' is req.params.id FYI');
-    // ensure that the id in the request path and the one in request body match
-    // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    //     var message = 'Request path id (' + req.params.id + ') and request body id ' + ('(' + req.body.id + ') must match');
-    //     console.error(message);
-    //     res.status(400).json({
-    //         message: message
-    //     });
-   // }
     var toUpdate = {};
     var updateableFields = ['position', 'company', 'funnelStage', 'companyOverview', 'companySize', 'positionLocation', 'salaryBenefits', 'jobDescription', 'applicationDate', 'contactName', 'contactEmail', 'applicationMaterials', 'interviewDate', 'interviewFollowUp', 'leadSource', 'notes', 'rating'];
     updateableFields.forEach(function(field) {
@@ -245,8 +231,6 @@ app.put('/leads/:id', function(req, res) {
 
 // DELETE: deleting a lead
 app.delete('/leads/:id', function(req, res) {
-    //console.log('deleting a lead by id');
-    //console.log(req);
     Lead.findByIdAndRemove(req.params.id).exec().then(function(lead) {
         return res.status(204).end();
     }).catch(function(err) {
@@ -265,6 +249,4 @@ app.use('*', function (req, res) {
 
 exports.app = app;
 exports.runServer = runServer;
-
-// app.listen is always the last line in server.js
-// app.listen(process.env.PORT || 8080);
+exports.closeServer = closeServer;

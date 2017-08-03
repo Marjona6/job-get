@@ -98,7 +98,6 @@ function formatDate(str) {
     if (str != null && str != undefined) {
         var parts = ((str).split('T'))[0].split('-');
         var month = '';
-        console.log(parts);
         // the code below evaluates every value of parts[1] to '01'--why?
         if (parts[1] == '01') {
             month = "January";
@@ -127,7 +126,6 @@ function formatDate(str) {
         } else {
             month = '';
         };
-        console.log(month);
         var day = '';
         if ((parts[2])[0] == 0) {
             day = (parts[2])[1];
@@ -211,7 +209,6 @@ function populateViewScreen(data) {
 
 // populate the dashboard with contents of the user's database
 function getAndDisplayLeads() {
-    console.log('Get and display leads username: ' + username);
     $.getJSON("/leads", function (res) {
         var htmlOutput = '';
         // what I need to do to clear this out is to .html a blank htmlOutput for each section first
@@ -222,7 +219,6 @@ function getAndDisplayLeads() {
         $('#offer').html('<p class="category">Offer</p>');
         $('#negotiate').html('<p class="category">Negotiate</p>');
             for (var i = 0; i < res.leads.length; i++) {
-                console.log(username + ' ' + res.leads[i].username);
                 if (res.leads[i].username == username) {
                     if (res.leads[i].funnelStage == 1) {
                         htmlOutput = '<p class="job-lead" id="' + res.leads[i]._id + '"><a href="#"><span>' + res.leads[i].company + '</span></a></p>';
@@ -259,7 +255,6 @@ function getAndDisplayLeads() {
 function getJobLeadForViewScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-        // console.log('made the GET request for the clicked job lead--for view screen');
         populateViewScreen(res);
     });
 }
@@ -267,7 +262,6 @@ function getJobLeadForViewScreen(searchId) {
 function getJobLeadForEditScreen(searchId) {
     var result;
     $.getJSON("/leads/" + searchId, function (res) {
-        // console.log('made the GET request for the clicked job lead--for edit screen');
         populateEditScreen(res);
     });
 }
@@ -287,9 +281,8 @@ var editToggle = false;
     $('#thanks').hide();
     $('#login-screen').show();
     var username = $('input[name="email"]').val();
-    console.log(username);
     if (username != '') {
-        $('#welcome').html('<p>Welcome, ' + username + '</p>');
+        $('#welcome').html('<p>Welcome, ' + username + '!</p>');
         $('#welcome').show();
     };
 
@@ -322,8 +315,6 @@ var editToggle = false;
                 .done(function (result) {
                     $('#login-screen').hide();
                     $('#thanks').show();
-                    console.log('made the user POST request');
-                    console.log(result);
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -335,7 +326,6 @@ var editToggle = false;
 
     document.getElementById('js-redirect').addEventListener('click', function(event) {
         event.preventDefault();
-        console.log('successfully redirected back to login screen');
         $('#thanks').hide();
         $('#login-screen').show();
     });
@@ -344,9 +334,7 @@ var editToggle = false;
         event.preventDefault();
         // step 2: taking input from the user
         var inputEmail = $('input[name="email"]').val();
-        console.log(inputEmail);
         var inputPassword = $('input[name="password"]').val();
-        console.log(inputPassword);
         // check for spaces, empty, undefined
         if ((!inputEmail) || (inputEmail.length < 1) || (inputEmail.indexOf(' ') > 0)) {
             alert('Invalid email');
@@ -359,7 +347,6 @@ var editToggle = false;
                 password: inputPassword
             };
             username = inputEmail;
-            console.log('username is currently ' + username);
             // step 3: using user input, make the local login API call
         $.ajax({
                 type: "POST",
@@ -370,20 +357,16 @@ var editToggle = false;
             })
             // step 8 (continuing from server.js): display results
             .done(function (result) {
-                console.log(result);
                 // set global username variable from result object
                 username = result.username;
                 $('#login-screen').hide();
                 $('#nav').show();
                 $('#dashboard').show();
-                console.log(username);
                 if (username != '') {
-                    $('#welcome').html('<p>Welcome, ' + username + '</p>');
+                    $('#welcome').html('<p>Welcome, ' + username + '!</p>');
                     $('#welcome').show();
                 };
                 getAndDisplayLeads();
-                console.log('trying to sign in a user');
-                console.log(result);
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -520,8 +503,6 @@ var editToggle = false;
                     success: function(data) {getAndDisplayLeads}
                 })
                 .done(function (result) {
-                    console.log('made the user PUT request');
-                    console.log(result);
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -583,19 +564,17 @@ var editToggle = false;
             $('#edit-screen').hide();
             $('#dashboard').show();
         });
+    editToggle = false;
     });
 
     // when user clicks  a .job-lead box
     // should take user to that job lead's view screen
     $(document).on('click', ".job-lead", function (event) {
         if (event.target.nodeName == "SPAN") {
-            console.log('span');
             getJobLeadForViewScreen(event.target.parentNode.parentNode.id);
         } else if (event.target.nodeName == "A") {
-            console.log('a');
             getJobLeadForViewScreen(event.target.parentNode.id);
         } else if (event.target.nodeName == "P") {
-            console.log('p');
             getJobLeadForViewScreen(event.target.id);
         }
         populateViewScreen(getJobLeadForViewScreen);
@@ -609,18 +588,11 @@ var editToggle = false;
     });
 
 // when user clicks log out
-// should also log them out from DB on server side
 document.getElementById('js-log-out').addEventListener('click', function () {
     location.reload();
 });
 
-// to do:
-// Users should be able to choose whether to sign in or sign up at login screen
-// Should send a POST request to users (to create a new user) when a user signs up
-// Should validate email and PW formats when a user tries to sign in or sign up
-// Should send a GET request to users (to check for an existing user) when a user signs in
-// Should check user input email against email addresses in users DB when user tries to sign in
-// Should check user input password against password in users DB when user tries to sign in
-// Should include password security features
-// Including: should not display password entered when user signs in or signs up
-// Including: should not directly send plain-text password in GET request or POST request
+// Always striving to be better and better.
+// If you find a bug or room for improvement in this code,
+// ... please let me know.
+// GitHub: Marjona6
