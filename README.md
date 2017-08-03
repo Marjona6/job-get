@@ -56,4 +56,5 @@ Additional enhancements to the app are expected to include:
 * Integration with an automated email service to allow users to receive information and updates regarding the app or job searches in general.
 * Improved visual design.
 * Allowing users to customize the categories of information they wish to include for their job leads; for example, including two interview stages instead of one.
+* Adding drag-and-drop functionality to job leads to move them from one funnel stage to another.
 * Fixing bugs and responding to user feedback to make finding your dream job an even better experience.
