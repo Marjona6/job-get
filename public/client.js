@@ -163,7 +163,11 @@ function populateViewScreen(data) {
     }
     $('#js-funnel-stage').text(funnelStageText);
     $('#js-company-overview').text(data.companyOverview);
-    $('#js-company-size').text(data.companySize + ' employees');
+    if (data.companySize != '') {
+        $('#js-company-size').text(data.companySize + ' employees');
+    } else {
+        $('#js-company-size').text(data.companySize);
+    };
     $('#js-position-location').text(data.positionLocation);
     $('#js-salary-benefits').text(data.salaryBenefits);
     $('#js-job-description').text(data.jobDescription);

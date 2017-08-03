@@ -1,116 +1,59 @@
-# job-tracker-capstone-app
+# Job Tracker App: Find your dream job!
 
-----
-Interactive full-stack web app to organize your job search. Created as a capstone project for the Thinkful web development course.
+Interactive full-stack web app to organize your job search. Created as a Node.js capstone project for the [Thinkful](https://www.thinkful.com) web development course.
+(screenshots)
 
-For reference, see [this site](https://timsstrategy.com/how-to-create-a-job-search-funnel/) on job search funnels.
+## Use Case
+This app helps job seekers organize and track their job leads and applications as they search for their perfect job.
 
-**Epic:** Help job seekers organize and track their job leads and applications as they search for their perfect job.
+## Initial UX
+(wireframes)
 
-----
-##USER POINT OF VIEW
+## Working Prototype
+You can access a working prototype of the app [here](https://job-tracker-capstone-app.herokuapp.com).
 
-# User stories by functionality:
-* 1) As a user, I should be able to register a new username and password with the site/app.
-* 1) As a user, I should be able to log in and log out.
-* 3) As a user, I should be able to reset my password (change it if and when desired or create a new password if I lose or forget mine).
-* 1) As a user, I should be able to create a new job application object to represent one in my real-life search, based on a template provided by the app.
-* 3) As a user, I should be able to customize to some degree the template of my job applications/leads ("jobjects").
-* 1) As a user, I should be able to update, add, or delete information from my "jobjects."
-* 1) As a user, I should be able to reassign a "jobject" from one stage of the funnel to another.
-* 1) As a user, I should be able to delete an entire "jobject."
-* 2) As a user, I should be able to view and read "jobjects" in some organized way--by filtering them, for example.
+## Functionality
+This app is based on the concept of a [funnel system](https://timsstrategy.com/how-to-create-a-job-search-funnel/) as a strategy for organizing a job search. With this app, users can keep their job searches organized from the initial stage of identifying a new lead through six funnel stages:
+* New Leads
+* Qualified Leads
+* Contact/Apply
+* Interview
+* Offer
+* Negotiate
 
-# User stories by priority:
-* 1.6) As a user, I should be able to register a new username and password with the site/app.
-* 1.1) As a user, I should be able to log in and log out.
-* 1.4) As a user, I should be able to create a new job application object to represent one in my real-life search, based on a template provided by the app.
-* 1.3) As a user, I should be able to update, add, or delete information from my "jobjects."
-* 1.2) As a user, I should be able to reassign a "jobject" from one stage of the funnel to another.
-* 1.5) As a user, I should be able to delete an entire "jobject."
-* 2) As a user, I should be able to view and read "jobjects" in some organized way--by filtering them, for example.
-* 3) As a user, I should be able to reset my password (change it if and when desired or create a new password if I lose or forget mine).
-* 3) As a user, I should be able to customize to some degree the template of my job applications/leads ("jobjects").
+Users create a username and password that is used to sign in and to save and access their personal job leads. As job leads progress through the funnel stages, users can move their job leads in the app along the funnel in order to track where each lead stands at the present moment. Users can update information in their job leads or delete them entirely at any stage of the process.
 
+Information that can be added to a job lead includes:
+* Position title
+* Company name
+* Company overview
+* Company size
+* Position location
+* Salary/benefit information
+* Job description
+* Date of application
+* Contact name
+* Contact email
+* Application materials required (e.g., CV, resume, cover letter)
+* Interview date
+* Interview follow-up
+* Source of lead
+* Notes
+* Overall desirability rating
 
-## WEBMASTER/BUSINESS POINT OF VIEW
-----
+## Technical
+This app is built using HTML, CSS, JavaScript, jQuery, and Node.js. Usernames, encrypted passwords (encrypted using salted hashing with [bcrypt.js](https://www.npmjs.com/package/bcryptjs)), and job lead information are stored and accessed from an [mLab](https://mlab.com) database. The app is designed to be responsive across desktop, tablet, and mobile platforms.
 
-[structure of database below]
-
-**Business Objects**
-
-* user(s) [SUBJECT]
-
- * What makes a user a user?
-    * name
-      * first name
-      * last name
-    * username
-    * password
-
-* job application/lead (the concept of what the user interacts with) [OBJECT]
-
- * What is a job application?
-      * job ID (which user is it associated with?)
-      * company
-        * company overview
-        * technologies used
-        * company size
-        * company headquarters location
-      * position
-        * position title
-        * position location
-        * salary/benefits offered
-        * job description
-          * duties
-          * desired skills
-          * desired experience
-          * desired education
-      * application
-        * date of application
-        * contact name
-        * contact email address
-        * application materials required/sent
-        * interview 1
-          * date
-          * follow-up
-        * interview 2
-          * date
-          * follow-up
-      * source of lead/posting
-      * notes
-      * funnel stage/category ID
-      * overall rating of how much you want the job
-
-* funnel stages
-   * What makes a funnel stage a funnel stage?
-      * name
-      * ID
-      * ordering relative to the other stages
-* [VERB?]
-
-## funnel diagram
-NEW LEADS
-
-V
-
-QUALIFIED LEADS
-
-V
-
-CONTACT & INTEREST
-
-V
-
-INTERVIEW
-
-V
-
-OFFER
-
-V
-
-NEGOTIATE (SALARY/BENEFITS)
-
-----
+## Development Roadmap
+Additional enhancements to the app are expected to include:
+* Password reset capability.
+* Enhanced security by sending AJAX requests including usernames through the back end only.
+* Improved username and password validation to ensure that:
+  * users cannot use an email address that has already been signed up
+  * users see an "incorrect password" message if their usernames are correct but passwords are incorrect (they currently see a generic "user does not exist, please sign up" message)
+  * users must enter a username in email format
+  * passwords must be of at least a minimum length
+* Integration with an automated email service to allow users to receive information and updates regarding the app or job searches in general.
+* Improved visual design.
+* Allowing users to customize the categories of information they wish to include for their job leads; for example, including two interview stages instead of one.
+* Fixing bugs and responding to user feedback to make finding your dream job an even better experience.
