@@ -21,7 +21,7 @@ This app is based on the concept of a [funnel system](https://timsstrategy.com/h
 * Offer
 * Negotiate
 
-Users create a username and password that is used to sign in and to save and access their personal job leads. As job leads progress through the funnel stages, users can move their job leads in the app along the funnel in order to track where each lead stands at the present moment. Users can update information in their job leads or delete them entirely at any stage of the process.
+Users create a username and password that is used to sign in and to save and access their personal job leads. As job leads progress through the funnel stages, users can push their job leads along in the app to track the current status of each lead. Users can update information in their job leads or delete them entirely at any stage of the process.
 
 Information that can be added to a job lead includes:
 * Position title
