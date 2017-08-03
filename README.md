@@ -42,9 +42,17 @@ Information that can be added to a job lead includes:
 * Overall desirability rating
 
 ## Technical
-This app is built using HTML, CSS, JavaScript, jQuery, and Node.js. Usernames, encrypted passwords (encrypted using salted hashing with [bcrypt.js](https://www.npmjs.com/package/bcryptjs)), and job lead information are stored and accessed from an [mLab](https://mlab.com) database. The app is designed to be responsive across desktop, tablet, and mobile platforms.
+This app is built using HTML, CSS, JavaScript, jQuery, and Node.js.
+
+Usernames, encrypted passwords (encrypted using salted hashing with [bcrypt.js](https://www.npmjs.com/package/bcryptjs)), and job lead information are stored and accessed from an [mLab](https://mlab.com) database.
+
+Other technologies used include MongoDB, Mongoose, Passport, Express, Mocha, and Chai.
+
+The app is designed to be responsive across desktop, tablet, and mobile platforms.
 
 ## Development Roadmap
+This app was built for use in my own job search, but it is my hope that other job seekers will find value in it as well. I hope to continually improve the app for a better user experience and a more pleasant job search for all users.
+
 Additional enhancements to the app are expected to include:
 * Password reset capability.
 * Enhanced security by sending AJAX requests including usernames through the back end only.
