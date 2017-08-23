@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var mongoose = require('mongoose');
 var cors = require('cors');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var express = require('express');
@@ -55,11 +55,6 @@ function closeServer() {
         });
     });
 }
-
-// logging
-// app.use('*', function(req, res) {
-//     return res.status(404).json({message: 'Not found'});
-// });
 
 // ----------- LEAD ENDPOINTS ------------------------
 // GET: getting all the lead objects to populate the dashboard
@@ -128,7 +123,6 @@ app.post('/login', function (req, res) {
                         console.log("User logged in: " + req.body.username + ' at ' + logInTime);
                         return res.json(items);
                     }
-                    // return sth here?
                 });
             };
         });
@@ -195,7 +189,7 @@ app.post('/leads', function (req, res) {
         leadSource: req.body.leadSource,
         notes: req.body.notes,
         rating: req.body.rating,
-        username: req.body.username // this should not be here
+        username: req.body.username
     }, function (err, lead) {
         // step b6: return the result of DB call
         if (err) {

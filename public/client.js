@@ -98,7 +98,6 @@ function formatDate(str) {
     if (str != null && str != undefined) {
         var parts = ((str).split('T'))[0].split('-');
         var month = '';
-        // the code below evaluates every value of parts[1] to '01'--why?
         if (parts[1] == '01') {
             month = "January";
         } else if (parts[1] == '02') {
