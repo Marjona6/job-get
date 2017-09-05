@@ -212,6 +212,49 @@ header {
     margin: 0 1rem 0 1rem;
 }
 
+/* ABOUT & GUIDANCE */
+#about, #guidance {
+    height: auto;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0A093B;
+    color: #8180B2;
+    padding: 0.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+    border: 1px solid #0a093B;
+    border-radius: 5px;
+    margin-top: 1rem;
+    line-height: 2rem;
+}
+
+#guidance ul {
+    list-style-type: circle;
+    padding-left: 2rem;
+    font-size: 1rem;
+}
+
+#guidance h2 {
+    text-align: center;
+}
+
+#got-it {
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    margin-top: 2rem;
+}
+
+#demo-info {
+    margin-left: 10%;
+    width: 25%;
+}
+
+#about ul {
+    text-align: left;
+    color: white;
+}
 
 /* LOGIN SCREEN */
 

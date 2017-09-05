@@ -278,7 +278,9 @@ var editToggle = false;
     $('#edit-screen').hide();
     $('#nav').hide();
     $('#thanks').hide();
+    $('#guidance').hide();
     $('#login-screen').show();
+    $('#about').show();
     var username = $('input[name="email"]').val();
     if (username != '') {
         $('#welcome').html('<p>Welcome, ' + username + '!</p>');
@@ -359,6 +361,8 @@ var editToggle = false;
                 // set global username variable from result object
                 username = result.username;
                 $('#login-screen').hide();
+                $('#about').hide();
+                $('#guidance').show();
                 $('#nav').show();
                 $('#dashboard').show();
                 if (username != '') {
@@ -380,6 +384,16 @@ var editToggle = false;
 
         // when user clicks "back" button on view/edit screen
         // returns user to dashboard and resets form
+        document.getElementById('got-it').addEventListener('click', function(event) {
+            event.preventDefault();
+            $('#guidance').hide();
+        });
+
+        document.getElementById('js-show-help').addEventListener('click', function(event) {
+            event.preventDefault();
+            $('#guidance').show();
+        });
+
         document.getElementById('js-back-button').addEventListener('click', function (event) {
             event.preventDefault();
             if (editToggle == true) {
