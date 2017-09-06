@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <h1>Job Tracker App</h1>
+        <h1 class="highlight">Job Tracker App</h1>
         <h2>Find your dream job!</h2>
         <div id="nav">
             <div class="nav-item" id="js-create-new">
@@ -32,21 +32,18 @@
         </div>
     </header>
     <main>
-        <section id="about">
-            <p>The Job Tracker App helps you organize and track your job leads and applications so that you can find your perfect job.</p>
-            <p>To try it out, log in with:</p>
-            <div id="demo-info">
-                <ul>
-                    <li>Email: demo</li>
-                    <li>Password: demo</li>
-                </ul>
-            </div>
-            <p>We will never send you spam or share your information with anyone for any reason.</p>
-        </section>
         <section id="login-screen">
             <div id="login-box">
+            <p>The Job Tracker App helps you organize and track your job leads and applications so that you can find your perfect job.</p> 
                 <form id="login-form">
-                    <h3>Sign in / Sign up</h3>
+                    <h3 class="highlight">Sign in / Sign up</h3>
+                    <div id="demo-info">
+                    <p>To try it out:</p>
+                        <ul>
+                            <li>Email: demo</li>
+                            <li>Password: demo</li>
+                        </ul>
+                    </div>
                     <p>Email:</p>
                     <input type="text" name="email" placeholder="competent_person@dreamjob.com">
                     <p>Password:</p>
@@ -55,6 +52,7 @@
                     <input type="submit" id="js-signin-button" class="styledButton" value="Sign in">
                     <input type="submit" id="js-signup-button" class="styledButton" value="Sign up">
                 </form>
+                <p>We will never send you spam or share your information with anyone for any reason.</p>
             </div>
         </section>
         <section id="welcome">
@@ -109,25 +107,39 @@
             </div>
             <div id="view-edit-box">
                 <form id="edit-form">
-                    <h3><span id="js-position-header"></span> at <span id="js-company-header"></span></h3>
-                    <p>Funnel stage: </p>
-                    <div id="js-funnel-stage">
+                    <div id="box-header">
+                        <h3><span id="js-position-header"></span> at <span id="js-company-header"></span></h3>
                     </div>
-                    <p>Company overview: <span id="js-company-overview"></span></p>
-                    <p>Company size: <span id="js-company-size"></span></p>
-                    <p>Position location: <span id="js-position-location"></span></p>
-                    <p>Salary/benefits offered: <span id="js-salary-benefits"></span></p>
-                    <p>Job description: <span id="js-job-description"></span></p>
-                    <p>Date of application: <span id="js-application-date"></span></p>
-                    <p>Contact name: <span id="js-contact-name"></span></p>
-                    <p>Contact email: <span id="js-contact-email"></span></p>
-                    <p>Application materials: <span id="js-application-materials"></span></p>
-                    <p>Interview date: <span id="js-interview-date"></span></p>
-                    <p>Interview follow-up: <span id="js-interview-follow-up"></span></p>
-                    <p>Source of lead: <span id="js-lead-source"></span></p>
-                    <p>Notes: <span id="js-notes"></span></p>
-                    <p>Overall desirability rating: </p>
-                    <div id="js-rating">
+                    <div id="box-funnel-stage">
+                        <p>Funnel stage: </p>
+                        <div id="js-funnel-stage">
+                        </div>
+                    </div>
+                    <div id="box-company">
+                        <p>Company overview: <span id="js-company-overview"></span></p>
+                        <p>Company size: <span id="js-company-size"></span></p>
+                    </div>
+                    <div>
+                        <p>Position location: <span id="js-position-location"></span></p>
+                        <p>Salary/benefits offered: <span id="js-salary-benefits"></span></p>
+                        <p>Job description: <span id="js-job-description"></span></p>
+                    </div>
+                    <div id="box-application">
+                        <p>Date of application: <span id="js-application-date"></span></p>
+                        <p>Contact name: <span id="js-contact-name"></span></p>
+                        <p>Contact email: <span id="js-contact-email"></span></p>
+                        <p>Application materials: <span id="js-application-materials"></span></p>
+                    </div>
+                    <div id="box-interview">
+                        <p>Interview date: <span id="js-interview-date"></span></p>
+                        <p>Interview follow-up: <span id="js-interview-follow-up"></span></p>
+                    </div>
+                    <div id="box-notes">
+                        <p>Source of lead: <span id="js-lead-source"></span></p>
+                        <p>Notes: <span id="js-notes"></span></p>
+                        <p>Overall desirability rating: </p>
+                        <div id="js-rating">
+                        </div>
                     </div>
                 </form>
             </div>

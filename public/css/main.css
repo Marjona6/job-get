@@ -6,87 +6,8 @@ v2.0 | 20110126
 License: none (public domain)
 */
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0;
@@ -143,21 +64,20 @@ table {
 /* PAGE DEFAULTS */
 
 html {
-    box-sizing: border-box;
     background-color: #8180B2;
     font-family: 'Lato', sans-serif;
 }
 
 h1 {
-    font-size: 3.5rem;
+    font-size: 2.25rem;
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 p,
@@ -192,6 +112,10 @@ input[type=textarea] {
     margin-bottom: 0.5rem;
 }
 
+.highlight {
+    color: white;
+}
+
 
 /* HEADER */
 
@@ -212,8 +136,8 @@ header {
     margin: 0 1rem 0 1rem;
 }
 
-/* ABOUT & GUIDANCE */
-#about, #guidance {
+/* GUIDANCE */
+#guidance {
     height: auto;
     width: 70%;
     margin-left: auto;
@@ -244,16 +168,6 @@ header {
     margin-right: auto;
     width: 15%;
     margin-top: 2rem;
-}
-
-#demo-info {
-    margin-left: 10%;
-    width: 25%;
-}
-
-#about ul {
-    text-align: left;
-    color: white;
 }
 
 /* LOGIN SCREEN */
@@ -294,11 +208,14 @@ a {
     background-color: #0A093B;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    text-align: center;
 }
 
 .column {
     display: inline-block;
-    width: 16%;
+    margin-left: 0.25%;
+    margin-right: 0.25%;
+    width: 15%;
     text-align: center;
     vertical-align: top;
 }
@@ -420,7 +337,7 @@ footer {
         width: 95%;
     }
     .column {
-        width: 33%;
+        width: 32%;
     }
     /* BUTTONS */
     .styledButton {
@@ -476,7 +393,7 @@ footer {
     }
     /* DASHBOARD */
     .column {
-        width: 49%;
+        width: 48%;
     }
     /* BUTTONS */
     .styledButton {

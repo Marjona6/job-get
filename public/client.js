@@ -280,7 +280,6 @@ var editToggle = false;
     $('#thanks').hide();
     $('#guidance').hide();
     $('#login-screen').show();
-    $('#about').show();
     var username = $('input[name="email"]').val();
     if (username != '') {
         $('#welcome').html('<p>Welcome, ' + username + '!</p>');
@@ -361,7 +360,6 @@ var editToggle = false;
                 // set global username variable from result object
                 username = result.username;
                 $('#login-screen').hide();
-                $('#about').hide();
                 $('#guidance').show();
                 $('#nav').show();
                 $('#dashboard').show();
