@@ -64,8 +64,9 @@ table {
 /* PAGE DEFAULTS */
 
 html {
-    background-color: #8180B2;
+    background-color: #00E8E8;
     font-family: 'Lato', sans-serif;
+    color: white;
 }
 
 h1 {
@@ -86,8 +87,8 @@ a {
 }
 
 a {
-    color: #8180B2;
     text-decoration: none;
+    color: white;
 }
 
 .centered {
@@ -113,7 +114,7 @@ input[type=textarea] {
 }
 
 .highlight {
-    color: white;
+    color: yellow;
 }
 
 
@@ -121,7 +122,6 @@ input[type=textarea] {
 
 header {
     background-color: #1B1A59;
-    color: #8180B2;
     padding: 2rem;
     position: relative;
 }
@@ -136,6 +136,10 @@ header {
     margin: 0 1rem 0 1rem;
 }
 
+#welcome {
+    color: #0A093B;
+}
+
 /* GUIDANCE */
 #guidance {
     height: auto;
@@ -143,7 +147,6 @@ header {
     margin-left: auto;
     margin-right: auto;
     background-color: #0A093B;
-    color: #8180B2;
     padding: 0.5rem;
     padding-bottom: 3.5rem;
     position: relative;
@@ -182,7 +185,6 @@ header {
     margin-left: auto;
     margin-right: auto;
     background-color: #0A093B;
-    color: #8180B2;
     border: 1px solid #0A093B;
     border-radius: 5px;
     padding: 1rem;
@@ -221,16 +223,16 @@ a {
 }
 
 .category {
-    background-color: #1B1A59;
+    background-color: goldenrod;
     padding: 1rem;
-    border: 2px solid #8180B2;
-    color: #8180B2;
+    border: 2px solid #00E8E8;
+    color: #1B1A59;
 }
 
 .job-lead {
-    background-color: #8180B2;
+    background-color: #00E8E8;
     padding: 1rem;
-    border: 2px solid #1B1A59;
+    border: 2px solid yellow;
     position: relative;
     color: #1B1A59;
 }
@@ -249,7 +251,7 @@ a {
     margin-left: auto;
     margin-right: auto;
     background-color: #0A093B;
-    color: #8180B2;
+    color: #00E8E8;
     padding: 0.5rem;
     padding-bottom: 3.5rem;
     position: relative;
@@ -271,6 +273,10 @@ a {
     display: inline-block;
 }
 
+#view-edit-box {
+    margin-top: 3.25rem;
+}
+
 #view-edit-box h1,
 h2,
 h3,
@@ -279,25 +285,44 @@ a {
     margin: 0.25rem;
 }
 
+ .box-section {
+    border: 2px solid #00E8E8;
+    border-radius: 8px;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: goldenrod;
+    color: #0A093B;
+ }
+
+/* FOOTER */
+
 footer {
     height: 5rem;
-    background-color: #8180B2;
+    background-color: #00E8E8;
+    color: #0A093B;
     text-align: center;
     padding: 1rem;
 }
 
+footer a {
+    color: #0A093B;
+}
+
+footer li {
+    display: inline;
+}
 
 /*BUTTONS */
 
 .styledButton {
     padding: 5px;
     font-size: 1rem;
-    background-color: goldenrod;
+    background-color: yellow;
     color: #0A093B;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid goldenrod;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: 2px solid goldenrod;
     cursor: pointer;
 }
 
@@ -306,7 +331,7 @@ footer {
 
 @media only screen and (max-width: 1024px) {
     h1 {
-        font-size: 3rem;
+        font-size: 2rem;
     }
     h2 {
         font-size: 1.5rem;
@@ -347,7 +372,7 @@ footer {
 
 @media only screen and (max-width: 768px) {
     h1 {
-        font-size: 2.75rem;
+        font-size: 2rem;
     }
     h2 {
         font-size: 1.2rem;
@@ -368,7 +393,7 @@ footer {
 
 @media only screen and (max-width: 640px) {
     h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     h2 {
         font-size: 1rem;
