@@ -97,7 +97,15 @@
 
         </section>
         <section id="edit-screen">
-            <div class="buttons">
+            <div class="buttons-left">
+                <div id="js-back-button">
+                    <input type="submit" class="styledButton" value="Back">
+                </div>
+                <div class="js-save-button">
+                    <input type="submit" class="styledButton" value="Save Changes">
+                </div>
+            </div>
+            <div class="buttons-right">
                 <div class="js-edit-button">
                     <input type="submit" class="styledButton" value="Edit">
                 </div>
@@ -116,8 +124,10 @@
                     </div>
                     </div>
                     <div id="box-company" class="box-section">
-                        <p>Company overview: <span id="js-company-overview"></span></p>
-                        <p>Company size: <span id="js-company-size"></span></p>
+                        <div class="field-label">Company overview:</div>
+                        <div class="field-value" id="js-company-overview"></div>
+                        <div class="field-label">Company size:</div>
+                        <div class="field-value" id="js-company-size"></div>
                     </div>
                     <div id="box-position" class="box-section">
                         <p>Position location: <span id="js-position-location"></span></p>
@@ -143,23 +153,18 @@
                     </div>
                 </form>
             </div>
-            <div class="buttons">
-                <div id="js-back-button">
-                    <input type="submit" class="styledButton" value="Back">
-                </div>
-                <div class="js-save-button">
-                    <input type="submit" class="styledButton" value="Save Changes">
-                </div>
-            </div>
         </section>
     </main>
     <footer>
         <ul>
             <li><p>&#xa9; 2017 Meryem Yanar</p></li>
-            <li><a href="https://github.com/Marjona6">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/marjona6/">LinkedIn</a></li>
-            <li><a href="mailto:meryem.yanaryanar@gmail.com?Subject=Hello">Email</a></li>
+            <li><a href="https://github.com/Marjona6" title="Check out my code on GitHub">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/marjona6/" title="Connect with me on LinkedIn">LinkedIn</a></li>
+            <li><a href="mailto:meryem.yanaryanar@gmail.com?Subject=Hello" title="Send me an email">Email</a></li>
         </ul>
+        <div id="photo-credit">
+            <a href="https://unsplash.com/@apviktor?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" title="Download free do-whatever-you-want high-resolution photos from Viktor Jakovlev" alt="Background image photo credit: Viktor Jakovlev via Unsplash">Image: Viktor Jakovlev via Unsplash</a>
+        </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="client.js" type="text/javascript"></script>

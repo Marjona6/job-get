@@ -64,9 +64,13 @@ table {
 /* PAGE DEFAULTS */
 
 html {
-    background-color: #00E8E8;
     font-family: 'Lato', sans-serif;
     color: white;
+    background: #00E8E8 url("../img/building.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 h1 {
@@ -121,7 +125,7 @@ input[type=textarea] {
 /* HEADER */
 
 header {
-    background-color: #1B1A59;
+    background-color: rgba(27, 26, 89, 0.7);
     padding: 2rem;
     position: relative;
 }
@@ -146,20 +150,20 @@ header {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #0A093B;
+    background-color: rgba(10, 9, 59, 0.7);
     padding: 0.5rem;
     padding-bottom: 3.5rem;
     position: relative;
     border: 1px solid #0a093B;
     border-radius: 5px;
     margin-top: 1rem;
-    line-height: 2rem;
+    line-height: 1.5rem;
+    font-size: 0.95rem;
 }
 
 #guidance ul {
     list-style-type: circle;
     padding-left: 2rem;
-    font-size: 1rem;
 }
 
 #guidance h2 {
@@ -184,7 +188,7 @@ header {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #0A093B;
+    background-color: rgba(10, 9, 59, 0.7);
     border: 1px solid #0A093B;
     border-radius: 5px;
     padding: 1rem;
@@ -198,6 +202,20 @@ a {
     margin: 0.5rem;
 }
 
+/* THANKS */
+#thanks {
+    margin: 2rem;
+    background-color: rgba(10, 9, 59, 0.7);
+    border: 1px solid #0A093B;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 2rem;
+}
+
 
 /* DASHBOARD */
 
@@ -207,7 +225,7 @@ a {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    background-color: #0A093B;
+    background-color: rgba(10, 9, 59, 0.7);
     margin-bottom: 1rem;
     margin-top: 1rem;
     text-align: center;
@@ -250,7 +268,7 @@ a {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #0A093B;
+    background-color: rgba(10, 9, 59, 0.7);
     color: #00E8E8;
     padding: 0.5rem;
     padding-bottom: 3.5rem;
@@ -258,11 +276,17 @@ a {
     border: 1px solid #0a093B;
     border-radius: 5px;
     margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
-.buttons {
-    position: absolute;
-    right: 0;
+.buttons-right {
+    float: right;
+    margin: 0.5rem;
+    display: inline-block;
+}
+
+.buttons-left {
+    display: inline-block;
     margin: 0.5rem;
 }
 
@@ -274,7 +298,7 @@ a {
 }
 
 #view-edit-box {
-    margin-top: 3.25rem;
+    margin-top: 1rem;
 }
 
 #view-edit-box h1,
@@ -294,11 +318,27 @@ a {
     color: #0A093B;
  }
 
+ .field-label {
+    width: 27%;
+    margin-right: 2%;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    vertical-align: top;
+    color: #1B1A59;
+ }
+
+ .field-value {
+    width: 70%;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    vertical-align: top;
+ }
+
 /* FOOTER */
 
 footer {
     height: 5rem;
-    background-color: #00E8E8;
+    background-color: rgba(0, 232, 232, 0.5);
     color: #0A093B;
     text-align: center;
     padding: 1rem;
@@ -310,6 +350,15 @@ footer a {
 
 footer li {
     display: inline;
+}
+
+#photo-credit {
+    float: right;
+}
+
+#photo-credit a {
+    color: #0A093B;
+    font-size: 0.6rem;
 }
 
 /*BUTTONS */
@@ -387,7 +436,7 @@ footer li {
     }
     /* VIEW/EDIT SCREEN */
     #view-edit-box {
-        margin-top: 3rem;
+        margin-top: 1rem;
     }
 }
 
