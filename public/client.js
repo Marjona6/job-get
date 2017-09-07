@@ -610,6 +610,7 @@ console.log(editToggle);
 // when user clicks log out
 document.getElementById('js-log-out').addEventListener('click', function () {
     location.reload();
+    $('#welcome').hide();
 });
 
 // Always striving to be better and better.
