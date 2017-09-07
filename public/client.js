@@ -26,8 +26,8 @@ function populateEditScreen(dataPassedIn) {
     ratingHtmlOutput += '<option value="4">Only if I\'m desperate</option>';
     ratingHtmlOutput += '</select>';
 
-    $('#js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
-    $('#js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
+    $('.js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
+    $('.js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
     for (var i = 1; i <= 6; i++) {
         if (dataPassedIn.funnelStage == i) {
             // first search for the index where i occurs
@@ -140,8 +140,8 @@ function populateViewScreen(data) {
 
     // now replace the previous html added to the DOM with text
     // how to deal with empty variables? currently these still display the fillable fields (html)
-    $('#js-position-header').text(data.position);
-    $('#js-company-header').text(data.company);
+    $('.js-position-header').text(data.position);
+    $('.js-company-header').text(data.company);
     var funnelStageText = '';
     if (data.funnelStage == 1) {
         funnelStageText = 'New Leads';
@@ -415,6 +415,8 @@ var editToggle = false;
             editToggle = true;
             var idFromEditButton = $('.js-edit-button').attr('id');
             getJobLeadForEditScreen(idFromEditButton);
+            $('#box-header').hide();
+            $('#box-header-edit-mode').show();
             $('.js-edit-button').hide();
             $('.js-save-button').show();
         });
@@ -450,6 +452,7 @@ var editToggle = false;
             // these are unnecessary when creating a brand new lead
             $('.js-edit-button').hide();
             $('.js-delete-button').hide();
+            $('#box-header-edit-mode').hide();
             $('#edit-screen').show();
             $('.js-save-button').show();
             // calling the function to populate the edit screen with fillable fields
@@ -594,6 +597,8 @@ var editToggle = false;
         populateViewScreen(getJobLeadForViewScreen);
         $('#dashboard').hide();
         $('.js-save-button').hide();
+        $('#box-header-edit-mode').hide();
+        $('#box-header').show();
         $('#edit-screen').show();
         $('.js-edit-button').show();
         $('.js-delete-button').show();
