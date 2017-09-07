@@ -74,20 +74,22 @@ html {
 }
 
 h1 {
-    font-size: 2.25rem;
+    font-size: 3vw;
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 1.25vw;
 }
 
 h3 {
-    font-size: 1.2rem;
+    font-size: 1.2vw;
 }
 
 p,
-a {
-    font-size: 1rem;
+a,
+li,
+input {
+    font-size: 1vw;
 }
 
 a {
@@ -108,13 +110,13 @@ select {
 }
 
 input[type=text], input[type=password] {
-    width: 50%;
+    width: 60%;
 }
 
 input[type=textarea] {
     width: 90%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
 }
 
 .highlight {
@@ -126,18 +128,21 @@ input[type=textarea] {
 
 header {
     background-color: rgba(27, 26, 89, 0.7);
-    padding: 2rem;
-    position: relative;
+    padding: 0.75vw;
+}
+
+#header-left {
+    display: inline-block;
 }
 
 #nav {
-    position: absolute;
-    right: 1rem;
+    display: inline-block;
+    margin-left: auto;
 }
 
 .nav-item {
     display: inline-block;
-    margin: 0 1rem 0 1rem;
+    margin: 0 1vw 0 1vw;
 }
 
 #welcome {
@@ -151,19 +156,19 @@ header {
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(10, 9, 59, 0.7);
-    padding: 0.5rem;
-    padding-bottom: 3.5rem;
+    padding: 0.5vw;
+    padding-bottom: 1.5vw;
     position: relative;
     border: 1px solid #0a093B;
     border-radius: 5px;
-    margin-top: 1rem;
-    line-height: 1.5rem;
-    font-size: 0.95rem;
+    margin-top: 1vw;
+    line-height: 1.5vw;
+    font-size: 1vw;
 }
 
 #guidance ul {
     list-style-type: circle;
-    padding-left: 2rem;
+    padding-left: 2vw;
 }
 
 #guidance h2 {
@@ -174,13 +179,13 @@ header {
     margin-left: auto;
     margin-right: auto;
     width: 15%;
-    margin-top: 2rem;
+    margin-top: 2vw;
 }
 
 /* LOGIN SCREEN */
 
 #login-screen {
-    padding: 1rem;
+    padding: 1vw;
 }
 
 #login-box {
@@ -191,7 +196,7 @@ header {
     background-color: rgba(10, 9, 59, 0.7);
     border: 1px solid #0A093B;
     border-radius: 5px;
-    padding: 1rem;
+    padding: 1vw;
 }
 
 #login-box p,
@@ -199,21 +204,21 @@ h1,
 h2,
 h3,
 a {
-    margin: 0.5rem;
+    margin: 0.5vw;
 }
 
 /* THANKS */
 #thanks {
-    margin: 2rem;
+    margin: 2vw;
     background-color: rgba(10, 9, 59, 0.7);
     border: 1px solid #0A093B;
     border-radius: 5px;
-    padding: 1rem;
+    padding: 1vw;
     text-align: center;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    line-height: 2rem;
+    line-height: 2vw;
 }
 
 
@@ -226,8 +231,8 @@ a {
     margin-right: auto;
     width: 90%;
     background-color: rgba(10, 9, 59, 0.7);
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-bottom: 1vw;
+    margin-top: 1vw;
     text-align: center;
 }
 
@@ -242,14 +247,14 @@ a {
 
 .category {
     background-color: goldenrod;
-    padding: 1rem;
+    padding: 1vw;
     border: 2px solid #00E8E8;
     color: #1B1A59;
 }
 
 .job-lead {
     background-color: #00E8E8;
-    padding: 1rem;
+    padding: 1vw;
     border: 2px solid yellow;
     position: relative;
     color: #1B1A59;
@@ -270,24 +275,24 @@ a {
     margin-right: auto;
     background-color: rgba(10, 9, 59, 0.7);
     color: #00E8E8;
-    padding: 0.5rem;
-    padding-bottom: 3.5rem;
+    padding: 0.5vw;
+    padding-bottom: 3.5vw;
     position: relative;
     border: 1px solid #0a093B;
     border-radius: 5px;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
 }
 
 .buttons-right {
     float: right;
-    margin: 0.5rem;
+    margin: 0.5vw;
     display: inline-block;
 }
 
 .buttons-left {
     display: inline-block;
-    margin: 0.5rem;
+    margin: 0.5vw;
 }
 
 .js-edit-button,
@@ -298,7 +303,7 @@ a {
 }
 
 #view-edit-box {
-    margin-top: 1rem;
+    margin-top: 1vw;
 }
 
 #view-edit-box h1,
@@ -306,14 +311,18 @@ h2,
 h3,
 p,
 a {
-    margin: 0.25rem;
+    margin: 0.25vw;
+}
+
+#view-edit-box h3 {
+    font-weight: bold;
 }
 
  .box-section {
     border: 2px solid #00E8E8;
     border-radius: 8px;
-    margin: 1rem;
-    padding: 1rem;
+    margin: 1vw;
+    padding: 1vw;
     background-color: goldenrod;
     color: #0A093B;
  }
@@ -322,7 +331,7 @@ a {
     width: 27%;
     margin-right: 2%;
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5vw;
     vertical-align: top;
     color: #1B1A59;
  }
@@ -330,18 +339,18 @@ a {
  .field-value {
     width: 70%;
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5vw;
     vertical-align: top;
  }
 
 /* FOOTER */
 
 footer {
-    height: 5rem;
-    background-color: rgba(0, 232, 232, 0.5);
+/*    height: 5vw;
+*/    background-color: rgba(0, 232, 232, 0.5);
     color: #0A093B;
     text-align: center;
-    padding: 1rem;
+    padding: 1vw;
 }
 
 footer a {
@@ -353,19 +362,20 @@ footer li {
 }
 
 #photo-credit {
+    margin-top: 1vw;
     float: right;
 }
 
 #photo-credit a {
     color: #0A093B;
-    font-size: 0.6rem;
+    font-size: 0.6vw;
 }
 
 /*BUTTONS */
 
 .styledButton {
     padding: 5px;
-    font-size: 1rem;
+    font-size: 1vw;
     background-color: yellow;
     color: #0A093B;
     border-radius: 8px;
@@ -380,31 +390,40 @@ footer li {
 
 @media only screen and (max-width: 1024px) {
     h1 {
-        font-size: 2rem;
+        font-size: 3vw;
     }
     h2 {
-        font-size: 1.5rem;
+        font-size: 2.25vw;
     }
     h3 {
-        font-size: 1.25rem;
+        font-size: 2vw;
     }
     p,
     a,
+    li,
+    input,
     .styledButton {
-        font-size: 0.9rem;
+        font-size: 1.5vw;
     }
+
     /* HEADER */
     #nav {
-        position: absolute;
-        right: 1rem;
-    }
-    .nav-item {
-        /*        display: none;
-*/
+        display: inline-block;
+        margin-left: auto;
     }
     /* LOGIN SCREEN */
     .vertically-centered {
-        margin-top: 1.5rem;
+        margin-top: 1.5vw;
+    }
+
+    input[type=textarea] {
+        margin-top: 1.5vw;
+        margin-bottom: 1.5vw;
+    }
+
+    /* GUIDANCE */
+    #guidance {
+        line-height: 2.5vw;
     }
     /* DASHBOARD */
     #dashboard {
@@ -413,47 +432,63 @@ footer li {
     .column {
         width: 32%;
     }
-    /* BUTTONS */
-    .styledButton {
-        font-size: 0.9rem;
+    /* FOOTER */
+
+    #footer p, a {
+        font-size: 1.25vw;
+    }
+
+    #photo-credit a {
+        font-size: 1vw;
     }
 }
 
 @media only screen and (max-width: 768px) {
+    #login-box {
+        line-height: 2.5vw;
+    }
     h1 {
-        font-size: 2rem;
+        font-size: 4vw;
     }
     h2 {
-        font-size: 1.2rem;
+        font-size: 3vw;
     }
     h3 {
-        font-size: 1rem;
+        font-size: 2.5vw;
     }
     p,
     a,
+    li,
+    input,
     .styledButton {
-        font-size: 0.8rem;
+        font-size: 1.75vw;
     }
     /* VIEW/EDIT SCREEN */
     #view-edit-box {
-        margin-top: 1rem;
+        margin-top: 2vw;
+        font-size: 1.75vw;
+    }
+
+    /* FOOTER */
+    #photo-credit a {
+        font-size: 1.5vw;
     }
 }
 
 @media only screen and (max-width: 640px) {
     h1 {
-        font-size: 2rem;
+        font-size: 4vw;
     }
     h2 {
-        font-size: 1rem;
+        font-size: 2.5vw;
     }
     h3 {
-        font-size: 0.9rem;
+        font-size: 1.75vw;
     }
     p,
     a,
     .styledButton {
-        font-size: 0.75rem;
+        font-size: 1.75vw;
     }
     /* LOGIN SCREEN */
     #login-box {
@@ -477,26 +512,45 @@ footer li {
 
 @media only screen and (max-width: 480px) {
     h1 {
-        font-size: 2rem;
+        font-size: 5vw;
     }
     h2 {
-        font-size: 0.9rem;
+        font-size: 4vw;
     }
     h3 {
-        font-size: 0.8rem;
+        font-size: 3vw;
     }
     p,
     a,
+    li,
+    input,
     .styledButton {
-        font-size: 0.7rem;
+        font-size: 2.75vw;
     }
     /* LOGIN SCREEN */
     #login-box {
         width: 90%;
+        line-height: 4vw;
+    }
+
+    /* GUIDANCE */
+    #guidance {
+        line-height: 5vw;
     }
     /* DASHBOARD */
     .column {
         width: 100%;
+    }
+
+    /* FOOTER */
+    footer p, 
+    footer a, 
+    footer li {
+        font-size: 2.5vw;
+    }
+
+    #photo-credit a {
+        font-size: 2vw;
     }
 }
 
@@ -506,8 +560,8 @@ footer li {
         width: 90%;
     }
     /* FOOTER */
-    footer {
-        height: 3rem;
-        font-size: 0.75rem;
-    }
+   /* footer {
+        height: 3vw;
+        font-size: 0.75vw;
+    }*/
 }

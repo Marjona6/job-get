@@ -14,8 +14,10 @@
 
 <body>
     <header>
-        <h1 class="highlight">Job Tracker App</h1>
-        <h2>Find your dream job!</h2>
+        <div id="header-left">
+            <h1 class="highlight">Job Tracker App</h1>
+            <h2>Find your dream job!</h2>
+        </div>
         <div id="nav">
             <div class="nav-item" id="js-create-new">
                 <p><a href="#">New Lead</a></p>
@@ -118,9 +120,8 @@
                     <div id="box-header" class="box-section">
                         <h3><span id="js-position-header"></span> at <span id="js-company-header"></span></h3>
                     <div id="box-funnel-stage">
-                        <p>Funnel stage: </p>
-                        <div id="js-funnel-stage">
-                        </div>
+                        <div class="field-label">Funnel stage:</div>
+                        <div class="field-value" id="js-funnel-stage"></div>
                     </div>
                     </div>
                     <div id="box-company" class="box-section">
@@ -130,26 +131,36 @@
                         <div class="field-value" id="js-company-size"></div>
                     </div>
                     <div id="box-position" class="box-section">
-                        <p>Position location: <span id="js-position-location"></span></p>
-                        <p>Salary/benefits offered: <span id="js-salary-benefits"></span></p>
-                        <p>Job description: <span id="js-job-description"></span></p>
+                        <div class="field-label">Position location:</div>
+                        <div class="field-value" id="js-position-location"></div>
+                        <div class="field-label">Salary/benefits offered:</div>
+                        <div class="field-value" id="js-salary-benefits"></div>
+                        <div class="field-label">Job description:</div>
+                        <div class="field-value" id="js-job-description"></div>
                     </div>
                     <div id="box-application" class="box-section">
-                        <p>Date of application: <span id="js-application-date"></span></p>
-                        <p>Contact name: <span id="js-contact-name"></span></p>
-                        <p>Contact email: <span id="js-contact-email"></span></p>
-                        <p>Application materials: <span id="js-application-materials"></span></p>
+                        <div class="field-label">Date of application:</div>
+                        <div class="field-value" id="js-application-date"></div>
+                        <div class="field-label">Contact name:</div>
+                        <div class="field-value" id="js-contact-name"></div>
+                        <div class="field-label">Contact email:</div>
+                        <div class="field-value" id="js-contact-email"></div>
+                        <div class="field-label">Application materials:</div>
+                        <div class="field-value" id="js-application-materials"></div>
                     </div>
                     <div id="box-interview" class="box-section">
-                        <p>Interview date: <span id="js-interview-date"></span></p>
-                        <p>Interview follow-up: <span id="js-interview-follow-up"></span></p>
+                        <div class="field-label">Interview date:</div>
+                        <div class="field-value" id="js-interview-date"></div>
+                        <div class="field-label">Interview follow-up:</div>
+                        <div class="field-value" id="js-interview-follow-up"></div>
                     </div>
                     <div id="box-notes" class="box-section">
-                        <p>Source of lead: <span id="js-lead-source"></span></p>
-                        <p>Notes: <span id="js-notes"></span></p>
-                        <p>Overall desirability rating: </p>
-                        <div id="js-rating">
-                        </div>
+                        <div class="field-label">Source of lead:</div>
+                        <div class="field-value" id="js-lead-source"></div>
+                        <div class="field-label">Notes:</div>
+                        <div class="field-value" id="js-notes"></div>
+                        <div class="field-label">Overall desirability rating:</div>
+                        <div class="field-value" id="js-rating"></div>
                     </div>
                 </form>
             </div>

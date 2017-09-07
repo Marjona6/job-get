@@ -269,6 +269,7 @@ function getJobLeadForEditScreen(searchId) {
 // if it has, clicking save makes a PUT request;
 // if it has not, clicking save makes a POST request for a new lead
 var editToggle = false;
+console.log(editToggle);
 // ----------------------------------------------------------------
 // END FUNCTION AND VARIABLE DEFINITIONS
 
@@ -401,6 +402,7 @@ var editToggle = false;
                     $('#edit-screen').hide();
                     $('#dashboard').show();
                     editToggle = false;
+                    console.log(editToggle + ' I was clicked');
                 };
             } else {
                 $('#edit-form').trigger('reset');
@@ -413,6 +415,7 @@ var editToggle = false;
         $(document).on('click', ".js-edit-button", function (event) {
             event.preventDefault();
             editToggle = true;
+            console.log(editToggle);
             var idFromEditButton = $('.js-edit-button').attr('id');
             getJobLeadForEditScreen(idFromEditButton);
             $('.js-edit-button').hide();
@@ -439,6 +442,7 @@ var editToggle = false;
                 $('#edit-screen').hide();
                 $('#dashboard').show();
                 editToggle = false;
+                console.log(editToggle);
             };
         });
 
@@ -514,6 +518,10 @@ var editToggle = false;
                     success: function(data) {getAndDisplayLeads}
                 })
                 .done(function (result) {
+                    // need to re-render the dashboard here
+                    getAndDisplayLeads();
+                    editToggle = false;
+                    console.log(editToggle);
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -576,6 +584,7 @@ var editToggle = false;
             $('#dashboard').show();
         });
     editToggle = false;
+    console.log(editToggle);
     });
 
     // when user clicks  a .job-lead box
