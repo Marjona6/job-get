@@ -137,12 +137,14 @@ header {
 
 #nav {
     display: inline-block;
-    margin-left: auto;
-}
+    float: right;
+ }
 
 .nav-item {
     display: inline-block;
+    line-height: 3vw;
     margin: 0 1vw 0 1vw;
+    padding-top: 0.7vw;
 }
 
 #welcome {
@@ -200,7 +202,6 @@ header {
 }
 
 #login-box p,
-h1,
 h2,
 h3,
 a {
@@ -463,6 +464,11 @@ footer li {
     .styledButton {
         font-size: 1.75vw;
     }
+
+    #nav {
+        line-height: 4vw;
+    }
+
     /* VIEW/EDIT SCREEN */
     #view-edit-box {
         margin-top: 2vw;
@@ -526,6 +532,10 @@ footer li {
     input,
     .styledButton {
         font-size: 2.75vw;
+    }
+
+    #nav {
+        line-height: 5vw;
     }
     /* LOGIN SCREEN */
     #login-box {
