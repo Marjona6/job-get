@@ -1,6 +1,6 @@
-# Job Tracker App: Find your dream job!
+# JobGet: Find your dream job!
 
-Interactive full-stack web app to organize your job search. Created as a Node.js capstone project for the [Thinkful](https://www.thinkful.com) web development course.
+Interactive full-stack web app to organize your job search. Created as a Node.js capstone project for the Thinkful full-stack web development course ([https://www.thinkful.com](https://www.thinkful.com)).
 (screenshots)
 
 ## Use Case
@@ -10,7 +10,7 @@ This app helps job seekers organize and track their job leads and applications a
 (wireframes)
 
 ## Working Prototype
-You can access a working prototype of the app [here](https://job-tracker-capstone-app.herokuapp.com).
+You can access a working prototype of the app at [https://job-get.herokuapp.com](https://job-get.herokuapp.com).
 
 ## Functionality
 This app is based on the concept of a [funnel system](https://timsstrategy.com/how-to-create-a-job-search-funnel/) as a strategy for organizing a job search. With this app, users can keep their job searches organized from the initial stage of identifying a new lead through six funnel stages:
@@ -51,7 +51,7 @@ Other technologies used include MongoDB, Mongoose, Passport, Express, Mocha, and
 The app is designed to be responsive across desktop, tablet, and mobile platforms.
 
 ## Development Roadmap
-This app was built for use in my own job search, but it is my hope that other job seekers will find value in it as well. I hope to continually improve the app for a better user experience and a more pleasant job search for all users.
+This app was built for use in my own job search, but I hope other job seekers will find value in it as well. I hope to continually improve the app for a better user experience and a more pleasant job search for all users.
 
 Additional enhancements to the app are expected to include:
 * Password reset capability.
@@ -60,9 +60,9 @@ Additional enhancements to the app are expected to include:
   * users cannot use an email address that has already been signed up
   * users see an "incorrect password" message if their usernames are correct but passwords are incorrect (they currently see a generic "user does not exist, please sign up" message)
   * users must enter a username in email format
-  * passwords must be of at least a minimum length
+  * passwords must be of at least a minimum length.
 * Integration with an automated email service to allow users to receive information and updates regarding the app or job searches in general.
-* Improved visual design.
+* Integration with a browser extension (yet to be built) that allows users to import data from job postings directly into their JobGet account.
 * Allowing users to customize the categories of information they wish to include for their job leads; for example, including two interview stages instead of one.
 * Adding drag-and-drop functionality to job leads to move them from one funnel stage to another.
 * Fixing bugs and responding to user feedback to make finding your dream job an even better experience.

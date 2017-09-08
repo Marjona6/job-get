@@ -139,7 +139,6 @@ function formatDate(str) {
 function populateViewScreen(data) {
 
     // now replace the previous html added to the DOM with text
-    // how to deal with empty variables? currently these still display the fillable fields (html)
     $('.js-position-header').text(data.position);
     $('.js-company-header').text(data.company);
     var funnelStageText = '';
@@ -452,7 +451,8 @@ var editToggle = false;
             // these are unnecessary when creating a brand new lead
             $('.js-edit-button').hide();
             $('.js-delete-button').hide();
-            $('#box-header-edit-mode').hide();
+            $('#box-header').hide();
+            $('#box-header-edit-mode').show();
             $('#edit-screen').show();
             $('.js-save-button').show();
             // calling the function to populate the edit screen with fillable fields
