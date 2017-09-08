@@ -25,7 +25,7 @@ Mobile:
 This app helps job seekers organize and track their job leads and applications as they search for their perfect job.
 
 ## Initial UX
-(wireframes)
+![Wireframe](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/wireframe-01.jpg)
 
 ## Working Prototype
 You can access a working prototype of the app at [https://job-get.herokuapp.com](https://job-get.herokuapp.com).
