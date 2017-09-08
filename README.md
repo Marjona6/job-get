@@ -1,7 +1,11 @@
 # JobGet: Find your dream job!
 
 Interactive full-stack web app to organize your job search. Created as a Node.js capstone project for the Thinkful full-stack web development course ([https://www.thinkful.com](https://www.thinkful.com)).
-(screenshots)
+
+## Screenshots
+![Desktop](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-screenshot-01.png)
+![Mobile](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-iphone-screenshot-00.jpg)
+
 
 ## Use Case
 This app helps job seekers organize and track their job leads and applications as they search for their perfect job.
