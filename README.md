@@ -79,6 +79,7 @@ Additional enhancements to the app are expected to include:
   * users see an "incorrect password" message if their usernames are correct but passwords are incorrect (they currently see a generic "user does not exist, please sign up" message)
   * users must enter a username in email format
   * passwords must be of at least a minimum length.
+* Improved testing.
 * Integration with an automated email service to allow users to receive information and updates regarding the app or job searches in general.
 * Integration with a browser extension (yet to be built) that allows users to import data from job postings directly into their JobGet account.
 * Allowing users to customize the categories of information they wish to include for their job leads; for example, including two interview stages instead of one.
