@@ -4,6 +4,7 @@ Interactive full-stack web app to organize your job search. Created as a Node.js
 
 ## Screenshots
 Desktop:
+
 ![Desktop](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-screenshot-01.png)
 ![Desktop](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-screenshot-02.png)
 ![Desktop](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-screenshot-03.png)
@@ -11,6 +12,7 @@ Desktop:
 ![Desktop](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-screenshot-05.png)
 
 Mobile:
+
 ![Mobile](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-iphone-screenshot-00.jpg)
 ![Mobile](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-iphone-screenshot-01.jpg)
 ![Mobile](https://raw.githubusercontent.com/Marjona6/job-get-node-capstone/master/public/img/jobget-iphone-screenshot-02.jpg)
