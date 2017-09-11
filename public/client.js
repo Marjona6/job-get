@@ -26,8 +26,8 @@ function populateEditScreen(dataPassedIn) {
     ratingHtmlOutput += '<option value="4">Only if I\'m desperate</option>';
     ratingHtmlOutput += '</select>';
 
-    $('.js-position-header').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
-    $('.js-company-header').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
+    $('#js-position-header-edit').html('<input type="text" name="position" placeholder="Position" value="' + dataPassedIn.position + '">');
+    $('#js-company-header-edit').html('<input type="text" name="company" placeholder="Company Name" value="' + dataPassedIn.company + '">');
     for (var i = 1; i <= 6; i++) {
         if (dataPassedIn.funnelStage == i) {
             // first search for the index where i occurs
@@ -139,8 +139,8 @@ function formatDate(str) {
 function populateViewScreen(data) {
 
     // now replace the previous html added to the DOM with text
-    $('.js-position-header').text(data.position);
-    $('.js-company-header').text(data.company);
+    $('#js-position-header-display').text(data.position);
+    $('#js-company-header-display').text(data.company);
     var funnelStageText = '';
     if (data.funnelStage == 1) {
         funnelStageText = 'New Leads';
@@ -468,7 +468,9 @@ var editToggle = false;
             event.preventDefault();
             // step b2: taking input from the user
             var position = $('input[name="position"]').val();
+            console.log(position);
             var company = $('input[name="company"]').val();
+            console.log(company);
             var funnelStage = $('select[name="funnel-stage"]').find('option:selected').val();
             var companyOverview = $('input[name="company-overview"]').val();
             var companySize = $('input[name="company-size"]').val();
