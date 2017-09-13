@@ -11,7 +11,7 @@ License: none (public domain)
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 1em;
     font: inherit;
     vertical-align: baseline;
 }
@@ -74,22 +74,23 @@ html {
 }
 
 h1 {
-    font-size: 3vw;
+    font-size: 300%;
 }
 
 h2 {
-    font-size: 1.25vw;
+    font-size: 125%;
 }
 
 h3 {
-    font-size: 1.2vw;
+    font-size: 120%;
 }
 
 p,
 a,
 li,
-input {
-    font-size: 1vw;
+input,
+.styledButton {
+    font-size: 100%;
 }
 
 a {
@@ -164,9 +165,9 @@ header {
     border: 1px solid #0a093B;
     border-radius: 5px;
     margin-top: 1vw;
-    line-height: 1.5vw;
-    font-size: 1vw;
-}
+/*    line-height: 1.5vw;
+*//*    font-size: 1vw;
+*/}
 
 #guidance ul {
     list-style-type: circle;
@@ -369,15 +370,15 @@ footer li {
 
 #photo-credit a {
     color: #0A093B;
-    font-size: 0.6vw;
+    font-size: 70%;
 }
 
 /*BUTTONS */
 
 .styledButton {
     padding: 5px;
-    font-size: 1vw;
-    background-color: yellow;
+/*    font-size: 1vw;
+*/    background-color: yellow;
     color: #0A093B;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -390,22 +391,22 @@ footer li {
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 1024px) {
-    h1 {
-        font-size: 3vw;
-    }
+  /*  h1 {
+        font-size: 300%;*/
+    /*}
     h2 {
-        font-size: 2.25vw;
-    }
+        font-size: 225%;
+    } 
     h3 {
-        font-size: 2vw;
+        font-size: 200%;
     }
     p,
     a,
     li,
     input,
     .styledButton {
-        font-size: 1.5vw;
-    }
+        font-size: 150%;
+    }*/
 
     /* HEADER */
     #nav {
@@ -423,9 +424,9 @@ footer li {
     }
 
     /* GUIDANCE */
-    #guidance {
+    /*#guidance {
         line-height: 2.5vw;
-    }
+    }*/
     /* DASHBOARD */
     #dashboard {
         width: 95%;
@@ -435,35 +436,35 @@ footer li {
     }
     /* FOOTER */
 
-    #footer p, a {
-        font-size: 1.25vw;
+   /* #footer p, a {
+        font-size: 125%;
     }
 
     #photo-credit a {
-        font-size: 1vw;
-    }
+        font-size: 100%;
+    }*/
 }
 
 @media only screen and (max-width: 768px) {
-    #login-box {
-        line-height: 2.5vw;
-    }
+    /*#login-box {
+        line-height: 2.5vw;*/
+    /*}
     h1 {
-        font-size: 4vw;
+        font-size: 400%;
     }
     h2 {
-        font-size: 3vw;
+        font-size: 300%;
     }
     h3 {
-        font-size: 2.5vw;
+        font-size: 250%;
     }
     p,
     a,
     li,
     input,
     .styledButton {
-        font-size: 1.75vw;
-    }
+        font-size: 175%;
+    }*/
 
     #nav {
         line-height: 4vw;
@@ -472,30 +473,30 @@ footer li {
     /* VIEW/EDIT SCREEN */
     #view-edit-box {
         margin-top: 2vw;
-        font-size: 1.75vw;
-    }
+/*        font-size: 175%;
+*/    }
 
     /* FOOTER */
-    #photo-credit a {
-        font-size: 1.5vw;
-    }
+   /* #photo-credit a {
+        font-size: 150%;
+    }*/
 }
 
 @media only screen and (max-width: 640px) {
-    h1 {
-        font-size: 4vw;
+   /* h1 {
+        font-size: 400%;
     }
     h2 {
-        font-size: 2.5vw;
+        font-size: 250%;
     }
     h3 {
-        font-size: 1.75vw;
+        font-size: 200%;
     }
     p,
     a,
     .styledButton {
-        font-size: 1.75vw;
-    }
+        font-size: 200%;
+    }*/
     /* LOGIN SCREEN */
     #login-box {
         width: 70%;
@@ -517,22 +518,22 @@ footer li {
 }
 
 @media only screen and (max-width: 480px) {
-    h1 {
-        font-size: 5vw;
+ /*   h1 {
+        font-size: 500%;
     }
     h2 {
-        font-size: 4vw;
+        font-size: 400%;
     }
     h3 {
-        font-size: 3vw;
+        font-size: 300%;
     }
     p,
     a,
     li,
     input,
     .styledButton {
-        font-size: 2.75vw;
-    }
+        font-size: 275%;
+    }*/
 
     #nav {
         line-height: 5vw;
@@ -544,24 +545,24 @@ footer li {
     }
 
     /* GUIDANCE */
-    #guidance {
+   /* #guidance {
         line-height: 5vw;
-    }
+    }*/
     /* DASHBOARD */
     .column {
         width: 100%;
     }
 
     /* FOOTER */
-    footer p, 
+   /* footer p, 
     footer a, 
     footer li {
-        font-size: 2.5vw;
+        font-size: 250%;
     }
 
     #photo-credit a {
-        font-size: 2vw;
-    }
+        font-size: 200%;
+    }*/
 }
 
 @media only screen and (max-width: 350px) {

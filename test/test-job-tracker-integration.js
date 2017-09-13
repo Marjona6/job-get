@@ -41,7 +41,7 @@ describe('GET endpoint to root URL', function () {
 
 describe('POST endpoint to `/leads`', function() {
     before(function () {
-        return runServer(TEST_DATABASE_URL + '/leads');
+        return runServer(TEST_DATABASE_URL);
     });
     after(function () {
         return closeServer();
@@ -71,7 +71,7 @@ describe('POST endpoint to `/leads`', function() {
             username: 'neo@theone.org'
         };
         return chai.request(app)
-            .post('leads')
+            .post('/leads')
             .send(newLead)
             .then(function(res) {
                 res.should.have.status(201);

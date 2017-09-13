@@ -466,11 +466,18 @@ var editToggle = false;
         // step b1: new lead trigger
         $(document).on('click', ".js-save-button", function (event) {
             event.preventDefault();
+            var reqsMet = true;
             // step b2: taking input from the user
             var position = $('input[name="position"]').val();
-            console.log(position);
+            if (position == '' || position == undefined) {
+                alert('Position title is required. Please enter a position title to continue.');
+                reqsMet = false;
+            };
             var company = $('input[name="company"]').val();
-            console.log(company);
+            if (company == '' || company == undefined) {
+                alert('Company name is required. Please enter a company name to continue.');
+                reqsMet = false;
+            };
             var funnelStage = $('select[name="funnel-stage"]').find('option:selected').val();
             var companyOverview = $('input[name="company-overview"]').val();
             var companySize = $('input[name="company-size"]').val();
@@ -507,7 +514,7 @@ var editToggle = false;
                 username: username
             };
             // if the bool has been toggled, make a PUT request to the same object by ID
-            if (editToggle == true) {
+            if (editToggle == true && reqsMet == true) {
                 // get the id for the lead from the save button id
                 var idFromSaveButton = $('.js-save-button').attr('id');
                 $.ajax({
@@ -528,7 +535,10 @@ var editToggle = false;
                     console.log(error);
                     console.log(errorThrown);
                 });
-            } else {
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
+            } else if (reqsMet == true) {
             // if it has NOT been toggled, make a POST request
             // step b3: make local API call using user input
             $.ajax({
@@ -577,11 +587,12 @@ var editToggle = false;
                     console.log(error);
                     console.log(errorThrown);
                 });
+                // reset the form so user can input a new lead
+                $('#edit-form').trigger('reset');
+                $('#edit-screen').hide();
+                $('#dashboard').show();
                 };
-            // reset the form so user can input a new lead
-            $('#edit-form').trigger('reset');
-            $('#edit-screen').hide();
-            $('#dashboard').show();
+            
         });
     editToggle = false;
     });
