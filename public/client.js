@@ -274,10 +274,12 @@ var editToggle = false;
     // when page loads
     // show and hide sections as needed
     $('#dashboard').hide();
+    $('#welcome').hide();
     $('#edit-screen').hide();
     $('#nav').hide();
     $('#thanks').hide();
     $('#guidance').hide();
+    $('#faq-box').hide();
     $('#login-screen').show();
     var username = $('input[name="email"]').val();
     if (username != '') {
@@ -389,6 +391,15 @@ var editToggle = false;
         document.getElementById('js-show-help').addEventListener('click', function(event) {
             event.preventDefault();
             $('#guidance').show();
+        });
+
+        document.getElementById('js-show-faq').addEventListener('click', function(event) {
+            $('#faq-box').show();
+
+            document.getElementById('js-close-faq').addEventListener('click', function(event) {
+                event.preventDefault();
+                $('#faq-box').hide();
+            });
         });
 
         document.getElementById('js-back-button').addEventListener('click', function (event) {

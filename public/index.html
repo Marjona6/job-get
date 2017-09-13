@@ -22,8 +22,8 @@
             <div class="nav-item" id="js-create-new">
                 <p><a href="#">New Lead</a></p>
             </div>
-            <div class="nav-item">
-                <p><a href="https://github.com/Marjona6/job-tracker-capstone-app/blob/master/README.md" target="_blank">FAQ</a></p>
+            <div class="nav-item" id="js-show-faq">
+                <p><a href="#faq-box">FAQ</a></p>
             </div>
             <div class="nav-item" id="js-show-help">
                 <p><a href="#">Help</a></p>
@@ -172,8 +172,57 @@
                 </form>
             </div>
         </section>
-        <section id="faq">
-            
+        <section id="faq-box">
+            <div>
+                <div id="faq-title">
+                    <h3>FAQ</h3>
+                </div>
+                <div id="js-close-faq">
+                    <input type="submit" class="styledButton" value="Close FAQ">
+                </div>
+                <ol>
+                    <li class="box-section js-click-to-expand">What is JobGet?
+                        <div class="faq-answer">
+                            <p>JobGet is a job search organizer and tracking tool. JobGet helps you organize your job search so that you can secure your dream job quickly and efficiently.</p>
+                        </div>
+                    </li>
+                    <li class="box-section js-click-to-expand">How do I use JobGet?
+                        <div class="faq-answer">
+                            <p>To use JobGet, start by entering a new job lead or application by clicking "New Lead" in the navigation menu.</p>
+                            <p>Fill in the information you have about the position, company, application, interview, and other notes.</p>
+                            <p>Select a funnel stage where you'd like to place your job lead:</p>
+                            <ol>
+                                <li>New Leads: Job leads you haven't vetted or qualified yet.</li>
+                                <li>Qualified Leads: Job leads you've looked into to ensure they're still relevant. (For example, the posting has not expired, the job has not been filled, the position is not located in a city you would not move to, etc.).</li>
+                                <li>Contact/Apply: Jobs you've already contacted an employer about or submitted an application for.</li>
+                                <li>Interview: Jobs where you have reached the interview stage (either called in for an interview or completed an interview).</li>
+                                <li>Offer: Jobs you have been formally offered.</li>
+                                <li>Negotiate: Jobs you have been offered and are negotiating salary, benefits, work conditions, etc. with the employer.</li>
+                            </ol>
+                        </div>
+                    </li>
+                    <li class="box-section js-click-to-expand">What is a funnel?
+                        <img src="img/filter-icon.svg" alt="A funnel">
+                        <p>JobGet was developed from the concept of a job search as a funnel. This idea came from the blog post <a href="https://timsstrategy.com/how-to-create-a-job-search-funnel/" target="_blank">How to Create a Sales Funnel for a Job Search"</a> written by Tim Tyrell-Smith. Tim advises job seekers to "manage your prospects like a sales person," referring to the older and well established funnel concept used in sales and marketing.</p>
+                        <p>Organizing your job search as a funnel helps you to stay on top of where each job lead or application is in the process. It also lets you see visually whether you need to add more leads at the "top" of the funnel at any given point during your job search.</p>
+                        <p>In short, the funnel concept is a very useful tool for finding the job you want as quickly and efficiently as possible.</p>
+                    </li>
+                    <li class="box-section js-click-to-expand">What are funnel stages?
+                        <p>JobGet uses six funnel stages. These are:</p>
+                        <ol>
+                            <li>New Leads: Job leads you haven't vetted or qualified yet.</li>
+                            <li>Qualified Leads: Job leads you've looked into to ensure they're still relevant. (For example, the posting has not expired, the job has not been filled, the position is not located in a city you would not move to, etc.).</li>
+                            <li>Contact/Apply: Jobs you've already contacted an employer about or submitted an application for.</li>
+                            <li>Interview: Jobs where you have reached the interview stage (either called in for an interview or completed an interview).</li>
+                            <li>Offer: Jobs you have been formally offered.</li>
+                            <li>Negotiate: Jobs you have been offered and are negotiating salary, benefits, work conditions, etc. with the employer.</li>
+                        </ol>
+                    </li>
+                    <li class="box-section js-click-to-expand">Who should use JobGet?
+                        <p>JobGet is for anyone who is looking for a job. It can be used by job seekers in any field. Whether you are looking for a full-time, part-time, or temporary job, or even an unpaid internship for school or college, JobGet is for you.</p>
+                    </li>
+                </ol>
+            </div>
         </section>
     </main>
     <footer>

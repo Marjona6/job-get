@@ -150,6 +150,14 @@ header {
 
 #welcome {
     color: #0A093B;
+    background-color: goldenrod;
+    border: 2px solid #0a093B;
+    border-radius: 10px;
+    width: auto;
+    margin: 0.7rem;
+    padding: 0.2rem;
+    text-align: center;
+    display: inline-block;
 }
 
 /* GUIDANCE */
@@ -344,6 +352,53 @@ a {
     margin-bottom: 0.5vw;
     vertical-align: top;
  }
+
+/* FAQ */
+#faq-box {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(10, 9, 59, 0.7);
+    border: 1px solid #0A093B;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+#faq-box ol {
+}
+
+#faq-box ol li {
+    list-style: decimal;
+    list-style-position: inside;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+#faq-box ol li,
+#faq-box p {
+    margin-bottom: 0.5rem;
+}
+
+#faq-box img {
+    width: 25%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+#faq-title {
+    display: inline-block;
+}
+
+#js-close-faq {
+    float: right;
+    display: inline-block;
+}
 
 /* FOOTER */
 
