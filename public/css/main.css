@@ -362,8 +362,8 @@ a {
     border: 1px solid #0A093B;
     border-radius: 5px;
     padding: 1rem;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 #faq-box ol {
