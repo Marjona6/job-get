@@ -173,9 +173,9 @@ header {
     border: 1px solid #0a093B;
     border-radius: 5px;
     margin-top: 1vw;
-/*    line-height: 1.5vw;
-*//*    font-size: 1vw;
-*/}
+    line-height: 2rem;
+    font-size: 125%;
+}
 
 #guidance ul {
     list-style-type: circle;
